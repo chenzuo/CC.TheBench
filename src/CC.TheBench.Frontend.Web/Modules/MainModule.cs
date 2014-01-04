@@ -2,6 +2,7 @@
 {
     using System;
     using System.Dynamic;
+    using System.Globalization;
     using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.Extensions;
@@ -11,7 +12,11 @@
     {
         public MainModule()
         {
-            Get["/"] = _ => "Hi!";
+            Get["/"] = _ =>
+            {
+                Context.Culture = new CultureInfo("nl-BE");
+                return View["Index"];
+            };
 
             Get["/login"] = x =>
             {
