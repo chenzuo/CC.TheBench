@@ -2,6 +2,9 @@
 [Bb]in/
 [Oo]bj/
 
+# Nuget packages
+lib/
+
 # mstest test results
 TestResults
 

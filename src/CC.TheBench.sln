@@ -3,7 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC.TheBench.Frontend.Web", "src\CC.TheBench.Frontend.Web\CC.TheBench.Frontend.Web.csproj", "{B5874799-093A-4A0D-A00E-E15EB9DCE7C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC.TheBench.Frontend.Web", "CC.TheBench.Frontend.Web\CC.TheBench.Frontend.Web.csproj", "{B5874799-093A-4A0D-A00E-E15EB9DCE7C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4A3266D0-96A3-4349-BB67-558AA059795E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6CC6311D-8A5C-458C-8AEA-6533E7E0B6A6}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cmd = ..\build.cmd
+		..\default.ps1 = ..\default.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
