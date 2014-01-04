@@ -29,7 +29,7 @@
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration()
                 {
-                    RedirectUrl = "~/login",
+                    RedirectUrl = "~/account/login",
                     UserMapper = requestContainer.Resolve<IUserMapper>(),
                 };
 

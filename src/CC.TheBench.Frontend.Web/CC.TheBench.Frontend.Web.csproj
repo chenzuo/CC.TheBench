@@ -70,8 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Views\Secure\Dashboard.cshtml" />
-    <Content Include="Views\Main\Login.cshtml" />
+    <Content Include="Views\Invoices\Overview.cshtml" />
+    <Content Include="Views\Account\Login\Index.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -89,9 +89,13 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Modules\Account\LogoutModule.cs" />
+    <Compile Include="Modules\Account\LoginModule.cs" />
+    <Compile Include="Modules\Account\RegisterModule.cs" />
+    <Compile Include="Modules\Invoices\InvoicesModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
-    <Compile Include="Modules\SecureModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecureNancyModule.cs" />
     <Compile Include="Resources\Text.nl.Designer.cs">
       <DependentUpon>Text.nl.resx</DependentUpon>
       <AutoGen>True</AutoGen>
