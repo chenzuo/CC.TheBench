@@ -25,19 +25,18 @@
             @if (!Html.RenderContext.Context.ModelValidationResult.IsValid)
             {
                 <div class="alert alert-danger">
-                        @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors)
-                        {
-                            <p>
-                                
-                                @e.GetMessage(string.Empty)
-                            </p>
-                        }
+                    @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors)
+                    {
+                        <p>@e.GetMessage(string.Empty)</p>
+                    }
                 </div>
             }
 
             <div class="space-6"></div>
         
             <form action="@Url.Content("~/account/login")@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? string.Empty : "?returnUrl=" + Model.ReturnUrl)" method="POST">
+                @Html.AntiForgeryToken()
+
                 <fieldset>
                     <label class="block clearfix">
                         <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Username") ? "has-error" : string.Empty)">
@@ -88,7 +87,7 @@
                     <i class="icon-google-plus"></i>
                 </a>
             </div>
-        </div><!-- /widget-main -->
+        </div>
 
         <div class="toolbar clearfix">
             <div>
@@ -105,5 +104,5 @@
                 </a>
             </div>
         </div>
-    </div><!-- /widget-body -->
-</div><!-- /login-box -->
+    </div>
+</div>

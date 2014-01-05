@@ -4,6 +4,7 @@
     using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.ModelBinding;
+    using Nancy.Security;
     using Resources;
     using Security;
     using Views.Account.Models;
@@ -14,12 +15,16 @@
         {
             Get["/"] = x =>
             {
+                this.CreateNewCsrfToken();
+
                 var model = this.Bind<LoginModel>();
                 return View["account/login", model];
             };
 
             Post["/"] = x =>
             {
+                this.ValidateCsrfToken();
+
                 var model = this.BindAndValidate<LoginModel>();
                 if (!ModelValidationResult.IsValid)
                     return View["account/login", model];

@@ -5,6 +5,7 @@
     using Nancy.Bootstrapper;
     using Nancy.Conventions;
     using Nancy.Diagnostics;
+    using Nancy.Security;
     using Nancy.TinyIoc;
     using Security;
 
@@ -17,7 +18,13 @@
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            //DiagnosticsHook.Disable(pipelines);
+            base.ApplicationStartup(container, pipelines);
+
+            // Disable _Nancy
+            DiagnosticsHook.Disable(pipelines);
+
+            // Takes care of outputting the CSRF token to Cookies
+            Csrf.Enable(pipelines);
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
