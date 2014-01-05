@@ -71,6 +71,9 @@
   <ItemGroup>
     <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.svg" />
     <Content Include="Public\Scripts\html5shiv.js" />
+    <Content Include="Public\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Public\Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Public\Scripts\jquery.mobile.custom.min.js" />
     <Content Include="Public\Scripts\respond.min.js" />
     <Content Include="Public\Styles\ace-fonts.css" />
     <Content Include="Public\Styles\ace-ie.min.css" />
@@ -82,7 +85,7 @@
     <Content Include="Public\Styles\font-awesome.min.css" />
     <Content Include="packages.config" />
     <Content Include="Views\Invoices\Overview.cshtml" />
-    <Content Include="Views\Account\Login\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Public\Fonts\FontAwesome\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <Content Include="Public\Fonts\FontAwesome\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
@@ -90,6 +93,9 @@
     <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.ttf" />
     <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.woff" />
     <Content Include="Public\Fonts\FontAwesome\FontAwesome.otf" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -108,6 +114,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Modules\Account\LogoutModule.cs" />
     <Compile Include="Modules\Account\LoginModule.cs" />
+    <Compile Include="Modules\Account\ForgotPasswordModule.cs" />
     <Compile Include="Modules\Account\RegisterModule.cs" />
     <Compile Include="Modules\Invoices\InvoicesModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
@@ -136,6 +143,7 @@
     <Compile Include="Security\UserDatabase.cs" />
     <Compile Include="Security\UserIdentity.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Account\Models\LoginModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Account.resx">

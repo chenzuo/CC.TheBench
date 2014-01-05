@@ -1,11 +1,11 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
     using System;
-    using System.Dynamic;
     using Nancy;
     using Nancy.Authentication.Forms;
-    using Nancy.Extensions;
+    using Nancy.ModelBinding;
     using Security;
+    using Views.Account.Models;
 
     public class LoginModule : NancyModule
     {
@@ -13,26 +13,20 @@
         {
             Get["/"] = x =>
             {
-                dynamic model = new ExpandoObject();
-                model.Errored = Request.Query.error.HasValue;
-
-                return View["index", model];
+                var model = this.Bind<LoginModel>();
+                return View["account/login", model];
             };
 
             Post["/"] = x =>
             {
-                var userGuid = UserDatabase.ValidateUser((string)Request.Form.Username, (string)Request.Form.Password);
+                var model = this.Bind<LoginModel>();
+
+                var userGuid = UserDatabase.ValidateUser(model.Username, model.Password);
 
                 if (userGuid == null)
-                {
-                    return Context.GetRedirect("~/account/login?error=true&username=" + (string)Request.Form.Username);
-                }
+                    return View["account/login", model];
 
-                DateTime? expiry = null;
-                if (Request.Form.RememberMe.HasValue)
-                {
-                    expiry = DateTime.Now.AddDays(7);
-                }
+                var expiry = (model.RememberMe) ? DateTime.Now.AddDays(7) : (DateTime?) null;
 
                 return this.LoginAndRedirect(userGuid.Value, expiry);
             };

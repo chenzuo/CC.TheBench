@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@RenderSection("Title") &raquo; @Text.General.ApplicationName</title>
+
+    <meta name="description" content="@RenderSection("Title") &raquo; @Text.General.ApplicationName" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/font-awesome.min.css")" rel="stylesheet" />
+
+    <!--[if IE 7]>
+        <link href="@Url.Content("~/css/font-awesome-ie7.min.css")" rel="stylesheet" />
+    <![endif]-->
+
+    <link href="@Url.Content("~/css/ace-fonts.css")" rel="stylesheet" />
+
+    <link href="@Url.Content("~/css/ace.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/ace-rtl.min.css")" rel="stylesheet" />
+
+    <!--[if lte IE 8]>
+        <link href="@Url.Content("~/css/ace-ie.min.css")" rel="stylesheet" />
+    <![endif]-->
+
+    <link href="@Url.Content("~/css/bench.css")" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/js/html5shiv.js")"></script>
+        <script src="@Url.Content("~/js/respond.min.js")"></script>
+    <![endif]-->
+</head>
+<body class="login-layout">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <h1>
+                                <span class="white">@Text.General.ApplicationNamePart1</span>
+                                <span class="red">@Text.General.ApplicationNamePart2</span>
+                            </h1>
+                            <h4 class="blue">&copy; @Text.General.CompanyName</h4>
+                        </div>
+
+                        <div class="space-6"></div>
+
+                        <div class="position-relative">
+                            @RenderBody()
+                        </div><!-- /position-relative -->
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+    </div><!-- /.main-container -->
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='@Url.Content("~/js/jquery-2.0.3.min.js")'>" + "<" + "/script>");
+    </script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='@Url.Content("~/js/jquery-1.10.2.min.js")'>" + "<" + "/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='@Url.Content("~/js/jquery.mobile.custom.min.js")'>" + "<" + "/script>");
+    </script>
+    
+    @RenderSection("Scripts", false)
+</body>
+</html>
+
+@*<body>
+        <form method="POST">
+            Username <input type="text" name="Username" />
+            <br />
+            Password <input name="Password" type="password" />
+            <br />
+            Remember Me <input name="RememberMe" type="checkbox" value="True" />
+            <br />
+            <input type="submit" value="Login" />
+        </form>
+        @if (Model.Errored)
+        {
+            <div id="errorBox" class="floatingError">Invalid Username or Password</div>
+        }
+    </body>
+    </html>
+*@

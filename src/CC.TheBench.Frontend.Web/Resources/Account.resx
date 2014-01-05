@@ -120,6 +120,9 @@
   <data name="EnterYourInformation" xml:space="preserve">
     <value>Please Enter Your Information</value>
   </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
   <data name="IForgotMyPassword" xml:space="preserve">
     <value>I forgot my password</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me</value>

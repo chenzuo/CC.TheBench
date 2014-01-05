@@ -2,13 +2,13 @@
 {
     using Nancy;
 
-    public class RegisterModule : NancyModule
+    public class ForgotPasswordModule : NancyModule
     {
-        public RegisterModule() : base("/account/register")
+        public ForgotPasswordModule() : base("/account/forgotpassword")
         {
             Get["/"] = x =>
             {
-                return View["account/register"];
+                return View["account/forgotpassword"];
             };
 
             Post["/"] = _ => "register";

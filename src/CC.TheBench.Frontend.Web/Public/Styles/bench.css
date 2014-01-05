@@ -2,6 +2,6 @@
     text-align: center;
 }
 
-.forgot-password-link, .user-signup-link {
-    cursor: pointer;
+#login-box .icon-user, #login-box .icon-lock {
+    top: 4px;
 }

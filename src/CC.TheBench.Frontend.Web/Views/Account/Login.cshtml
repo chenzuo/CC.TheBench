@@ -1,0 +1,94 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Account.Models.LoginModel>
+@{
+    Layout = "Account/Layout.cshtml";
+}
+
+@section Title { @Text.Account.Login }
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#username').focus();
+    });
+</script>
+}
+<div id="login-box" class="login-box visible widget-box no-border">
+    <div class="widget-body">
+        <div class="widget-main">
+            <h4 class="header blue lighter bigger">
+                <i class="icon-pencil blue"></i>
+                @Text.Account.EnterYourInformation
+            </h4>
+
+            <div class="space-6"></div>
+
+            <form action="@Url.Content("~/account/login")@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? string.Empty : "?returnUrl=" + Model.ReturnUrl)" method="POST">
+                <fieldset>
+                    <label class="block clearfix">
+                        <span class="block input-icon input-icon-right">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="@Text.Account.Username" value="@Model.Username" />
+                            <i class="icon-user"></i>
+                        </span>
+                    </label>
+
+                    <label class="block clearfix">
+                        <span class="block input-icon input-icon-right">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="@Text.Account.Password" />
+                            <i class="icon-lock"></i>
+                        </span>
+                    </label>
+
+                    <div class="space"></div>
+
+                    <div class="clearfix">
+                        <label class="inline">
+                            <input type="checkbox" class="ace" id="rememberMe" name="rememberMe" value="true" @(Model.RememberMe ? "checked='checked'" : string.Empty) />
+                            <span class="lbl"> @Text.Account.RememberMe</span>
+                        </label>
+
+                        <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                            <i class="icon-key"></i>
+                            @Text.Account.Login
+                        </button>
+                    </div>
+
+                    <div class="space-4"></div>
+                </fieldset>
+            </form>
+
+            <div class="social-or-login center">
+                <span class="bigger-110">@Text.Account.OrLoginUsing</span>
+            </div>
+
+            <div class="social-login center">
+                <a class="btn btn-primary">
+                    <i class="icon-facebook"></i>
+                </a>
+
+                <a class="btn btn-info">
+                    <i class="icon-twitter"></i>
+                </a>
+
+                <a class="btn btn-danger">
+                    <i class="icon-google-plus"></i>
+                </a>
+            </div>
+        </div><!-- /widget-main -->
+
+        <div class="toolbar clearfix">
+            <div>
+                <a href="@Url.Content("~/account/forgotpassword")" class="forgot-password-link">
+                    <i class="icon-arrow-left"></i>
+                    @Text.Account.IForgotMyPassword
+                </a>
+            </div>
+
+            <div>
+                <a href="@Url.Content("~/account/register")" class="user-signup-link">
+                    @Text.Account.IWantToRegister
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div><!-- /widget-body -->
+</div><!-- /login-box -->
