@@ -7,11 +7,11 @@
 @section Title { @Text.Account.Login }
 
 @section Scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function () {
-        $('#@Html.RenderContext.Context.GetFirstInvalidField("email", new[] { "email", "password" })').focus();
+        $('#@Html.RenderContext.Context.GetFirstInvalidField("email", new[] {"email", "password"})').focus();
     });
-</script>
+    </script>
 }
 
 <div id="login-box" class="login-box visible widget-box no-border">
@@ -34,7 +34,7 @@
 
             <div class="space-6"></div>
         
-            <form action="@Url.Content("~/account/login")@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? string.Empty : "?returnUrl=" + Model.ReturnUrl)" method="POST">
+            <form id="login-form" action="@Url.Content("~/account/login")@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? string.Empty : "?returnUrl=" + Model.ReturnUrl)" method="POST">
                 @Html.AntiForgeryToken()
 
                 <fieldset>
