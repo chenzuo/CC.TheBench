@@ -1,0 +1,7 @@
+.header {
+    text-align: center;
+}
+
+.forgot-password-link, .user-signup-link {
+    cursor: pointer;
+}

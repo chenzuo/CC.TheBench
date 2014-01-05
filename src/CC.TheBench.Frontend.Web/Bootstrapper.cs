@@ -10,9 +10,14 @@
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        protected override DiagnosticsConfiguration DiagnosticsConfiguration
+        {
+            get { return new DiagnosticsConfiguration { Password = @"testdebug" }; }
+        }
+
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            DiagnosticsHook.Disable(pipelines);
+            //DiagnosticsHook.Disable(pipelines);
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
@@ -34,7 +39,7 @@
             // The pipelines passed in here are specific to this request,
             // so we can add/remove/update items in them as we please.
             var formsAuthConfiguration =
-                new FormsAuthenticationConfiguration()
+                new FormsAuthenticationConfiguration
                 {
                     RedirectUrl = "~/account/login",
                     UserMapper = requestContainer.Resolve<IUserMapper>(),
@@ -49,6 +54,7 @@
 
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/css", @"/Public/Styles"));
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/js", @"/Public/Scripts"));
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/fonts", @"/Public/Fonts"));
         }
     }
 }

@@ -120,4 +120,13 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>The Bench</value>
   </data>
+  <data name="ApplicationNamePart1" xml:space="preserve">
+    <value>The</value>
+  </data>
+  <data name="ApplicationNamePart2" xml:space="preserve">
+    <value>Bench</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Cumps Consulting</value>
+  </data>
 </root>

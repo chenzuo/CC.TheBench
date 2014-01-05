@@ -69,12 +69,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.svg" />
+    <Content Include="Public\Scripts\html5shiv.js" />
+    <Content Include="Public\Scripts\respond.min.js" />
+    <Content Include="Public\Styles\ace-fonts.css" />
+    <Content Include="Public\Styles\ace-ie.min.css" />
+    <Content Include="Public\Styles\ace-rtl.min.css" />
+    <Content Include="Public\Styles\bench.css" />
+    <Content Include="Public\Styles\ace.min.css" />
     <Content Include="Public\Styles\bootstrap.min.css" />
+    <Content Include="Public\Styles\font-awesome-ie7.min.css" />
     <Content Include="Public\Styles\font-awesome.min.css" />
     <Content Include="packages.config" />
     <Content Include="Views\Invoices\Overview.cshtml" />
     <Content Include="Views\Account\Login\Index.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Public\Fonts\FontAwesome\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
+    <Content Include="Public\Fonts\FontAwesome\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
+    <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.eot" />
+    <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.ttf" />
+    <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.woff" />
+    <Content Include="Public\Fonts\FontAwesome\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -140,9 +155,7 @@
       <LastGenOutput>Text.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Public\Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

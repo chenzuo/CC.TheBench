@@ -61,11 +61,74 @@ namespace CC.TheBench.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Enter Your Information.
+        /// </summary>
+        internal static string EnterYourInformation {
+            get {
+                return ResourceManager.GetString("EnterYourInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I forgot my password.
+        /// </summary>
+        internal static string IForgotMyPassword {
+            get {
+                return ResourceManager.GetString("IForgotMyPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I want to register.
+        /// </summary>
+        internal static string IWantToRegister {
+            get {
+                return ResourceManager.GetString("IWantToRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or Login Using.
+        /// </summary>
+        internal static string OrLoginUsing {
+            get {
+                return ResourceManager.GetString("OrLoginUsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember Me.
+        /// </summary>
+        internal static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        internal static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
             }
         }
     }

@@ -68,5 +68,32 @@ namespace CC.TheBench.Frontend.Web.Resources {
                 return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The.
+        /// </summary>
+        internal static string ApplicationNamePart1 {
+            get {
+                return ResourceManager.GetString("ApplicationNamePart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bench.
+        /// </summary>
+        internal static string ApplicationNamePart2 {
+            get {
+                return ResourceManager.GetString("ApplicationNamePart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cumps Consulting.
+        /// </summary>
+        internal static string CompanyName {
+            get {
+                return ResourceManager.GetString("CompanyName", resourceCulture);
+            }
+        }
     }
 }
