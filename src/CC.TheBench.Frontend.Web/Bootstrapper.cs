@@ -3,11 +3,18 @@
     using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.Bootstrapper;
+    using Nancy.Conventions;
+    using Nancy.Diagnostics;
     using Nancy.TinyIoc;
     using Security;
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        {
+            DiagnosticsHook.Disable(pipelines);
+        }
+
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
         {
             base.ConfigureRequestContainer(container, context);
@@ -34,6 +41,14 @@
                 };
 
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+        }
+
+        protected override void ConfigureConventions(NancyConventions conventions)
+        {
+            base.ConfigureConventions(conventions);
+
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/css", @"/Public/Styles"));
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/js", @"/Public/Scripts"));
         }
     }
 }
