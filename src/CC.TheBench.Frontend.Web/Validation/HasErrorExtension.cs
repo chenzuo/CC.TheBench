@@ -12,8 +12,7 @@
             if (validationResult.IsValid)
                 return false;
 
-            var errors = validationResult.Errors;
-            var memberNames = errors.SelectMany(x => x.MemberNames);
+            var memberNames = validationResult.Errors.SelectMany(x => x.MemberNames);
 
             return memberNames.Contains(memberName);
         }
