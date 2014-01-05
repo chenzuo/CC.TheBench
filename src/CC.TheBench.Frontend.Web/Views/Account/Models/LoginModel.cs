@@ -5,7 +5,7 @@
 
     public class LoginModel
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
 
         public bool RememberMe { get; set; }
@@ -17,7 +17,7 @@
     {
         public LoginModelValidator()
         {
-            RuleFor(x => x.Username).NotEmpty().WithName(Account.Username).WithMessage(Validation.IsRequired);
+            RuleFor(x => x.Email).NotEmpty().WithName(Account.Email).WithMessage(Validation.IsRequired);
 
             RuleFor(x => x.Password).NotEmpty().WithName(Account.Password).WithMessage(Validation.IsRequired);
         }

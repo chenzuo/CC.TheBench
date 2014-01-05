@@ -2,11 +2,11 @@
 {
     public class UserModel
     {
-        public string Username { get; private set; }
+        public string Email { get; private set; }
 
-        public UserModel(string username)
+        public UserModel(string email)
         {
-            Username = username;
+            Email = email;
         }
     }
 }

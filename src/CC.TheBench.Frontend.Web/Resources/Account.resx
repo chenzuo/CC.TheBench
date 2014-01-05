@@ -127,7 +127,7 @@
     <value>I forgot my password</value>
   </data>
   <data name="InvalidLogin" xml:space="preserve">
-    <value>The combination username and password is invalid.</value>
+    <value>Wrong email and password combination.</value>
   </data>
   <data name="IWantToRegister" xml:space="preserve">
     <value>I want to register</value>
@@ -147,7 +147,7 @@
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me</value>
   </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
 </root>

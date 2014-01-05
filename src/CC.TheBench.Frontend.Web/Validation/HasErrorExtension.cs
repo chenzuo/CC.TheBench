@@ -1,5 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web.Validation
 {
+    using System;
     using System.Linq;
     using Nancy;
 
@@ -14,7 +15,7 @@
 
             var memberNames = validationResult.Errors.SelectMany(x => x.MemberNames);
 
-            return memberNames.Contains(memberName);
+            return memberNames.Contains(memberName, StringComparer.InvariantCultureIgnoreCase);
         }
     }
 }

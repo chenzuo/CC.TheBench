@@ -29,11 +29,11 @@
                 if (!ModelValidationResult.IsValid)
                     return View["account/login", model];
 
-                var userGuid = UserDatabase.ValidateUser(model.Username, model.Password);
+                var userGuid = UserDatabase.ValidateUser(model.Email, model.Password);
 
                 if (userGuid == null)
                 {
-                    ModelValidationResult.AddError(new[] {"Username", "Password"}, Account.InvalidLogin);
+                    ModelValidationResult = ModelValidationResult.AddError(new[] { "Email", "Password" }, Account.InvalidLogin);
                     return View["account/login", model];
                 }
 

@@ -61,6 +61,15 @@ namespace CC.TheBench.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Enter Your Information.
         /// </summary>
         internal static string EnterYourInformation {
@@ -88,7 +97,7 @@ namespace CC.TheBench.Frontend.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The combination username and password is invalid..
+        ///   Looks up a localized string similar to Wrong email and password combination..
         /// </summary>
         internal static string InvalidLogin {
             get {
@@ -147,15 +156,6 @@ namespace CC.TheBench.Frontend.Web.Resources {
         internal static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username.
-        /// </summary>
-        internal static string Username {
-            get {
-                return ResourceManager.GetString("Username", resourceCulture);
             }
         }
     }

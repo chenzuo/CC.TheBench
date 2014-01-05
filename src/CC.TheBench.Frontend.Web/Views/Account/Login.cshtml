@@ -9,7 +9,7 @@
 @section Scripts {
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#username').focus();
+        $('#@Html.RenderContext.Context.GetFirstInvalidField("email", new[] { "email", "password" })').focus();
     });
 </script>
 }
@@ -39,8 +39,8 @@
 
                 <fieldset>
                     <label class="block clearfix">
-                        <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Username") ? "has-error" : string.Empty)">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="@Text.Account.Username" value="@Model.Username" />
+                        <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Email") ? "has-error" : string.Empty)">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="@Text.Account.Email" value="@Model.Email" />
                             <i class="icon-user"></i>
                         </span>
                     </label>

@@ -26,9 +26,9 @@
                        : new UserIdentity { UserName = userRecord.Item1 };
         }
 
-        public static Guid? ValidateUser(string username, string password)
+        public static Guid? ValidateUser(string email, string password)
         {
-            var userRecord = Users.FirstOrDefault(u => u.Item1 == username && u.Item2 == password);
+            var userRecord = Users.FirstOrDefault(u => u.Item1 == email && u.Item2 == password);
 
             if (userRecord == null)
             {
