@@ -1,4 +1,5 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Account.Models.LoginModel>
+﻿@using CC.TheBench.Frontend.Web.Validation
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Account.Models.LoginModel>
 @{
     Layout = "Account/Layout.cshtml";
 }
@@ -12,6 +13,7 @@
     });
 </script>
 }
+
 <div id="login-box" class="login-box visible widget-box no-border">
     <div class="widget-body">
         <div class="widget-main">
@@ -19,20 +21,33 @@
                 <i class="icon-pencil blue"></i>
                 @Text.Account.EnterYourInformation
             </h4>
+        
+            @if (!Html.RenderContext.Context.ModelValidationResult.IsValid)
+            {
+                <div class="alert alert-danger">
+                        @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors)
+                        {
+                            <p>
+                                
+                                @e.GetMessage(string.Empty)
+                            </p>
+                        }
+                </div>
+            }
 
             <div class="space-6"></div>
-
+        
             <form action="@Url.Content("~/account/login")@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? string.Empty : "?returnUrl=" + Model.ReturnUrl)" method="POST">
                 <fieldset>
                     <label class="block clearfix">
-                        <span class="block input-icon input-icon-right">
+                        <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Username") ? "has-error" : string.Empty)">
                             <input type="text" class="form-control" id="username" name="username" placeholder="@Text.Account.Username" value="@Model.Username" />
                             <i class="icon-user"></i>
                         </span>
                     </label>
 
                     <label class="block clearfix">
-                        <span class="block input-icon input-icon-right">
+                        <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Password") ? "has-error" : string.Empty)">
                             <input type="password" class="form-control" id="password" name="password" placeholder="@Text.Account.Password" />
                             <i class="icon-lock"></i>
                         </span>

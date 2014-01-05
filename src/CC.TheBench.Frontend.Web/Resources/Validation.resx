@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EnterYourInformation" xml:space="preserve">
-    <value>Please Enter Your Information</value>
-  </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot Password</value>
-  </data>
-  <data name="IForgotMyPassword" xml:space="preserve">
-    <value>I forgot my password</value>
-  </data>
-  <data name="InvalidLogin" xml:space="preserve">
-    <value>The combination username and password is invalid.</value>
-  </data>
-  <data name="IWantToRegister" xml:space="preserve">
-    <value>I want to register</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="OrLoginUsing" xml:space="preserve">
-    <value>Or Login Using</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember Me</value>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
+  <data name="IsRequired" xml:space="preserve">
+    <value>{PropertyName} is required.</value>
   </data>
 </root>

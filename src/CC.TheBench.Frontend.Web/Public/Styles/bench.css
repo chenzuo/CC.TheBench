@@ -5,3 +5,17 @@
 #login-box .icon-user, #login-box .icon-lock {
     top: 4px;
 }
+
+.has-error .form-control, .has-error .form-control:focus, .has-error .form-control:hover {
+    border-color: #F09784;
+    color: #D68273;
+}
+
+.has-error.input-icon > [class*="icon-"], .has-error.input-icon > input:focus + [class*="icon-"] {
+    color: #D68273 !important;
+}
+
+.login-container .alert {
+    margin-bottom: 0px;
+    line-height: 1.3;
+}

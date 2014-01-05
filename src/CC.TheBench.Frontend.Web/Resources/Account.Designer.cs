@@ -88,6 +88,15 @@ namespace CC.TheBench.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The combination username and password is invalid..
+        /// </summary>
+        internal static string InvalidLogin {
+            get {
+                return ResourceManager.GetString("InvalidLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I want to register.
         /// </summary>
         internal static string IWantToRegister {
