@@ -1,5 +1,5 @@
-﻿@using CC.TheBench.Frontend.Web.Validation
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Account.Models.LoginModel>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Account.Models.LoginModel>
+@using CC.TheBench.Frontend.Web.Validation
 @{
     Layout = "Account/Layout.cshtml";
 }
@@ -14,8 +14,8 @@
             $('#login-form').validate({
                 errorClass: 'has-error',
                 messages: {
-                    email: 'Email is required.',
-                    password: 'Password is required.',
+                    email: '@Html.ValidationMessage((string)Text.Validation.IsRequired, (string)Text.Account.Email)',
+                    password: '@Html.ValidationMessage((string)Text.Validation.IsRequired, (string)Text.Account.Password)',
                 },
                 errorPlacement: $.noop,
                 highlight: function(element, errorClass) {

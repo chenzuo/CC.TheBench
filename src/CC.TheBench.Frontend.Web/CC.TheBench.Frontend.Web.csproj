@@ -157,6 +157,7 @@
     <Compile Include="Security\UserIdentity.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validation\GetFirstInvalidFieldExtension.cs" />
+    <Compile Include="Validation\ValidationMessageExtension.cs" />
     <Compile Include="Validation\HasErrorExtension.cs" />
     <Compile Include="Views\Account\Models\LoginModel.cs" />
   </ItemGroup>
