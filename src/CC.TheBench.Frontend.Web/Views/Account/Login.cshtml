@@ -13,19 +13,30 @@
 
             $('#login-form').validate({
                 errorClass: 'has-error',
-                //errorContainer: '#errors',
-                //errorLabelContainer: '#errors',
-                //wrapper: 'p',
                 messages: {
                     email: 'Email is required.',
                     password: 'Password is required.',
                 },
                 errorPlacement: $.noop,
-                highlight: function (element, errorClass) {
+                highlight: function(element, errorClass) {
                     $(element).closest('span').addClass(errorClass);
                 },
-                unhighlight: function (element, errorClass) {
+                unhighlight: function(element, errorClass) {
                     $(element).closest('span').removeClass(errorClass);
+                },
+                invalidHandler: function(event, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        var errorList = '';
+                        $.each(validator.errorList, function () {
+                            errorList += '<p>' + this.message + '</p>';
+                        });
+
+                        $('#errors').html(errorList);
+                        $('#errors').show();
+                    } else {
+                        $('#errors').hide();
+                    }
                 }
             });
         });
@@ -46,7 +57,7 @@
                     <p>@e.GetMessage(string.Empty)</p>
                 }
             </div>
-
+            
             <div class="space-6"></div>
         
             <form id="login-form" action="@Url.Content("~/account/login")@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? string.Empty : "?returnUrl=" + Model.ReturnUrl)" method="POST">
