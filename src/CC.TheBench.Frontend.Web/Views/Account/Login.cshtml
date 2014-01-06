@@ -8,9 +8,27 @@
 
 @section Scripts {
     <script type="text/javascript">
-    $(document).ready(function () {
-        $('#@Html.RenderContext.Context.GetFirstInvalidField("email", new[] {"email", "password"})').focus();
-    });
+        $(document).ready(function() {
+            $('#@Html.RenderContext.Context.GetFirstInvalidField("email", new[] {"email", "password"})').focus();
+
+            $('#login-form').validate({
+                errorClass: 'has-error',
+                //errorContainer: '#errors',
+                //errorLabelContainer: '#errors',
+                //wrapper: 'p',
+                messages: {
+                    email: 'Email is required.',
+                    password: 'Password is required.',
+                },
+                errorPlacement: $.noop,
+                highlight: function (element, errorClass) {
+                    $(element).closest('span').addClass(errorClass);
+                },
+                unhighlight: function (element, errorClass) {
+                    $(element).closest('span').removeClass(errorClass);
+                }
+            });
+        });
     </script>
 }
 
@@ -22,15 +40,12 @@
                 @Text.Account.EnterYourInformation
             </h4>
         
-            @if (!Html.RenderContext.Context.ModelValidationResult.IsValid)
-            {
-                <div class="alert alert-danger">
-                    @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors)
-                    {
-                        <p>@e.GetMessage(string.Empty)</p>
-                    }
-                </div>
-            }
+            <div id="errors" class="alert alert-danger" @(Html.RenderContext.Context.ModelValidationResult.IsValid ? "style='display: none;'" : string.Empty)>
+                @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors)
+                {
+                    <p>@e.GetMessage(string.Empty)</p>
+                }
+            </div>
 
             <div class="space-6"></div>
         
@@ -40,14 +55,14 @@
                 <fieldset>
                     <label class="block clearfix">
                         <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Email") ? "has-error" : string.Empty)">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="@Text.Account.Email" value="@Model.Email" />
+                            <input type="text" class="form-control" id="email" name="email" placeholder="@Text.Account.Email" value="@Model.Email" required />
                             <i class="icon-user"></i>
                         </span>
                     </label>
 
                     <label class="block clearfix">
                         <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Password") ? "has-error" : string.Empty)">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="@Text.Account.Password" />
+                            <input type="password" class="form-control" id="password" name="password" placeholder="@Text.Account.Password" required />
                             <i class="icon-lock"></i>
                         </span>
                     </label>

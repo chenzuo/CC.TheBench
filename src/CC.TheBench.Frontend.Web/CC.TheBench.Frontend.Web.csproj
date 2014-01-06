@@ -76,10 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.svg" />
+    <Content Include="Public\Images\favicon.ico" />
     <Content Include="Public\Scripts\html5shiv.js" />
     <Content Include="Public\Scripts\jquery-1.10.2.min.js" />
     <Content Include="Public\Scripts\jquery-2.0.3.min.js" />
     <Content Include="Public\Scripts\jquery.mobile.custom.min.js" />
+    <Content Include="Public\Scripts\jquery.validate.min.js" />
     <Content Include="Public\Scripts\respond.min.js" />
     <Content Include="Public\Styles\ace-fonts.css" />
     <Content Include="Public\Styles\ace-ie.min.css" />
