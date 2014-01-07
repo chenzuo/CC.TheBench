@@ -1,5 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
+    using System.Text;
     using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.Bootstrapper;
@@ -8,6 +9,7 @@
     using Nancy.Diagnostics;
     using Nancy.Security;
     using Nancy.TinyIoc;
+    using Properties;
     using Security;
 
     public class Bootstrapper : DefaultNancyBootstrapper
@@ -21,10 +23,12 @@
                 // because the algorithm is too slow to do per-request. This means that your salt will be static so 
                 // the passphrase should be long and complex.
 
-                // TODO: Change this obviously!
                 return new CryptographyConfiguration(
-                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator("SuperSecretPass", new byte[] {1, 2, 3, 4, 5, 6, 7, 8})),
-                    new DefaultHmacProvider(new PassphraseKeyGenerator("UberSuperSecure", new byte[] {1, 2, 3, 4, 5, 6, 7, 8})));
+                    new RijndaelEncryptionProvider(
+                        new PassphraseKeyGenerator(Settings.Default.EncryptionProviderPassphrase,
+                            Encoding.ASCII.GetBytes(Settings.Default.EncryptionProviderSalt))),
+                    new DefaultHmacProvider(new PassphraseKeyGenerator(Settings.Default.HMacProviderPassphrase,
+                        Encoding.ASCII.GetBytes(Settings.Default.HMacProviderSalt))));
             }
         }
 

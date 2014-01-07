@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CC.TheBench.Frontend.Web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EncryptionProviderPassphrase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SuperSecretPass</Value>
+    </Setting>
+    <Setting Name="HMacProviderPassphrase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UberSuperSecure</Value>
+    </Setting>
+    <Setting Name="EncryptionProviderSalt" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Salty salt!</Value>
+    </Setting>
+    <Setting Name="HMacProviderSalt" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UberSalty salt!</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
