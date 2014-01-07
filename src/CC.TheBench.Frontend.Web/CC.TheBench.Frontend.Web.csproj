@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentMigrator">
+      <HintPath>..\..\lib\FluentMigrator.1.1.2.1\lib\40\FluentMigrator.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\..\lib\FluentValidation.5.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
@@ -49,6 +52,9 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\..\lib\Microsoft.Owin.Host.SystemWeb.2.0.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\lib\MySql.Data.6.8.3\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\lib\Nancy.0.21.1\lib\net40\Nancy.dll</HintPath>
@@ -73,6 +79,15 @@
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\lib\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data">
+      <HintPath>..\..\lib\Simple.Data.Core.0.18.3.1\lib\net40\Simple.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Ado">
+      <HintPath>..\..\lib\Simple.Data.Ado.0.18.3.1\lib\net40\Simple.Data.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Mysql">
+      <HintPath>..\..\lib\Simple.Data.Mysql.0.18.3.2\lib\net40\Simple.Data.Mysql.dll</HintPath>
     </Reference>
     <Reference Include="SimpleAuthentication.Core">
       <HintPath>..\..\lib\SimpleAuthentication.Core.0.3.10\lib\net40\SimpleAuthentication.Core.dll</HintPath>

@@ -29,6 +29,7 @@
                 if (!ModelValidationResult.IsValid)
                     return View["account/login", model];
 
+                // TODO: Check user in reporting db
                 var userGuid = UserDatabase.ValidateUser(model.Email, model.Password);
 
                 if (userGuid == null)
@@ -39,6 +40,7 @@
 
                 var expiry = (model.RememberMe) ? DateTime.Now.AddDays(7) : (DateTime?) null;
 
+                // TODO: Publish event for CQRS/ES audit logging
                 return this.LoginAndRedirect(userGuid.Value, expiry);
             };
         }
