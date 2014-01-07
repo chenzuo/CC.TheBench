@@ -4,6 +4,7 @@
     using Nancy.Authentication.Forms;
     using Nancy.Bootstrapper;
     using Nancy.Conventions;
+    using Nancy.Cryptography;
     using Nancy.Diagnostics;
     using Nancy.Security;
     using Nancy.TinyIoc;
@@ -11,6 +12,22 @@
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        protected override CryptographyConfiguration CryptographyConfiguration
+        {
+            get
+            {
+                // This is to prevent app restarts from invalidating existing CSRF and Forms Cookies
+                // If you are using the PassphraseKeyGenerator then it should be initialized at application startup 
+                // because the algorithm is too slow to do per-request. This means that your salt will be static so 
+                // the passphrase should be long and complex.
+
+                // TODO: Change this obviously!
+                return new CryptographyConfiguration(
+                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator("SuperSecretPass", new byte[] {1, 2, 3, 4, 5, 6, 7, 8})),
+                    new DefaultHmacProvider(new PassphraseKeyGenerator("UberSuperSecure", new byte[] {1, 2, 3, 4, 5, 6, 7, 8})));
+            }
+        }
+
         protected override DiagnosticsConfiguration DiagnosticsConfiguration
         {
             get { return new DiagnosticsConfiguration { Password = @"testdebug" }; }
@@ -48,6 +65,7 @@
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration
                 {
+                    CryptographyConfiguration = requestContainer.Resolve<CryptographyConfiguration>(),
                     RedirectUrl = "~/account/login",
                     UserMapper = requestContainer.Resolve<IUserMapper>(),
                 };
