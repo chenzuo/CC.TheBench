@@ -24,17 +24,17 @@
                 // because the algorithm is too slow to do per-request. This means that your salt will be static so 
                 // the passphrase should be long and complex.
                 return new CryptographyConfiguration(
-                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator(Settings.Default.EncryptionProviderPassphrase,
-                                                                              Encoding.ASCII.GetBytes(Settings.Default.EncryptionProviderSalt))),
+                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator(SecuritySettings.Default.EncryptionProviderPassphrase,
+                                                                              Encoding.ASCII.GetBytes(SecuritySettings.Default.EncryptionProviderSalt))),
                     new DefaultHmacProvider(
-                        new PassphraseKeyGenerator(Settings.Default.HMacProviderPassphrase,
-                                                   Encoding.ASCII.GetBytes(Settings.Default.HMacProviderSalt))));
+                        new PassphraseKeyGenerator(SecuritySettings.Default.HMacProviderPassphrase,
+                                                   Encoding.ASCII.GetBytes(SecuritySettings.Default.HMacProviderSalt))));
             }
         }
 
         protected override DiagnosticsConfiguration DiagnosticsConfiguration
         {
-            get { return new DiagnosticsConfiguration { Password = @"testdebug" }; }
+            get { return new DiagnosticsConfiguration { Password = SecuritySettings.Default.DiagnosticsConfigurationPassphrase }; }
         }
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
@@ -75,7 +75,7 @@
                 {
                     CryptographyConfiguration = requestContainer.Resolve<CryptographyConfiguration>(),
                     RedirectUrl = "~/account/login",
-                    UserMapper = requestContainer.Resolve<IUserMapper>(),
+                    UserMapper = requestContainer.Resolve<IUserMapper>()
                 };
 
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
