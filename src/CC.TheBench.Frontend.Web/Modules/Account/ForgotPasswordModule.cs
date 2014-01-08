@@ -1,8 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
-    using Nancy;
-
-    public class ForgotPasswordModule : NancyModule
+    public class ForgotPasswordModule : BaseModule
     {
         public ForgotPasswordModule() : base("/account/forgotpassword")
         {

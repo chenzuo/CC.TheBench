@@ -150,11 +150,14 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Data\IReadStoreFactory.cs" />
+    <Compile Include="Data\ReadStoreFactory.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Modules\Account\LogoutModule.cs" />
     <Compile Include="Modules\Account\LoginModule.cs" />
     <Compile Include="Modules\Account\ForgotPasswordModule.cs" />
     <Compile Include="Modules\Account\RegisterModule.cs" />
+    <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Modules\Invoices\InvoicesModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,7 +181,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="SecureNancyModule.cs" />
+    <Compile Include="Modules\SecureNancyModule.cs" />
     <Compile Include="Resources\Text.nl.Designer.cs">
       <DependentUpon>Text.nl.resx</DependentUpon>
       <AutoGen>True</AutoGen>

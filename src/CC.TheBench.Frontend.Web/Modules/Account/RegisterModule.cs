@@ -1,8 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
-    using Nancy;
-
-    public class RegisterModule : NancyModule
+    public class RegisterModule : BaseModule
     {
         public RegisterModule() : base("/account/register")
         {

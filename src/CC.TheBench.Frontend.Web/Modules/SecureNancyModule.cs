@@ -1,9 +1,8 @@
-﻿namespace CC.TheBench.Frontend.Web
+﻿namespace CC.TheBench.Frontend.Web.Modules
 {
-    using Nancy;
     using Nancy.Security;
 
-    public class SecureNancyModule : NancyModule
+    public class SecureNancyModule : BaseModule
     {
         public SecureNancyModule()
         {

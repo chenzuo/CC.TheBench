@@ -1,7 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
     using System;
-    using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.ModelBinding;
     using Nancy.Security;
@@ -9,7 +8,7 @@
     using Security;
     using Views.Account.Models;
 
-    public class LoginModule : NancyModule
+    public class LoginModule : BaseModule
     {
         public LoginModule() : base("/account/login")
         {

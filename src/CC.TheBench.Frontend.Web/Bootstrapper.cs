@@ -1,6 +1,7 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
     using System.Text;
+    using Data;
     using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.Bootstrapper;
@@ -56,6 +57,7 @@
             // As this is now per-request we could inject a request scoped
             // database "context" or other request scoped services.
             container.Register<IUserMapper, UserDatabase>();
+            
         }
 
         protected override void RequestStartup(TinyIoCContainer requestContainer, IPipelines pipelines, NancyContext context)
