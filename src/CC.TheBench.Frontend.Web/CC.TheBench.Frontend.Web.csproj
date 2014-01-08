@@ -40,9 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentMigrator">
-      <HintPath>..\..\lib\FluentMigrator.1.1.2.1\lib\40\FluentMigrator.dll</HintPath>
-    </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\..\lib\FluentValidation.5.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
