@@ -53,7 +53,9 @@
         {
             base.ConfigureRequestContainer(container, context);
 
-            container.Register<IReadStoreFactory, ReadStoreFactory>().AsMultiInstance();
+            // Simple.Data is quite aggressive in closing connections and holds no open connections to a data store by default, 
+            // so you can keep the Database object returned from the Open*() methods hanging around without worrying.
+            container.Register<IReadStoreFactory, ReadStoreFactory>().AsSingleton();
 
             // Here we register our user mapper as a per-request singleton.
             // As this is now per-request we could inject a request scoped
