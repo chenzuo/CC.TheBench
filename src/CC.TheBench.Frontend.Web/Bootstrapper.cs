@@ -23,13 +23,12 @@
                 // If you are using the PassphraseKeyGenerator then it should be initialized at application startup 
                 // because the algorithm is too slow to do per-request. This means that your salt will be static so 
                 // the passphrase should be long and complex.
-
                 return new CryptographyConfiguration(
-                    new RijndaelEncryptionProvider(
-                        new PassphraseKeyGenerator(Settings.Default.EncryptionProviderPassphrase,
-                            Encoding.ASCII.GetBytes(Settings.Default.EncryptionProviderSalt))),
-                    new DefaultHmacProvider(new PassphraseKeyGenerator(Settings.Default.HMacProviderPassphrase,
-                        Encoding.ASCII.GetBytes(Settings.Default.HMacProviderSalt))));
+                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator(Settings.Default.EncryptionProviderPassphrase,
+                                                                              Encoding.ASCII.GetBytes(Settings.Default.EncryptionProviderSalt))),
+                    new DefaultHmacProvider(
+                        new PassphraseKeyGenerator(Settings.Default.HMacProviderPassphrase,
+                                                   Encoding.ASCII.GetBytes(Settings.Default.HMacProviderSalt))));
             }
         }
 

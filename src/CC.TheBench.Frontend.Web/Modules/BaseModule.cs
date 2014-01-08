@@ -5,16 +5,23 @@
 
     public class BaseModule : NancyModule
     {
-        protected dynamic ReadStore;
+        private readonly IReadStoreFactory _readStoreFactory;
+
+        private dynamic _readStore;
+
+        protected dynamic ReadStore
+        {
+            get { return _readStore ?? (_readStore = _readStoreFactory.ReadStore()); }
+        }
 
         public BaseModule(IReadStoreFactory readStoreFactory)
         {
-            ReadStore = readStoreFactory.ReadStore();
+            _readStoreFactory = readStoreFactory;
         }
 
         public BaseModule(IReadStoreFactory readStoreFactory, string modulePath) : base(modulePath)
         {
-            ReadStore = readStoreFactory.ReadStore();
+            _readStoreFactory = readStoreFactory;
         }
     }
 }
