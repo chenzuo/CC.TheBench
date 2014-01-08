@@ -1,10 +1,12 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Invoices
 {
+    using Data;
     using Models;
 
     public class InvoicesModule : SecureNancyModule
     {
-        public InvoicesModule() : base("/invoices")
+        public InvoicesModule(IReadStoreFactory readStoreFactory)
+            : base(readStoreFactory, "/invoices")
         {
             Get["/"] = x =>
             {

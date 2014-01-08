@@ -1,6 +1,7 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
     using System;
+    using Data;
     using Nancy.Authentication.Forms;
     using Nancy.ModelBinding;
     using Nancy.Security;
@@ -10,7 +11,8 @@
 
     public class LoginModule : BaseModule
     {
-        public LoginModule() : base("/account/login")
+        public LoginModule(IReadStoreFactory readStoreFactory)
+            : base(readStoreFactory, "/account/login")
         {
             Get["/"] = x =>
             {

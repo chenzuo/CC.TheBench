@@ -1,8 +1,11 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
+    using Data;
+
     public class ForgotPasswordModule : BaseModule
     {
-        public ForgotPasswordModule() : base("/account/forgotpassword")
+        public ForgotPasswordModule(IReadStoreFactory readStoreFactory)
+            : base(readStoreFactory, "/account/forgotpassword")
         {
             Get["/"] = x =>
             {

@@ -1,8 +1,11 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
+    using Data;
+
     public class RegisterModule : BaseModule
     {
-        public RegisterModule() : base("/account/register")
+        public RegisterModule(IReadStoreFactory readStoreFactory) 
+            : base(readStoreFactory, "/account/register")
         {
             Get["/"] = x =>
             {

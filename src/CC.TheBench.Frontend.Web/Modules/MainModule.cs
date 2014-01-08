@@ -1,8 +1,11 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules
 {
+    using Data;
+
     public class MainModule : BaseModule
     {
-        public MainModule()
+        public MainModule(IReadStoreFactory readStoreFactory)
+            : base(readStoreFactory)
         {
             Get["/"] = _ =>
             {

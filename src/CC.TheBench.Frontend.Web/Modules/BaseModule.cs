@@ -7,16 +7,14 @@
     {
         protected dynamic ReadStore;
 
-        public IReadStoreFactory ReadStoreFactory { private get; set; }
-
-        public BaseModule()
+        public BaseModule(IReadStoreFactory readStoreFactory)
         {
-            ReadStore = ReadStoreFactory.ReadStore();
+            ReadStore = readStoreFactory.ReadStore();
         }
 
-        public BaseModule(string modulePath) : base(modulePath)
+        public BaseModule(IReadStoreFactory readStoreFactory, string modulePath) : base(modulePath)
         {
-            ReadStore = ReadStoreFactory.ReadStore();
+            ReadStore = readStoreFactory.ReadStore();
         }
     }
 }
