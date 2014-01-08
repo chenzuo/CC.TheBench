@@ -6,9 +6,12 @@ lib/
 packages/
 
 # Sensitive stuff
-#AuthenticationProviders.config
-#ConnectionStrings.config
-#SecuritySettings.config
+# Git lets you ignore those files by assuming they are unchanged. This is done by running the git update-index --assume-unchanged path/to/file.txt command. 
+# Once marking a file as such, git will completely ignore any changes on that file; they will not show up when running git status or git diff, nor will they ever be committed.
+# To make git track the file again, simply run git update-index --no-assume-unchanged path/to/file.txt.
+AuthenticationProviders.config
+ConnectionStrings.config
+SecuritySettings.config
 
 # mstest test results
 TestResults
