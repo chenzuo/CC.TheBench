@@ -53,11 +53,12 @@
         {
             base.ConfigureRequestContainer(container, context);
 
+            container.Register<IReadStoreFactory, ReadStoreFactory>().AsMultiInstance();
+
             // Here we register our user mapper as a per-request singleton.
             // As this is now per-request we could inject a request scoped
             // database "context" or other request scoped services.
             container.Register<IUserMapper, UserDatabase>();
-            
         }
 
         protected override void RequestStartup(TinyIoCContainer requestContainer, IPipelines pipelines, NancyContext context)
