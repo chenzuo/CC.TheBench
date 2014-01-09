@@ -7,7 +7,12 @@ namespace CC.TheBench.Frontend.Migrations
     {
         public override void Up()
         {
-            Create.Table("Users");
+            Create.Table("Users")
+                .WithColumn("UserId").AsInt32().NotNullable().PrimaryKey().Identity()
+                .WithColumn("Email").AsString(255).NotNullable().Unique("Email")
+                .WithColumn("Hash").AsFixedLengthString(64).NotNullable()
+                .WithColumn("Salt").AsFixedLengthString(8).NotNullable()
+                .WithColumn("DisplayName").AsString(100).NotNullable();
         }
 
         public override void Down()
