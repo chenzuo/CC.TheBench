@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6CC6311D
 		..\build.cmd = ..\build.cmd
 		..\default.ps1 = ..\default.ps1
 		..\migratedb.cmd = ..\migratedb.cmd
+		..\previewdb.cmd = ..\previewdb.cmd
 		..\serve.cmd = ..\serve.cmd
 	EndProjectSection
 EndProject

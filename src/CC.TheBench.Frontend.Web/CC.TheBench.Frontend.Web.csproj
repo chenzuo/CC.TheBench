@@ -156,7 +156,8 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Data\IReadStoreFactory.cs" />
     <Compile Include="Data\ReadStoreFactory.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Extensions\ByteExtensions\ToHexExtension.cs" />
+    <Compile Include="Extensions\StringExtensions\ToByteArrayExtension.cs" />
     <Compile Include="Modules\Account\LogoutModule.cs" />
     <Compile Include="Modules\Account\LoginModule.cs" />
     <Compile Include="Modules\Account\ForgotPasswordModule.cs" />
@@ -175,6 +176,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Data\ReadModel\User.cs" />
     <Compile Include="Resources\Account.Designer.cs">
       <DependentUpon>Account.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -202,7 +204,9 @@
       <DependentUpon>Text.resx</DependentUpon>
     </Compile>
     <Compile Include="Security\AuthenticationCallbackProvider.cs" />
-    <Compile Include="Security\UserDatabase.cs" />
+    <Compile Include="Security\RequiresProductionHttps.cs" />
+    <Compile Include="Security\SaltedHash.cs" />
+    <Compile Include="Security\UserMapper.cs" />
     <Compile Include="Security\UserIdentity.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validation\GetFirstInvalidFieldExtension.cs" />

@@ -46,6 +46,9 @@
 
             // Takes care of outputting the CSRF token to Cookies
             Csrf.Enable(pipelines);
+
+            // Stateless utilities
+            container.Register<ISaltedHash, SaltedHash>().AsSingleton();
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
@@ -59,7 +62,7 @@
             // Here we register our user mapper as a per-request singleton.
             // As this is now per-request we could inject a request scoped
             // database "context" or other request scoped services.
-            container.Register<IUserMapper, UserDatabase>();
+            container.Register<IUserMapper, UserMapper>();
         }
 
         protected override void RequestStartup(TinyIoCContainer requestContainer, IPipelines pipelines, NancyContext context)

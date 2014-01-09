@@ -1,7 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Invoices
 {
     using Data;
-    using Models;
 
     public class InvoicesModule : SecureNancyModule
     {
@@ -10,8 +9,7 @@
         {
             Get["/"] = x =>
             {
-                var model = new UserModel(Context.CurrentUser.UserName);
-                return View["overview", model];
+                return View["overview"];
             };
         }
     }

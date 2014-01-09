@@ -2,14 +2,14 @@
 
 namespace CC.TheBench.Frontend.Migrations
 {
-    [Migration(201401082219)]
+    [Migration(201401092104)]
     public class CreateUserTable : Migration
     {
         public override void Up()
         {
             Create.Table("Users")
-                .WithColumn("UserId").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Email").AsString(255).NotNullable().Unique("Email")
+                .WithColumn("UserId").AsGuid().NotNullable().Indexed("UserId")
+                .WithColumn("Email").AsString(255).NotNullable().PrimaryKey("Email")
                 .WithColumn("Hash").AsFixedLengthString(64).NotNullable()
                 .WithColumn("Salt").AsFixedLengthString(8).NotNullable()
                 .WithColumn("DisplayName").AsString(100).NotNullable();
