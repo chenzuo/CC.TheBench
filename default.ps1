@@ -14,12 +14,22 @@ properties {
     $out = resolve-path ".\out"
     $build = if ($env:build_number -ne $NULL) { $env:build_number } else { "0" }
     $version = [IO.File]::ReadAllText(".\VERSION.txt") + "." + $build
+
+    $frontend = "CC.TheBench.Frontend.Web"
+    $frontendwebui = "$src\$frontend\$frontend.csproj"
+    $frontendout = "$out\Web"
+
+    $migrations = "CC.TheBench.Frontend.Migrations"
+    $migrationsout = "$out\Migrations"
 }
 
 task default -depends Compile
 
-task Compile -depends CommonAssemblyInfo {
+task Clean -depends CommonAssemblyInfo {
   exec { msbuild /t:clean /v:q /nologo /p:Configuration=$configuration $src\$project.sln }
+}
+
+task Compile -depends Clean {
   exec { msbuild /t:build /v:q /nologo /p:Configuration=$configuration $src\$project.sln }
 }
 
@@ -43,7 +53,10 @@ using System.Runtime.InteropServices;
 }
 
 task MigrateDatabase -depends Compile {
-    exec { & "$lib\FluentMigrator.Tools.1.1.2.1\tools\AnyCPU\40\Migrate.exe" --db=MySql -p -a $out\Migrations\CC.TheBench.Frontend.Migrations.dll --configPath=$src\CC.TheBench.Frontend.Web\Web.config -c="Simple.Data.Properties.Settings.DefaultConnectionString" }
+    exec { & "$lib\FluentMigrator.Tools.1.1.2.1\tools\AnyCPU\40\Migrate.exe" --db=MySql -p -a $migrationsout\$migrations.dll --configPath=$src\$frontend\Web.config -c="Simple.Data.Properties.Settings.DefaultConnectionString" }
 }
 
- 
+task ServeSite -depends Clean  {
+	msbuild /t:rebuild /v:q /nologo /p:OutDir=$frontendout /p:Configuration=$configuration /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False /p:TrackFileAccess=false "$frontendwebui"
+	#copy $frontendout\_PublishedWebsites\$web_app_project_name\* -destination $inetpub_dir -recurse -force
+}
