@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6CC6311D
 	ProjectSection(SolutionItems) = preProject
 		..\build.cmd = ..\build.cmd
 		..\default.ps1 = ..\default.ps1
+		..\migratedb.cmd = ..\migratedb.cmd
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC.TheBench.Frontend.Migrations", "CC.TheBench.Frontend.Migrations\CC.TheBench.Frontend.Migrations.csproj", "{2232BBD7-E7BD-4E03-B2D7-25696E6F98B5}"

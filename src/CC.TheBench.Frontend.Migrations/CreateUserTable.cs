@@ -7,11 +7,12 @@ namespace CC.TheBench.Frontend.Migrations
     {
         public override void Up()
         {
-            
+            Create.Table("Users");
         }
 
         public override void Down()
         {
+            Delete.Table("Users");
         }
     }
 }

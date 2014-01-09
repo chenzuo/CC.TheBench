@@ -1,6 +1,9 @@
 [Bb]in/
 [Oo]bj/
 
+# Ignore build output
+out/
+
 # Nuget packages
 lib/
 packages/

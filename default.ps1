@@ -10,6 +10,8 @@ properties {
  
     $configuration = "Release"
     $src = resolve-path ".\src"
+    $lib = resolve-path ".\lib"
+    $out = resolve-path ".\out"
     $build = if ($env:build_number -ne $NULL) { $env:build_number } else { "0" }
     $version = [IO.File]::ReadAllText(".\VERSION.txt") + "." + $build
 }
@@ -39,3 +41,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany(""$company"")]
 [assembly: AssemblyConfiguration(""$configuration"")]" | out-file "$src\CommonAssemblyInfo.cs" -encoding "ASCII"
 }
+
+task MigrateDatabase -depends Compile {
+    exec { & "$lib\FluentMigrator.Tools.1.1.2.1\tools\AnyCPU\40\Migrate.exe" --db=MySql -p -a $out\Migrations\CC.TheBench.Frontend.Migrations.dll --configPath=$src\CC.TheBench.Frontend.Web\Web.config -c="Simple.Data.Properties.Settings.DefaultConnectionString" }
+}
+
+ 
