@@ -61,6 +61,10 @@ task ServeSite -depends Clean  {
 	msbuild /t:rebuild /v:q /nologo /p:OutDir=$frontendout /p:Configuration=$configuration /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False /p:TrackFileAccess=false "$frontendwebui"
 
     copy $lib\OwinHost.2.0.2\tools\* -destination $frontendout\_PublishedWebsites\$frontend -recurse -force
+	
+	set-location $frontendout\_PublishedWebsites\$frontend
 
-    exec { & "$frontendout\_PublishedWebsites\$frontend\OwinHost.exe" -d $frontendout\_PublishedWebsites\$frontend\ --port $frontendport }
+	start-process "http://localhost:$frontendport"
+	
+	exec { & "$frontendout\_PublishedWebsites\$frontend\OwinHost.exe" --port $frontendport -o }
 }
