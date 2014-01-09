@@ -3,8 +3,8 @@
     using System;
     using System.Security.Cryptography;
     using System.Text;
-    using Extensions.ByteExtensions;
-    using Extensions.StringExtensions;
+    using Utilities.Extensions.ByteExtensions;
+    using Utilities.Extensions.StringExtensions;
 
     public interface ISaltedHash
     {

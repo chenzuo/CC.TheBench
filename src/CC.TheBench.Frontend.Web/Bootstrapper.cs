@@ -12,6 +12,7 @@
     using Nancy.TinyIoc;
     using Properties;
     using Security;
+    using Utilities;
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
@@ -41,14 +42,18 @@
         {
             base.ApplicationStartup(container, pipelines);
 
+            // Stateless utilities
+            container.Register<ISaltedHash, SaltedHash>().AsSingleton();
+            container.Register<IDebuggingService, DebuggingService>().AsSingleton();
+            
             // Disable _Nancy
             DiagnosticsHook.Disable(pipelines);
 
             // Takes care of outputting the CSRF token to Cookies
             Csrf.Enable(pipelines);
 
-            // Stateless utilities
-            container.Register<ISaltedHash, SaltedHash>().AsSingleton();
+            var debuggingService = container.Resolve<IDebuggingService>();
+            StaticConfiguration.DisableErrorTraces = !debuggingService.RunningInDebugMode();
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)

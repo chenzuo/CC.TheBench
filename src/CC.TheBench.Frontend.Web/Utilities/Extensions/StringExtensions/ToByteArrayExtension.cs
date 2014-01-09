@@ -1,4 +1,4 @@
-namespace CC.TheBench.Frontend.Web.Extensions.StringExtensions
+namespace CC.TheBench.Frontend.Web.Utilities.Extensions.StringExtensions
 {
     using System;
     using System.Globalization;

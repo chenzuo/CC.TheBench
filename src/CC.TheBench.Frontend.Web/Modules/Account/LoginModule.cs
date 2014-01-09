@@ -45,7 +45,7 @@
                     : (DateTime?) null;
 
                 // TODO: Publish event for CQRS/ES audit logging
-                return this.LoginAndRedirect(user.UserId, expiry);
+                return this.LoginAndRedirect(new Guid(user.UserId), expiry);
             };
         }
 

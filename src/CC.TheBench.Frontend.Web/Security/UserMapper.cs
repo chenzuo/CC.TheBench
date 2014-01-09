@@ -2,6 +2,7 @@
 {
     using System;
     using Data;
+    using Data.ReadModel;
     using Nancy;
     using Nancy.Authentication.Forms;
     using Nancy.Security;
@@ -17,7 +18,7 @@
 
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
-            var user = ReadStore.Users.FindAllByUserId(identifier).FirstOrDefault();
+            User user = ReadStore.Users.FindAllByUserId(identifier).FirstOrDefault();
 
             return user == null
                        ? null

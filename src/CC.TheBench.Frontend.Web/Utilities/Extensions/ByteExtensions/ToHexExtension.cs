@@ -1,4 +1,4 @@
-namespace CC.TheBench.Frontend.Web.Extensions.ByteExtensions
+namespace CC.TheBench.Frontend.Web.Utilities.Extensions.ByteExtensions
 {
     public static class ToHexExtension
     {
