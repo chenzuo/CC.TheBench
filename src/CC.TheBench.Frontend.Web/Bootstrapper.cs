@@ -83,7 +83,8 @@
                 {
                     CryptographyConfiguration = requestContainer.Resolve<CryptographyConfiguration>(),
                     RedirectUrl = "~/account/login",
-                    UserMapper = requestContainer.Resolve<IUserMapper>()
+                    UserMapper = requestContainer.Resolve<IUserMapper>(),
+                    RequiresSSL = !context.IsLocal()
                 };
 
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);

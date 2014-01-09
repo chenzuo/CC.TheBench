@@ -45,11 +45,7 @@
                 Response response = null;
                 var request = ctx.Request;
 
-                var env = (IDictionary<string, object>)ctx.Items[NancyOwinHost.RequestEnvironmentKey];
-
-                var isLocal = env.ContainsKey("server.IsLocal") && (bool)env["server.IsLocal"];
-
-                if (!request.Url.IsSecure && !isLocal)
+                if (!request.Url.IsSecure && !ctx.IsLocal())
                 {
                     if (redirect && request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase))
                     {
