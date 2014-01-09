@@ -10,7 +10,7 @@
             Get["/"] = _ =>
             {
                 // TODO: Just for testing, remove later
-                ReadStore.Photos.FindAllByPublished(true);
+                //ReadStore.Photos.FindAllByPublished(true);
 
                 //Context.Culture = new CultureInfo("nl-BE");
                 return View["index"];

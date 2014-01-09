@@ -18,6 +18,7 @@ properties {
     $frontend = "CC.TheBench.Frontend.Web"
     $frontendwebui = "$src\$frontend\$frontend.csproj"
     $frontendout = "$out\Web"
+    $frontendport = 5001
 
     $migrations = "CC.TheBench.Frontend.Migrations"
     $migrationsout = "$out\Migrations"
@@ -58,5 +59,8 @@ task MigrateDatabase -depends Compile {
 
 task ServeSite -depends Clean  {
 	msbuild /t:rebuild /v:q /nologo /p:OutDir=$frontendout /p:Configuration=$configuration /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False /p:TrackFileAccess=false "$frontendwebui"
-	#copy $frontendout\_PublishedWebsites\$web_app_project_name\* -destination $inetpub_dir -recurse -force
+
+    copy $lib\OwinHost.2.0.2\tools\* -destination $frontendout\_PublishedWebsites\$frontend -recurse -force
+
+    exec { & "$frontendout\_PublishedWebsites\$frontend\OwinHost.exe" -d $frontendout\_PublishedWebsites\$frontend\ --port $frontendport }
 }
