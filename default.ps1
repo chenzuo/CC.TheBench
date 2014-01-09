@@ -64,7 +64,11 @@ task ServeSite -depends Clean  {
 	
 	set-location $frontendout\_PublishedWebsites\$frontend
 
-	start-process "http://localhost:$frontendport"
+	start-job -scriptblock {
+		param($frontendport)
+		start-sleep 5
+		start-process "http://localhost:$frontendport" 
+	} -arg $frontendport
 	
 	exec { & "$frontendout\_PublishedWebsites\$frontend\OwinHost.exe" --port $frontendport -o }
 }
