@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://www.wekeroad.com/2010/11/17/open-id-is-a-party-that-happened/ -->
+<html lang="en" style="" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths js"><!-- <![endif] --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <div class="fit-vids-style" id="fit-vids-style" style="display: none;">­<style>                 .fluid-width-video-wrapper {                   width: 100%;                                position: relative;                         padding: 0;                              }                                                                                       .fluid-width-video-wrapper iframe,          .fluid-width-video-wrapper object,          .fluid-width-video-wrapper embed {             position: absolute;                         top: 0;                                     left: 0;                                    width: 100%;                                height: 100%;                            }                                         </style></div><script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+    <!--
+      Meta
+      ==================================================
+    -->
+    <meta charset="utf-8">
+    <title>
+       
+        Open ID Is A Nightmare
+      
+    </title>
+    <meta name="author" content="Rob Conery">
+    
+    <meta content="
+            Rob Conery&#39;s Blog
+    " property="og:description">
+    <meta name="description" content="
+            Rob Conery&#39;s Blog
+    ">
+    <meta content="yv5VvILGOWUiDER1MmUE9R6wQthPiQ2YWBAcTCofM0g" name="google-site-verification">
+    <link href="http://feeds.feedburner.com/wekeroad/EeKc" rel="alternate" type="application/atom+xml">
+    <link href="http://www.wekeroad.com/" rel="index" title="Rob Conery">
+    <meta content="Rob Conery" name="author">
+    <meta content="summary" name="twitter:card">
+    <meta content="@robconery" name="twitter:site">
+    <meta content="Wekeroad" property="og:title">
+
+    <link href="http://www.wekeroad.com/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
+    <!--
+      Mobile Specific Meta
+      ==================================================
+    -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <!--  -->
+    <link href="http://www.wekeroad.com/assets/css/theme.css" rel="stylesheet">
+    <link href="http://www.wekeroad.com/assets/css/overrides.css" rel="stylesheet">
+
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900,300italic,400italic,700italic,900italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" rel="stylesheet">
+    <!--
+      Favicon/Touch Icons
+      ==================================================
+    -->
+    <link href="http://www.wekeroad.com/images/favicon.ico" rel="shortcut icon">
+    <link href="http://www.wekeroad.com/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="http://www.wekeroad.com/assets/img/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="http://www.wekeroad.com/assets/img/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+    <!--
+      HTML5 Shiv (for IE8 and earlier)
+      ==================================================
+    -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <![endif]-->
+    <script src="./Open ID Is A Nightmare_files/jquery.min.js"></script>
+    <script src="./Open ID Is A Nightmare_files/theme.js"></script><link rel="stylesheet" href="http://www.wekeroad.com/assets/css/animations.css">
+    
+  <style type="text/css">.fancybox-margin{margin-right:17px;}</style><script type="text/javascript" src="./Open ID Is A Nightmare_files/371019513707257856"></script></head>
+  <body>
+
+          <link rel="stylesheet" href="http://www.wekeroad.com/assets/css/solarized.min.css">
+
+<header id="header-global-inner" role="banner" style="height:120px">
+  <div class="js-clingify-placeholder" style="height: 101px;"><div class="js-clingify-wrapper"><div class="header-top" style="background-color:#000;opacity:0.7">
+  <div class="container">
+    <div class="logo three columns">
+      <h1>
+        <a href="http://www.wekeroad.com/" title="Shine">WekeRoad</a>
+      </h1>
+    </div>
+    <nav class="main-navigation thirteen columns" role="navigation">
+      <ul class="sf-menu sf-js-enabled sf-arrows" id="sf">
+        <li>
+          <a href="http://www.wekeroad.com/" title="Home">Home</a>
+        </li>
+        <li>
+          <a href="http://www.wekeroad.com/#blog" title="Features">Posts</a>
+        </li>
+        <li>
+          <a href="https://github.com/robconery" class="sf-with-ul">Projects</a>
+          <ul style="display: none;">
+            <li>
+              <a href="https://github.com/robconery/massive" title="">Massive</a>
+            </li>
+            <li>
+              <a href="https://github.com/robconery/massive-js" title="">Massive JS (for Node)</a>
+            </li>
+            <li>
+              <a href="https://github.com/tekpub/knockout-cart">The Knockout JS Shopping Cart</a>
+            </li>
+            <li>
+              <a href="https://github.com/subsonic" title="">SubSonic</a>
+            </li>
+            <li>
+              <a href="https://github.com/robconery/manatee" title="">Manatee</a>
+            </li>
+            <li>
+              <a href="https://github.com/tekpub/ng-mongo" title="">ng-Mongo</a>
+            </li>
+            <li>
+              <a href="https://github.com/tekpub/congo" title="">congo</a>
+            </li>
+            <li>
+              <a href="https://github.com/tekpub/mvcmusic">Tekpub's MVC Starter</a>
+            </li>
+            <li>
+              <a href="https://github.com/tekpub/capistrano-rails-server">Rails Server Builder</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="http://www.wekeroad.com/#tdl">This Developer's Life</a>
+        </li>
+        <li>
+          <a href="http://www.wekeroad.com/#speaking">Speaking</a>
+        </li>
+        <li>
+          <a href="http://www.wekeroad.com/archive">Archive</a>
+        </li>
+        <li>
+          <a href="http://feeds.feedburner.com/wekeroad/EeKc"><i class="icon-rss" style="color:orange"></i></a>
+        </li>
+      </ul><select class="selectnav" id="selectnav1"><option value="">NAVIGATION</option><option value="http://www.wekeroad.com/">HOME</option><option value="http://www.wekeroad.com/#blog">POSTS</option><option value="https://github.com/robconery">PROJECTS</option><option value="https://github.com/robconery/massive">- Massive</option><option value="https://github.com/robconery/massive-js">- Massive JS (for Node)</option><option value="https://github.com/tekpub/knockout-cart">- The Knockout JS Shopping Cart</option><option value="https://github.com/subsonic">- SubSonic</option><option value="https://github.com/robconery/manatee">- Manatee</option><option value="https://github.com/tekpub/ng-mongo">- ng-Mongo</option><option value="https://github.com/tekpub/congo">- congo</option><option value="https://github.com/tekpub/mvcmusic">- Tekpub's MVC Starter</option><option value="https://github.com/tekpub/capistrano-rails-server">- Rails Server Builder</option><option value="http://www.wekeroad.com/#tdl">THIS DEVELOPER'S LIFE</option><option value="http://www.wekeroad.com/#speaking">SPEAKING</option><option value="http://www.wekeroad.com/archive">ARCHIVE</option><option value="http://feeds.feedburner.com/wekeroad/EeKc"></option></select>
+    </nav>
+  </div>
+</div></div></div>
+
+</header>
+<div class="main">
+    <div class="uber-statement-inner container">
+    <h1 style="color:black">Open ID Is A Nightmare</h1>
+  </div>
+  <section class="content">
+    <div class="container">
+      <section class="post-excerpt post-summary sixteen columns">
+        
+          <p>I've always been a major proponent of Open ID. I love the idea and the intention - it's a great solution to a long-standing problem and solves a lot of issues for developers. Unfortunately it creates a ton more for business owners.</p>
+        
+        <ul class="meta-details">
+          <li>
+            <i class="icon-calendar"></i>
+            <strong>Wednesday, November 17, 10</strong>
+          </li>
+          <li>
+            
+              
+                <i class="icon-tag"></i> <a href="http://www.wekeroad.com/tags/opinion">opinion</a> |
+              
+            
+              
+                <i class="icon-tag"></i> <a href="http://www.wekeroad.com/tags/controversial">controversial</a>
+              
+            
+          </li>
+        </ul>
+      </section>
+      <section class="post-content twelve columns alpha">
+        <article class="single-article">
+          
+          <h2>It Seemed Like Such a Great Idea</h2>
+
+<p>I know the first thing you're going to think: "StackOverflow seems to have worked it just fine". I said this very thing about 12 times over the last year as I pounded my head against my desk, wondering what I was missing. James then said to me "really? when's the last time you logged in?"</p>
+
+<p>So I head over to Stackoverflow and login using the Open ID I use for everything - Google. And I'm met with this:</p>
+
+<p><img src="./Open ID Is A Nightmare_files/so_openid.png" alt=""></p>
+
+<p>James is laughing hysterically as I sputter... "What the FU**! You GOTTA be KIDDING me!" I don't have a ton of rep over there - but I spose it's enough to care about. In truth I haven't had to login over there in a very long time - I've just been really busy.</p>
+
+<p>So I start going through the recovery process:</p>
+
+<p><img src="./Open ID Is A Nightmare_files/so_openid_recover.png" alt=""></p>
+
+<p>Problem is I have a few emails that I use - and if I didn't use my Google login (as I thought I did above) - I really have no idea which email it is. So I start rifling off all of my emails, waiting to see if SO would know who I am.</p>
+
+<p>Honestly - I feel dumb about this. How could I possibly forget how I logged in? Also - how could I not know which emails are associated with which providers I setup? And hey WAIT A MINUTE, if Stackoverflow doesn't require email... well what if my provider didn't send it? I have a lot more to say about that, but let's get back on track.</p>
+
+<p>As I sit there and grumble about emails and Open ID, Avery is in my ear saying "Dude you used a different provider". Not a chance - I don't have another Open ID as far as I can remember.</p>
+
+<p>Oh shit. Right.</p>
+
+<p>I remember that I once setup a MyOpenID account! That was years ago and I never use it ... but YES! It's coming back to me now... So I head over to MyOpenID and go to login and...</p>
+
+<p>Yep, username/password and I have no idea what it is. I try 5 or so combinations and finally figure it out. And I login to StackOverflow. "At least Jeff doesn't charge money" I think. If he did, I have a feeling this feature would be gone.</p>
+
+<p>And James is still laughing.</p>
+
+<h2>Welcome To My Nightmare</h2>
+
+<p>I'm both a developer and a business owner. I care about the technology, I care about my users more. The story I relayed above happens about 3 to 5 times a week for people who are paying me money. People forget their Open ID - it happens a lot more than you would believe. And when they forget, I need to help them remember.</p>
+
+<p>I search our database and find 4-5 entries for them (we let anyone login and create an account with their Open ID) - once they login they want to go watch a video. And all they see is that their account doesn't have a subscription anymore and they get pissed off, and have to contact me.</p>
+
+<p>You never want to piss off your customer. You NEVER NEVER want to make them feel stupid. Both of those things are happening now: You have to gently remind them that they logged in with Twitter, Facebook AND Google and ... "do you remember which one you created the order with?". Eventually you solve the issue - but they remain upset.</p>
+
+<p>I caused this problem. I caused it because I'm making it too hard for the user to get into the sight - and that's really where the story ends for me. I don't care why, honestly. They don't have a problem with username/password - they need to use that for their Open ID provider anyway.</p>
+
+<p>Boil this down from a User's perspective:*User wants to watch a Tekpub flick, so they come to our site</p>
+
+<p>*User has to login, our Open ID system kicks them over to their provider</p>
+
+<p>*They enter the username/password for that system</p>
+
+<p>*They come back and they watch their flick (if they've remembered correctly)As a developer I'm happy about this because I'm not storing credentials (which is a solved problem as far as I'm concerned). As a business owner I'm wondering why we need 4 steps to happiness. They enter their username/password anyway? What's the damn difference?</p>
+
+<h2>Anatomy of a Authentication Nightmare</h2>
+
+<p>When we started Tekpub, it was with pure Open ID using a javascript Open ID selector. I liked it, it worked pretty well in the beginning. And then the complaints started rolling in...</p>
+
+<p>People would login successfully once, pay for a subscription, then login later and the sub would be gone. Turns out that Yahoo and Google have a different idea about what Open ID is supposed to do - because the the Identifier used for these users would change based on... some voodoo (sorry, but that's all I can deduce).</p>
+
+<p>All of a sudden Google (by far our most popular provider) would change the token (the encrypted value on the end of the Open ID) and boom - you're completely lost to us. We have no other way of knowing who you are - and more than once I've had to track people by their PayPal accounts (we track the transaction ids - which we can look up through PayPal to find out who you are).</p>
+
+<p>This problem gets worse when Google allows you to engineer your own URL - which they did about a year ago.</p>
+
+<p>To mitigate this issue I decide that we need to use the email instead of the identifier. Open ID providers don't have to provide an email - in fact about half of them don't (which is why, I think, Stackoverflow doesn't require one. They can't reliably get one using Open ID). Google is good about this, however - they always return the email.</p>
+
+<p>When sending a request to a provider for a user's credentials (after they've logged in) - you have to structure a bit of an incantation based on conflicting standards to get additional information. There's all kinds of stuff you can ask for - name, address, gender, and yes - email. We asked - more often then not, we were denied.</p>
+
+<p>So all was working well with Google - we were using the email to identify people.</p>
+
+<p><strong>And then they decided that UK folks would have their extension changed from "gmail.com" to "googlemail.com".</strong></p>
+
+<p>And just like that, we are on our asses again.</p>
+
+<h2>The Dumbest Decision I've Ever Made</h2>
+
+<p>The code for our Open ID responder is spiraling, with just about every conditional setting in there you can imagine for the various providers out there. I'll save you the grumbling rant, but coding up Open ID stuff is utterly mind-numbing frustration. And while I'm doing this, I'm not recording videos... creating product.</p>
+
+<p>Then I read about JanRain and their service RPXNow. I'll jump on this and say that as far as service providers go - they have been just fine. Their service is generally up 99.999999% of the time, which is pretty outstanding for a SaS provider.</p>
+
+<p>In addition they offer access to other providers: Facebook, Twitter, Wordpress, Yahoo... and they do all the "heavy lifting" for you in terms of understanding which standards incantation goes to which provider.</p>
+
+<p>I plumbed it in, it worked immediately and I was stoked! And then all hell broke loose...</p>
+
+<p>Let me just preface this by saying of all the failure points in your business - you really don't want the door to be locked while you stand behind the counter waiting for business. No, let me rephrase that: you don't want the door jammed shut, completely unopenable while your customers wait outside - irate that you won't let them in.</p>
+
+<p>You don't want that ever. Not even once, not even for 10 seconds. We're very, very small and this kind of thing will sink us.</p>
+
+<p>3 times the RPX people changed their API on us and our authentication system went down. We were able to fix it within 20 - 30 minutes each time; once, however, was at 5 in the morning.</p>
+
+<p>RPX as a service has gone down 3 times in the last year. This last time (about 4 months ago) it was down for about 4 hours - effectively shutting our doors for us. This isn't a small provder - there are many, many, many businesses that rely on them to authenticate their users.</p>
+
+<p>It happens. Services go down and we are patient. As a developer and user I need to learn how to say that. As a business owner you can go f*** yourself if you think I'll use you again.</p>
+
+<h2>Rolling Your Own</h2>
+
+<p>I've thought about it - the problem is that we're committed now. RPX uses OAuth to talk to Twitter and some special sauce to talk to Facebook Connect. I'm not going to write that code - I'd rather deal with the outages.</p>
+
+<p>Coding against the Open ID spec (and now OAuth) is utterly ridiculous. This is a dying standard, being dominated by one or two providers who change their minds as they see fit - taking the specs with them. I'm sure you recall when Windows Live got into the Open ID circus - playing by their own rules. Google retaliated doing the same.</p>
+
+<p>I'm caught in the middle of this "user information warfare" as a business owner - and I choose not to fight. I choose to walk away, my finger in the air proudly shown to both of them.</p>
+
+<h2>The Solution</h2>
+
+<p>Starting with our next release (coming in a few weeks) I'm weaving in a stronger presence for "traditional authentication". We already have the ability to sign up with username/password - but we're going to make that the <em>only</em> way to register for our site from now on.</p>
+
+<p>If you want, you can add Open ID to it moving forward. But no longer will my business be closed because Open ID gets flakey. I also want you, as our customer, NOT to feel stupid when you can't remember your login.</p>
+
+<p>I'm sure there are some who will defend Open ID and tell me all the ways I screwed up. Unless you own a business of your own, running behind Open ID, I truly don't want to hear about it. Put money on your decisions - put the customer first - and you change your tune.</p>
+
+<p>A friend of mine was offering a ton of solutions to my Open ID woes over Skype the other day - insisting that it's worth "investing in for the long run - the kinks will get worked out". I sort of agree as a dev - as a business owner I couldn't give a rat's ass.</p>
+
+<p>The best part? 5 days after our discussion, his custom Open ID provider crapped out - I don't know what happened (you can be your own provider if you like - it means a bit of code here and there but some people like the custom domains). He couldn't login to Tekpub... and I had to push his subscription over to a new account.</p>
+
+<p>What a mess.</p>
+
+
+          
+
+        </article>
+      </section>
+    </div>
+  </section>
+</div>
+
+<script src="./Open ID Is A Nightmare_files/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<footer class="footer-global" role="contentinfo">
+  <div class="container">
+    <div class="row">
+      <div class="widget-sidebars">
+        <div class="eight columns">
+          <div class="widget">
+            <h4>
+              <i class="icon-user"></i>
+              About Me
+            </h4>
+            <p>
+              I've been developing software for close to 20 years, mostly web development. Prior to that I was a Geologist for 9 years working in the environmental field in the SF Bay Area.
+            </p>
+            <p>
+              I started out as a basic web developer doing HTML and CGI "stuff". In 1996 I moved to the Microsoft stack due to the release of "Classic" ASP, which rocked my world. I've since expanded my abilities, working mainly with NodeJS (these days) and Ruby/Rails.
+            </p>
+            <p>
+              In 2009 I founded Tekpub with James Avery and became extremely interested in Video Production. Possibly too interested. The production process fascinates me and I love to polish a story to high perfection.
+            </p>
+            <p>
+              You can (hopefully) see my love of the production process in every video we do at Tekpub, and in every podcast my friend
+              <a href="http://hanselman.com/">Scott Hanselman</a>
+              and I put into This Developer's Life.
+            </p>
+            <p>
+              If you'd like to say hi, you can drop an email to me (rob) at this site's domain.
+            </p>
+          </div>
+          <!-- end .widget -->
+        </div>
+        <div class="eight columns">
+          <div class="widget">
+            <h4>
+              <i class="icon-twitter"></i>
+              Latest Tweets
+            </h4>
+            <div id="twitter-feed"><ul><li><p class="tweet">node-gyp needs Python 2.5 apparently, and I have 2.7. And with that, I’m done with my Node/SQL Server experiment :/</p><p class="timePosted">Posted 11 hours ago</p></li><li><p class="tweet">The Node SQL Server driver requires Python. That’s… interesting.</p><p class="timePosted">Posted 12 hours ago</p></li><li><p class="tweet">HA!!!! Victory! Thanks all for you helps :)</p><p class="timePosted">Posted 17 hours ago</p></li></ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="icons">
+          <ul class="social-icons">
+            <li>
+              <a class="mk-social-twitter-alt" href="http://twitter.com/robconery" title="View Twitter Profile"></a>
+            </li>
+            <li>
+              <a class="mk-social-vimeo" href="https://vimeo.com/user12379616" title="View Vimeo Profile"></a>
+            </li>
+            <li>
+              <a class="mk-social-github" href="http://github.com/robconery" title="Github Repo"></a>
+            </li>
+            <li>
+              <a class="mk-social-steam" href="http://stackoverflow.com/users/1151/rob-conery" title="View SO Profile"></a>
+            </li>
+            <li>
+              <a class="mk-social-lastfm" href="http://www.last.fm/user/robconery" title="View Last FM Profile"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <p id="copyright-details">© 2013 Rob Conery. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<div id="back-to-top" style="display: none;">
+  <a href="http://www.wekeroad.com/2010/11/17/open-id-is-a-party-that-happened/#header-global">
+    <i class="icon-circle-arrow-up"></i>
+  </a>
+</div>
+
+
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Open ID Is A Nightmare_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-85773-7");
+    pageTracker._trackPageview();
+  } catch(err) {}
+</script>
+<script type="text/javascript">
+var _sf_async_config = { uid: 52713, domain: 'wekeroad.com', useCanonical: true };
+(function() {
+  function loadChartbeat() {
+    window._sf_endpt = (new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
+    document.body.appendChild(e);
+  };
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+    loadChartbeat : function() { oldonload(); loadChartbeat(); };
+  })();
+</script>
+<script language="javascript" type="text/javascript" src="./Open ID Is A Nightmare_files/chartbeat.js"></script></body></html>
