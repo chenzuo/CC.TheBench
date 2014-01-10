@@ -40,11 +40,18 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="201401101402-AddHashAndSalt.cs" />
     <Compile Include="201401082219-CreateUserTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CC.TheBench.Frontend.Web\CC.TheBench.Frontend.Web.csproj">
+      <Project>{b5874799-093a-4a0d-a00e-e15eb9dce7c8}</Project>
+      <Name>CC.TheBench.Frontend.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

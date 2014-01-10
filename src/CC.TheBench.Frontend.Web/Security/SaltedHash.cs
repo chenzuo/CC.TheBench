@@ -12,26 +12,18 @@
         /// The routine provides a wrapper around the GetHashAndSalt function providing conversion
         /// from the required byte arrays to strings. Both the Hash and Salt are returned as hex encoded strings.
         /// </summary>
-        /// <param name="data">
-        /// A <see cref="System.String"/> string containing the data to hash
-        /// </param>
-        /// <param name="hash">
-        /// A <see cref="System.String"/> hex encoded string containing the generated hash
-        /// </param>
-        /// <param name="salt">
-        /// A <see cref="System.String"/> hex encoded string containing the generated salt
-        /// </param>
-        void GetHashAndSaltString(string data, out string hash, out string salt);
+        /// <param name="data">A UTF-8 encoded string containing the data to hash and salt</param>
+        /// <returns>A hex encoded <see cref="System.String"/> containing the generated hash and salt</returns>
+        string GetHashAndSaltString(string data);
 
         /// <summary>
         /// This routine provides a wrapper around VerifyHash converting the strings containing the
         /// data, hash and salt into byte arrays before calling VerifyHash.
         /// </summary>
         /// <param name="data">A UTF-8 encoded string containing the data to verify</param>
-        /// <param name="hash">A hex encoded string containing the previously stored hash</param>
-        /// <param name="salt">A hex encoded string containing the previously stored salt</param>
+        /// <param name="hashAndSalt">A hex encoded string containing the previously stored hash and salt</param>
         /// <returns></returns>
-        bool VerifyHashString(string data, string hash, string salt);
+        bool VerifyHashString(string data, string hashAndSalt);
     }
 
     public class SaltedHash : ISaltedHash
@@ -65,21 +57,30 @@
         /// <summary>
         /// The actual hash calculation is shared by both GetHashAndSalt and the VerifyHash functions
         /// </summary>
-        /// <param name="data">A byte array of the Data to Hash</param>
-        /// <param name="salt">A byte array of the Salt to add to the Hash</param>
+        /// <param name="dataAndSalt">A byte array of the Data and Salt to Hash</param>
         /// <returns>A byte array with the calculated hash</returns>
-        private byte[] ComputeHash(byte[] data, byte[] salt)
+        private byte[] ComputeHash(byte[] dataAndSalt)
         {
-            // Allocate memory to store both the Data and Salt together
-            var dataAndSalt = new byte[data.Length + _salthLength];
-
-            // Copy both the data and salt into the new array
-            Array.Copy(data, dataAndSalt, data.Length);
-            Array.Copy(salt, 0, dataAndSalt, data.Length, _salthLength);
-
             // Calculate the hash
             // Compute hash value of our plain text with appended salt.
             return _hashProvider.ComputeHash(dataAndSalt);
+        }
+
+        /// <summary>
+        /// Combine two byte arrays into one byte array
+        /// </summary>
+        /// <param name="first">First byte array to combine</param>
+        /// <param name="second">Second byte array to combine</param>
+        /// <returns>A byte array with the combined data and salt</returns>
+        private byte[] CombineArrays(byte[] first, byte[] second)
+        {
+            // Allocate memory to store both the Data and Salt together
+            var combinedArray = new byte[first.Length + second.Length];
+
+            // Copy both the data and salt into the new array
+            Array.Copy(first, combinedArray, first.Length);
+            Array.Copy(second, 0, combinedArray, first.Length, second.Length);
+            return combinedArray;
         }
 
         /// <summary>
@@ -88,16 +89,11 @@
         /// <param name="data">
         /// A <see cref="System.Byte"/>byte array containing the data from which to derive the salt
         /// </param>
-        /// <param name="hash">
-        /// A <see cref="System.Byte"/>byte array which will contain the hash calculated
-        /// </param>
-        /// <param name="salt">
-        /// A <see cref="System.Byte"/>byte array which will contain the salt generated
-        /// </param>
-        public void GetHashAndSalt(byte[] data, out byte[] hash, out byte[] salt)
+        /// <returns>A <see cref="System.Byte"/>byte array which will contain the hash and salt generated</returns>
+        public byte[] GetHashAndSalt(byte[] data)
         {
             // Allocate memory for the salt
-            salt = new byte[_salthLength];
+            var salt = new byte[_salthLength];
 
             // Strong runtime pseudo-random number generator, on Windows uses CryptAPI
             // on Unix /dev/urandom
@@ -107,51 +103,44 @@
             random.GetNonZeroBytes(salt);
 
             // Compute hash value of our data with the salt.
-            hash = ComputeHash(data, salt);
+            var hash = ComputeHash(CombineArrays(salt, data));
+
+            // Prepend the salt with our hash
+            return CombineArrays(salt, hash);
         }
 
         /// <summary>
         /// The routine provides a wrapper around the GetHashAndSalt function providing conversion
         /// from the required byte arrays to strings. Both the Hash and Salt are returned as hex encoded strings.
         /// </summary>
-        /// <param name="data">
-        /// A <see cref="System.String"/> string containing the data to hash
-        /// </param>
-        /// <param name="hash">
-        /// A <see cref="System.String"/> hex encoded string containing the generated hash
-        /// </param>
-        /// <param name="salt">
-        /// A <see cref="System.String"/> hex encoded string containing the generated salt
-        /// </param>
-        public void GetHashAndSaltString(string data, out string hash, out string salt)
+        /// <param name="data">A UTF-8 encoded string containing the data to hash and salt</param>
+        /// <returns>A hex encoded <see cref="System.String"/> containing the generated hash and salt</returns>
+        public string GetHashAndSaltString(string data)
         {
-            byte[] hashOut;
-            byte[] saltOut;
-
             // Obtain the Hash and Salt for the given string
-            GetHashAndSalt(Encoding.UTF8.GetBytes(data), out hashOut, out saltOut);
-
             // Transform the byte[] to Hex encoded strings
-            hash = hashOut.ToHex();
-            salt = saltOut.ToHex();
+            return GetHashAndSalt(Encoding.UTF8.GetBytes(data)).ToHex();
         }
 
         /// <summary>
         /// This routine verifies whether the data generates the same hash as we had stored previously
         /// </summary>
         /// <param name="data">The data to verify </param>
-        /// <param name="hash">The hash we had stored previously</param>
-        /// <param name="salt">The salt we had stored previously</param>
+        /// <param name="hashAndSalt">The hash and salt we had stored previously</param>
         /// <returns>True on a succesfull match</returns>
-        public bool VerifyHash(byte[] data, byte[] hash, byte[] salt)
+        public bool VerifyHash(byte[] data, byte[] hashAndSalt)
         {
-            var newHash = ComputeHash(data, salt);
+            // Pull salt out of hashAndSalt
+            var salt = new byte[_salthLength];
+            Array.Copy(hashAndSalt, salt, _salthLength);
+
+            var newHash = CombineArrays(salt, ComputeHash(CombineArrays(salt, data)));
 
             //  No easy array comparison in C# -- we do the legwork
-            if (newHash.Length != hash.Length) return false;
+            if (newHash.Length != hashAndSalt.Length) return false;
 
-            for (var lp = 0; lp < hash.Length; lp++)
-                if (!hash[lp].Equals(newHash[lp]))
+            for (var lp = 0; lp < hashAndSalt.Length; lp++)
+                if (!hashAndSalt[lp].Equals(newHash[lp]))
                     return false;
 
             return true;
@@ -162,15 +151,13 @@
         /// data, hash and salt into byte arrays before calling VerifyHash.
         /// </summary>
         /// <param name="data">A UTF-8 encoded string containing the data to verify</param>
-        /// <param name="hash">A hex encoded string containing the previously stored hash</param>
-        /// <param name="salt">A hex encoded string containing the previously stored salt</param>
+        /// <param name="hashAndSalt">A hex encoded string containing the previously stored hash and salt</param>
         /// <returns></returns>
-        public bool VerifyHashString(string data, string hash, string salt)
+        public bool VerifyHashString(string data, string hashAndSalt)
         {
-            var hashToVerify = hash.ToByteArray();
-            var saltToVerify = salt.ToByteArray();
+            var hashAndSaltToVerify = hashAndSalt.ToByteArray();
             var dataToVerify = Encoding.UTF8.GetBytes(data);
-            return VerifyHash(dataToVerify, hashToVerify, saltToVerify);
+            return VerifyHash(dataToVerify, hashAndSaltToVerify);
         }
     }
 }

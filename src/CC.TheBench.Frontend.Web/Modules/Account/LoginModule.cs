@@ -55,7 +55,7 @@
             if (user == null)
                 return null;
 
-            return _saltedHash.VerifyHashString(model.Password, user.Hash, user.Salt) 
+            return _saltedHash.VerifyHashString(model.Password, user.HashAndSalt) 
                 ? user 
                 : null;
         }
