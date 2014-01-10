@@ -8,6 +8,8 @@
     {
         public static bool IsLocal(this NancyContext context)
         {
+            // TODO: Use this with 0.22
+            // var env = context.GetOwinEnvironment();
             var env = (IDictionary<string, object>)context.Items[NancyOwinHost.RequestEnvironmentKey];
 
             return env.ContainsKey("server.IsLocal") && (bool)env["server.IsLocal"];

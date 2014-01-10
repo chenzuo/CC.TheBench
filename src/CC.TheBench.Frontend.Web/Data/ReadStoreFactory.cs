@@ -6,7 +6,6 @@
 
         public dynamic ReadStore()
         {
-            // TODO: Open DB from Named connection
             return _db ?? (_db = Simple.Data.Database.Open());
         }
     }

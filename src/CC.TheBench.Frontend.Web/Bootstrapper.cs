@@ -44,7 +44,6 @@
 
             // Stateless utilities
             container.Register<ISaltedHash, SaltedHash>().AsSingleton();
-            container.Register<IDebuggingService, DebuggingService>().AsSingleton();
             
             // Disable _Nancy
             DiagnosticsHook.Disable(pipelines);
@@ -52,8 +51,7 @@
             // Takes care of outputting the CSRF token to Cookies
             Csrf.Enable(pipelines);
 
-            var debuggingService = container.Resolve<IDebuggingService>();
-            StaticConfiguration.DisableErrorTraces = !debuggingService.RunningInDebugMode();
+            StaticConfiguration.DisableErrorTraces = !StaticConfiguration.IsRunningDebug;
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
@@ -72,19 +70,14 @@
 
         protected override void RequestStartup(TinyIoCContainer requestContainer, IPipelines pipelines, NancyContext context)
         {
-            // At request startup we modify the request pipelines to
-            // include forms authentication - passing in our now request
-            // scoped user name mapper.
-
-            // The pipelines passed in here are specific to this request,
-            // so we can add/remove/update items in them as we please.
+            // Turning on Forms Authentication - for this request
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration
                 {
                     CryptographyConfiguration = requestContainer.Resolve<CryptographyConfiguration>(),
                     RedirectUrl = "~/account/login",
                     UserMapper = requestContainer.Resolve<IUserMapper>(),
-                    RequiresSSL = !context.IsLocal()
+                    RequiresSSL = !StaticConfiguration.IsRunningDebug
                 };
 
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);

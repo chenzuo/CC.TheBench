@@ -157,7 +157,6 @@
     <Compile Include="Data\IReadStoreFactory.cs" />
     <Compile Include="Data\ReadStoreFactory.cs" />
     <Compile Include="Security\IsLocal.cs" />
-    <Compile Include="Utilities\DebuggingService.cs" />
     <Compile Include="Utilities\Extensions\ByteExtensions\ToHexExtension.cs" />
     <Compile Include="Utilities\Extensions\StringExtensions\ToByteArrayExtension.cs" />
     <Compile Include="Modules\Account\LogoutModule.cs" />

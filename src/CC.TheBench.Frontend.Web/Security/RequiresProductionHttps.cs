@@ -1,9 +1,7 @@
 ﻿namespace CC.TheBench.Frontend.Web.Security
 {
     using System;
-    using System.Collections.Generic;
     using Nancy;
-    using Nancy.Owin;
     using Nancy.Responses;
 
     public static class RequiresProductionHttpsExtension
@@ -44,8 +42,8 @@
             {
                 Response response = null;
                 var request = ctx.Request;
-
-                if (!request.Url.IsSecure && !ctx.IsLocal())
+                
+                if (!request.Url.IsSecure && !StaticConfiguration.IsRunningDebug)
                 {
                     if (redirect && request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase))
                     {
