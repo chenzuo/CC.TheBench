@@ -78,8 +78,8 @@
             var combinedArray = new byte[first.Length + second.Length];
 
             // Copy both the data and salt into the new array
-            Array.Copy(first, combinedArray, first.Length);
-            Array.Copy(second, 0, combinedArray, first.Length, second.Length);
+            Buffer.BlockCopy(first, 0, combinedArray, 0, first.Length);
+            Buffer.BlockCopy(second, 0, combinedArray, first.Length, second.Length);
             return combinedArray;
         }
 
@@ -132,7 +132,7 @@
         {
             // Pull salt out of hashAndSalt
             var salt = new byte[_salthLength];
-            Array.Copy(hashAndSalt, salt, _salthLength);
+            Buffer.BlockCopy(hashAndSalt, 0, salt, 0, _salthLength);
 
             var newHash = CombineArrays(salt, ComputeHash(CombineArrays(salt, data)));
 
