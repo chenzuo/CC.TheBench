@@ -8,5 +8,7 @@
         public string UserName { get; set; }
 
         public IEnumerable<string> Claims { get; set; }
+
+        public string Email { get; set; }
     }
 }

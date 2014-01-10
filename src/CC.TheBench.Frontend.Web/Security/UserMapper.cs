@@ -21,8 +21,13 @@
             User user = ReadStore.Users.FindAllByUserId(identifier).FirstOrDefault();
 
             return user == null
-                       ? null
-                       : new UserIdentity { UserName = user.DisplayName };
+                ? null
+                : new UserIdentity
+                {
+                    UserName = user.DisplayName,
+                    Email = user.Email
+                };
+
         }
     }
 }
