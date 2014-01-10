@@ -1,6 +1,8 @@
 ﻿namespace CC.TheBench.Frontend.Web.Security
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using System.Security.Cryptography;
     using System.Text;
     using Utilities.Extensions.ByteExtensions;
@@ -84,6 +86,23 @@
         }
 
         /// <summary>
+        /// Compares two byte arrays, always taking the same amount of time to prevent timing attacks
+        /// </summary>
+        /// <param name="first">First byte array to compare</param>
+        /// <param name="second">Second byte array to compare</param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static bool CompareArrays(IList<byte> first, IList<byte> second)
+        {
+            var diff = first.Count ^ second.Count;
+
+            for (var i = 0; i < first.Count && i < second.Count; i++)
+                diff |= first[i] ^ second[i];
+
+            return diff == 0;
+        }
+
+        /// <summary>
         /// Given a data block this routine returns both a Hash and a Salt
         /// </summary>
         /// <param name="data">
@@ -136,14 +155,7 @@
 
             var newHash = CombineArrays(salt, ComputeHash(CombineArrays(salt, data)));
 
-            //  No easy array comparison in C# -- we do the legwork
-            if (newHash.Length != hashAndSalt.Length) return false;
-
-            for (var lp = 0; lp < hashAndSalt.Length; lp++)
-                if (!hashAndSalt[lp].Equals(newHash[lp]))
-                    return false;
-
-            return true;
+            return CompareArrays(newHash, hashAndSalt);
         }
 
         /// <summary>
