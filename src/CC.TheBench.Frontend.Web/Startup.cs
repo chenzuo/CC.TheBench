@@ -8,7 +8,7 @@
         public void Configuration(IAppBuilder app)
         {
             // TODO: When Microsoft.Owin.StaticFiles gets out of pre-release, try that
-			// Also try to pre-bundle resources and eventually embed them since it can serve that too
+            // Also try to pre-bundle resources and eventually embed them since it can serve that too
             // app.Map("/js", jsApp => jsApp.UseFileServer("/Public/Scripts"));
 
             // https://github.com/NancyFx/Nancy/wiki/Hosting-nancy-with-owin

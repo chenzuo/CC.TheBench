@@ -1,0 +1,2 @@
+Simple.Data.Mysql.0.18.3.2
+Compiled for AnyCPU
