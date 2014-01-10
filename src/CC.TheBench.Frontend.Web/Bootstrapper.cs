@@ -12,7 +12,6 @@
     using Nancy.TinyIoc;
     using Properties;
     using Security;
-    using Utilities;
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
@@ -42,8 +41,13 @@
         {
             base.ApplicationStartup(container, pipelines);
 
-            // Stateless utilities
-            container.Register<ISaltedHash, SaltedHash>().AsSingleton();
+            // Password hasher using PBKDF2
+            var saltedHash = new SaltedHash(
+                SecuritySettings.Default.SaltLength,
+                SecuritySettings.Default.HashLength,
+                SecuritySettings.Default.NumberOfIterations);
+
+            container.Register<ISaltedHash, SaltedHash>(saltedHash);
             
             // Disable _Nancy
             DiagnosticsHook.Disable(pipelines);

@@ -15,7 +15,7 @@ namespace CC.TheBench.Frontend.Migrations
             Delete.Column("Salt").FromTable("Users");
 
             Alter.Table("Users")
-                .AddColumn("HashAndSalt").AsFixedLengthString(72).NotNullable();
+                .AddColumn("HashAndSalt").AsFixedLengthString(192).NotNullable();
 
             Delete.FromTable("Users").Row(new { Email = "david@cumps.be" });
 

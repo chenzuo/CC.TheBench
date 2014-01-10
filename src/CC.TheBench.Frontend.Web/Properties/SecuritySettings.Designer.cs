@@ -61,10 +61,37 @@ namespace CC.TheBench.Frontend.Web.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("testdebug")]
+        [global::System.Configuration.DefaultSettingValueAttribute("test!")]
         public string DiagnosticsConfigurationPassphrase {
             get {
                 return ((string)(this["DiagnosticsConfigurationPassphrase"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32")]
+        public int SaltLength {
+            get {
+                return ((int)(this["SaltLength"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("64")]
+        public int HashLength {
+            get {
+                return ((int)(this["HashLength"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int NumberOfIterations {
+            get {
+                return ((int)(this["NumberOfIterations"]));
             }
         }
     }

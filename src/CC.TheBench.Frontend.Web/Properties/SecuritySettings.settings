@@ -15,7 +15,16 @@
       <Value Profile="(Default)">UberSalty salt!</Value>
     </Setting>
     <Setting Name="DiagnosticsConfigurationPassphrase" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">testdebug</Value>
+      <Value Profile="(Default)">test!</Value>
+    </Setting>
+    <Setting Name="SaltLength" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">32</Value>
+    </Setting>
+    <Setting Name="HashLength" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">64</Value>
+    </Setting>
+    <Setting Name="NumberOfIterations" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

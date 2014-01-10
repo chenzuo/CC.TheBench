@@ -30,42 +30,46 @@
 
     public class SaltedHash : ISaltedHash
     {
-        private readonly HashAlgorithm _hashProvider;
         private readonly int _salthLength;
+        private readonly int _hashLength;
+        private readonly int _numberOfIterations;
 
         /// <summary>
-        /// Default constructor which initialises the SaltedHash with the SHA256Managed algorithm
-        /// and a Salt of 4 bytes (or 4*8 = 32 bits)
+        /// Default constructor which initialises the SaltedHash with a Salt of 32 bytes (or 32*8 = 256 bits),
+        /// a Hash of 64 bytes (or 64*8 = 512 bits) and 1000 PBKDF2 iterations
         /// </summary>
         public SaltedHash()
-            : this(new SHA256Managed(), 4)
+            : this(32, 64, 1000)
         {
         }
 
         /// <summary>
-        /// The constructor takes a HashAlgorithm as a parameter.
+        /// The constructor takes a salt length, hash length and number of PBKDF2 iterations as parameters
         /// </summary>
-        /// <param name="hashAlgorithm">
-        /// A <see cref="HashAlgorithm"/> HashAlgorihm which is derived from HashAlgorithm. C# provides
-        /// the following classes: SHA1Managed,SHA256Managed, SHA384Managed, SHA512Managed and MD5CryptoServiceProvider
-        /// </param>
-        /// <param name="theSaltLength"></param>
-        public SaltedHash(HashAlgorithm hashAlgorithm, int theSaltLength)
+        /// <param name="saltLength">Length of the salt to generate in bytes</param>
+        /// <param name="hashLength">Length of the hash to generate in bytes</param>
+        /// <param name="numberOfIterations">Number of PBKDF2 iterations to use on the hashing function</param>
+        public SaltedHash(int saltLength, int hashLength, int numberOfIterations)
         {
-            _hashProvider = hashAlgorithm;
-            _salthLength = theSaltLength;
+            _salthLength = saltLength;
+            _hashLength = hashLength;
+            _numberOfIterations = numberOfIterations;
         }
 
         /// <summary>
         /// The actual hash calculation is shared by both GetHashAndSalt and the VerifyHash functions
         /// </summary>
-        /// <param name="dataAndSalt">A byte array of the Data and Salt to Hash</param>
+        /// <param name="salt">A byte array of the Salt to Hash</param>
+        /// <param name="data">A byte array of the Data to Hash</param>
         /// <returns>A byte array with the calculated hash</returns>
-        private byte[] ComputeHash(byte[] dataAndSalt)
+        private byte[] ComputeHash(byte[] salt, byte[] data)
         {
             // Calculate the hash
             // Compute hash value of our plain text with appended salt.
-            return _hashProvider.ComputeHash(dataAndSalt);
+            using (var pbkdf2 = new Rfc2898DeriveBytes(data, salt, _numberOfIterations))
+            {
+                return pbkdf2.GetBytes(_hashLength);
+            }
         }
 
         /// <summary>
@@ -82,6 +86,7 @@
             // Copy both the data and salt into the new array
             Buffer.BlockCopy(first, 0, combinedArray, 0, first.Length);
             Buffer.BlockCopy(second, 0, combinedArray, first.Length, second.Length);
+
             return combinedArray;
         }
 
@@ -92,7 +97,7 @@
         /// <param name="second">Second byte array to compare</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static bool CompareArrays(IList<byte> first, IList<byte> second)
+        private bool CompareArrays(IList<byte> first, IList<byte> second)
         {
             var diff = first.Count ^ second.Count;
 
@@ -100,6 +105,26 @@
                 diff |= first[i] ^ second[i];
 
             return diff == 0;
+        }
+
+        /// <summary>
+        /// Generate strong random bytes
+        /// </summary>
+        /// <param name="count">Number of random bytes needed</param>
+        /// <returns></returns>
+        private byte[] GenerateRandomBytes(int count)
+        {
+            // Allocate memory for the salt
+            var bytes = new byte[count];
+
+            // Strong runtime pseudo-random number generator, on Windows uses CryptAPI
+            // on Unix /dev/urandom
+            var random = new RNGCryptoServiceProvider();
+
+            // Create a random salt
+            random.GetNonZeroBytes(bytes);
+
+            return bytes;
         }
 
         /// <summary>
@@ -111,18 +136,11 @@
         /// <returns>A <see cref="System.Byte"/>byte array which will contain the hash and salt generated</returns>
         public byte[] GetHashAndSalt(byte[] data)
         {
-            // Allocate memory for the salt
-            var salt = new byte[_salthLength];
-
-            // Strong runtime pseudo-random number generator, on Windows uses CryptAPI
-            // on Unix /dev/urandom
-            var random = new RNGCryptoServiceProvider();
-
-            // Create a random salt
-            random.GetNonZeroBytes(salt);
-
+            // Get a random salt
+            var salt = GenerateRandomBytes(_salthLength);
+            
             // Compute hash value of our data with the salt.
-            var hash = ComputeHash(CombineArrays(salt, data));
+            var hash = ComputeHash(salt, data);
 
             // Prepend the salt with our hash
             return CombineArrays(salt, hash);
@@ -153,7 +171,7 @@
             var salt = new byte[_salthLength];
             Buffer.BlockCopy(hashAndSalt, 0, salt, 0, _salthLength);
 
-            var newHash = CombineArrays(salt, ComputeHash(CombineArrays(salt, data)));
+            var newHash = CombineArrays(salt, ComputeHash(salt, data));
 
             return CompareArrays(newHash, hashAndSalt);
         }
