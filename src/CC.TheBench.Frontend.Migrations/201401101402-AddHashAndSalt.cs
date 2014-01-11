@@ -2,7 +2,6 @@
 
 namespace CC.TheBench.Frontend.Migrations
 {
-    using System;
     using Web.Data.ReadModel;
     using Web.Security;
 
@@ -22,7 +21,7 @@ namespace CC.TheBench.Frontend.Migrations
             ISaltedHash saltedHash = new SaltedHash();
             Insert.IntoTable("Users").Row(new User
             {
-                UserId = Guid.NewGuid().ToString(),
+                UserId = Constants.DummyUserId.ToString(),
                 Email = "david@cumps.be",
                 HashAndSalt = saltedHash.GetHashAndSaltString("admin"),
                 DisplayName = "David Cumps"

@@ -22,7 +22,7 @@
 
             return user == null
                 ? null
-                : new UserIdentity
+                : new BenchIdentity
                 {
                     UserName = user.DisplayName,
                     Email = user.Email

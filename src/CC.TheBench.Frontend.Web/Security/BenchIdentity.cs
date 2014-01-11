@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Nancy.Security;
 
-    public class UserIdentity : IUserIdentity
+    public class BenchIdentity : IUserIdentity
     {
         public string UserName { get; set; }
 

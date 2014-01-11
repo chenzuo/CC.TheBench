@@ -38,10 +38,13 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="201401101402-AddHashAndSalt.cs" />
     <Compile Include="201401082219-CreateUserTable.cs" />
+    <Compile Include="201401110222-AddUserIdentities.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
