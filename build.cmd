@@ -1,6 +1,6 @@
 @echo off
 
-.\src\.nuget\nuget.exe install src\.nuget\packages.config -source "https://nuget.org/api/v2/" -RequireConsent -o "lib"
+.\src\.nuget\nuget.exe install src\.nuget\packages.config -source "https://nuget.org/api/v2/" -source "https://www.myget.org/f/aspnetwebstacknightlyrelease/" -RequireConsent -o "lib"
 
 if not exist out mkdir out
 
