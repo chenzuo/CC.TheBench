@@ -1,0 +1,7 @@
+#sidebar {
+	width:240px;
+}
+
+ul li.widget ul li a {
+	display:inline;
+}
