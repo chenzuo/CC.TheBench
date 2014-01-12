@@ -27,7 +27,6 @@
                     UserName = user.DisplayName,
                     Email = user.Email
                 };
-
         }
     }
 }

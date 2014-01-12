@@ -7,6 +7,9 @@
     {
         public void Configuration(IAppBuilder app)
         {
+            // So that squishit works
+            //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+
             // TODO: When Microsoft.Owin.StaticFiles gets out of pre-release, try that
             // Also try to pre-bundle resources and eventually embed them since it can serve that too
             // app.Map("/js", jsApp => jsApp.UseFileServer("/Public/Scripts"));

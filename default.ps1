@@ -22,8 +22,8 @@ properties {
 
     $migrations = "CC.TheBench.Frontend.Migrations"
     $migrationsout = "$out\Migrations"
-	
-	$owinhost = "OwinHost.2.1.0-rc1-30110-760-rel"
+    
+    $owinhost = "OwinHost.2.1.0-rtw-30112-762-rel"
 }
 
 task default -depends Compile
