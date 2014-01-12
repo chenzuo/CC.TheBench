@@ -9,7 +9,7 @@ namespace CC.TheBench.Frontend.Web
     using Microsoft.Owin.FileSystems;
     using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.StaticFiles;
-    using Nancy;
+    using Middleware;
     using Nancy.Owin;
     using Owin;
 
@@ -21,6 +21,12 @@ namespace CC.TheBench.Frontend.Web
             //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
 
             var configuration = new TheBenchSettings();
+
+            if (configuration.General.RequireHttps)
+                app.Use(typeof(RequireHttpsHandler));
+
+            // TODO: Read Docs
+            //app.UseErrorPage();
 
             ConfigureAuthentication(app, configuration);
             ConfigureStaticContent(app);
@@ -48,6 +54,8 @@ namespace CC.TheBench.Frontend.Web
 
         private static void ConfigureStaticContent(IAppBuilder app)
         {
+            // TODO: When Owin.Compression reaches a more mature state, use that for compression
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 RequestPath = new PathString("/css"),

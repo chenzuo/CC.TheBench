@@ -9,22 +9,38 @@
 
     internal class TheBenchSettings
     {
-        private readonly SecuritySettings _securitySettings;
-
         public TheBenchSettings()
         {
-            _securitySettings = SecuritySettings.Default;
-            Authentication = new Authentication(_securitySettings);
-            Encryption = new Encryption(_securitySettings);
+            var securitySettings = SecuritySettings.Default;
+            Authentication = new Authentication(securitySettings);
+            Encryption = new Encryption(securitySettings);
+            General = new General(securitySettings);
         }
 
         public Authentication Authentication { get; private set; }
 
         public Encryption Encryption { get; private set; }
 
+        public General General { get; private set; }
+    }
+
+    internal class General
+    {
+        private readonly SecuritySettings _securitySettings;
+
+        public General(SecuritySettings securitySettings)
+        {
+            _securitySettings = securitySettings;
+        }
+
         public string DiagnosticsConfigurationPassphrase
         {
             get { return _securitySettings.DiagnosticsConfigurationPassphrase; }
+        }
+
+        public bool RequireHttps
+        {
+            get { return !StaticConfiguration.IsRunningDebug; }
         }
     }
 

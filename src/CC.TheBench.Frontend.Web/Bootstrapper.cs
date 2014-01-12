@@ -38,7 +38,7 @@
 
         protected override DiagnosticsConfiguration DiagnosticsConfiguration
         {
-            get { return new DiagnosticsConfiguration { Password = _configuration.DiagnosticsConfigurationPassphrase }; }
+            get { return new DiagnosticsConfiguration { Password = _configuration.General.DiagnosticsConfigurationPassphrase }; }
         }
 
         public Bootstrapper(TheBenchSettings configuration)

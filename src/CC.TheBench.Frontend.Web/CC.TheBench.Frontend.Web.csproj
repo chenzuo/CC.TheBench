@@ -177,6 +177,8 @@
     <Compile Include="Data\IReadStoreFactory.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
     <Compile Include="Data\ReadStoreFactory.cs" />
+    <Compile Include="Middleware\RequireHttpsHandler.cs" />
+    <Compile Include="Middleware\TaskHelper.cs" />
     <Compile Include="TheBenchSettings.cs" />
     <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />
