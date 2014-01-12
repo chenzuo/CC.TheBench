@@ -24,7 +24,10 @@ namespace CC.TheBench.Frontend.Web
 
             ConfigureAuthentication(app, configuration);
             ConfigureStaticContent(app);
-            ConfigureNancy(app, configuration);           
+            ConfigureNancy(app, configuration);
+
+            // http://katanaproject.codeplex.com/discussions/470920
+            app.UseStageMarker(PipelineStage.MapHandler);
         }
 
         private static void ConfigureAuthentication(IAppBuilder app, TheBenchSettings configuration)
