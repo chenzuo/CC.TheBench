@@ -238,7 +238,6 @@
       <DependentUpon>Text.resx</DependentUpon>
     </Compile>
     <Compile Include="Security\AuthenticationCallbackProvider.cs" />
-    <Compile Include="Security\Extensions\RequiresProductionHttpsExtension.cs" />
     <Compile Include="Security\SaltedHash.cs" />
     <Compile Include="Security\TheBenchIdentity.cs" />
     <Compile Include="Startup.cs" />

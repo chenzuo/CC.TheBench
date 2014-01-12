@@ -17,8 +17,6 @@
         public LoginModule(IReadStoreFactory readStoreFactory, ISaltedHash saltedHash)
             : base(readStoreFactory, "/account/login")
         {
-            this.RequiresProductionHttps(true);
-
             _saltedHash = saltedHash;
             Get["/"] = x =>
             {
