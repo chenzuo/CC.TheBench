@@ -68,8 +68,9 @@
     <Reference Include="Nancy.Owin">
       <HintPath>..\..\lib\Nancy.Owin.0.21.1\lib\net40\Nancy.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.SimpleAuthentication">
-      <HintPath>..\..\lib\Nancy.SimpleAuthentication.0.3.10\lib\net40\Nancy.SimpleAuthentication.dll</HintPath>
+    <Reference Include="Nancy.SimpleAuthentication, Version=0.3.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nancy.SimpleAuthentication.0.3.12\lib\net40\Nancy.SimpleAuthentication.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Validation.FluentValidation">
       <HintPath>..\..\lib\Nancy.Validation.FluentValidation.0.21.1\lib\net40\Nancy.Validation.FluentValidation.dll</HintPath>
@@ -80,8 +81,9 @@
     <Reference Include="Owin">
       <HintPath>..\..\lib\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\..\lib\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Simple.Data">
       <HintPath>..\..\lib\Simple.Data.Core.0.18.3.1\lib\net40\Simple.Data.dll</HintPath>
@@ -93,8 +95,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\temp\Simple.Data.Mysql.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleAuthentication.Core">
-      <HintPath>..\..\lib\SimpleAuthentication.Core.0.3.10\lib\net40\SimpleAuthentication.Core.dll</HintPath>
+    <Reference Include="SimpleAuthentication.Core, Version=0.3.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SimpleAuthentication.Core.0.3.12\lib\net40\SimpleAuthentication.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -164,7 +167,7 @@
     <Compile Include="Data\IReadStoreFactory.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
     <Compile Include="Data\ReadStoreFactory.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\Extensions\GetPrincipalExtension.cs" />
     <Compile Include="Security\Extensions\IsAuthenticatedExtension.cs" />
     <Compile Include="Security\Extensions\SignOutExtension.cs" />
