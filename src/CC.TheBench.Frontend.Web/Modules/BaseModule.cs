@@ -2,8 +2,9 @@
 {
     using Data;
     using Nancy;
+    using Security.Extensions;
 
-    public class BaseModule : NancyModule
+    public abstract class BaseModule : NancyModule
     {
         private readonly IReadStoreFactory _readStoreFactory;
 
@@ -14,12 +15,17 @@
             get { return _readStore ?? (_readStore = _readStoreFactory.ReadStore()); }
         }
 
-        public BaseModule(IReadStoreFactory readStoreFactory)
+        protected bool IsAuthenticated
+        {
+            get { return this.IsAuthenticated(); }
+        }
+
+        protected BaseModule(IReadStoreFactory readStoreFactory)
         {
             _readStoreFactory = readStoreFactory;
         }
 
-        public BaseModule(IReadStoreFactory readStoreFactory, string modulePath) : base(modulePath)
+        protected BaseModule(IReadStoreFactory readStoreFactory, string modulePath) : base(modulePath)
         {
             _readStoreFactory = readStoreFactory;
         }

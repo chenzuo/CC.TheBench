@@ -1,4 +1,4 @@
-﻿namespace CC.TheBench.Frontend.Web.Security
+﻿namespace CC.TheBench.Frontend.Web.Security.Extensions
 {
     using System;
     using Nancy;

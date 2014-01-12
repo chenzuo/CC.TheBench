@@ -1,17 +1,21 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
+    using System.Collections.Generic;
+    using System.Security.Claims;
+    using System.Security.Principal;
     using System.Text;
     using Data;
     using Nancy;
-    using Nancy.Authentication.Forms;
     using Nancy.Bootstrapper;
     using Nancy.Conventions;
     using Nancy.Cryptography;
     using Nancy.Diagnostics;
+    using Nancy.Owin;
     using Nancy.Security;
     using Nancy.TinyIoc;
     using Properties;
     using Security;
+    using Utilities.Extensions.DictionaryExtensions;
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
@@ -55,7 +59,11 @@
             // Takes care of outputting the CSRF token to Cookies
             Csrf.Enable(pipelines);
 
+            // Don't show errors when we are in release
             StaticConfiguration.DisableErrorTraces = !StaticConfiguration.IsRunningDebug;
+
+            // Wire up flowing of OWIN user to a Nancy one
+            pipelines.BeforeRequest.AddItemToStartOfPipeline(FlowPrincipal);
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
@@ -65,26 +73,6 @@
             // Simple.Data is quite aggressive in closing connections and holds no open connections to a data store by default, 
             // so you can keep the Database object returned from the Open*() methods hanging around without worrying.
             container.Register<IReadStoreFactory, ReadStoreFactory>().AsSingleton();
-
-            // Here we register our user mapper as a per-request singleton.
-            // As this is now per-request we could inject a request scoped
-            // database "context" or other request scoped services.
-            container.Register<IUserMapper, UserMapper>();
-        }
-
-        protected override void RequestStartup(TinyIoCContainer requestContainer, IPipelines pipelines, NancyContext context)
-        {
-            // Turning on Forms Authentication - for this request
-            var formsAuthConfiguration =
-                new FormsAuthenticationConfiguration
-                {
-                    CryptographyConfiguration = requestContainer.Resolve<CryptographyConfiguration>(),
-                    RedirectUrl = "~/account/login",
-                    UserMapper = requestContainer.Resolve<IUserMapper>(),
-                    RequiresSSL = !StaticConfiguration.IsRunningDebug
-                };
-
-            FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
         }
 
         protected override void ConfigureConventions(NancyConventions conventions)
@@ -94,6 +82,20 @@
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/css", @"/Public/Styles"));
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/js", @"/Public/Scripts"));
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/fonts", @"/Public/Fonts"));
+        }
+
+        private static Response FlowPrincipal(NancyContext context)
+        {
+            // TODO: Replace with context.GetOwinEnvironment() when v0.22 is released
+            var env = context.Items.Get<IDictionary<string, object>>(NancyOwinHost.RequestEnvironmentKey);
+            if (env == null) 
+                return null;
+
+            var principal = env.Get<IPrincipal>("server.User") as ClaimsPrincipal;
+            if (principal != null)
+                context.CurrentUser = new TheBenchIdentity(principal);
+
+            return null;
         }
     }
 }

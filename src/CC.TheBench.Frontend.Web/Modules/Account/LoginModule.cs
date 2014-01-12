@@ -1,13 +1,13 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
-    using System;
     using Data;
     using Data.ReadModel;
-    using Nancy.Authentication.Forms;
     using Nancy.ModelBinding;
     using Nancy.Security;
     using Resources;
     using Security;
+    using Security.Extensions;
+    using Utilities.Extensions.NancyExtensions;
     using Views.Account.Models;
 
     public class LoginModule : BaseModule
@@ -22,6 +22,9 @@
             _saltedHash = saltedHash;
             Get["/"] = x =>
             {
+                if (IsAuthenticated)
+                    return this.AsRedirectQueryStringOrDefault("~/");
+
                 this.CreateNewCsrfToken();
 
                 var model = this.Bind<LoginModel>();
@@ -30,6 +33,9 @@
 
             Post["/"] = x =>
             {
+                if (IsAuthenticated)
+                    return this.AsRedirectQueryStringOrDefault("~/");
+
                 this.ValidateCsrfToken();
 
                 var model = this.BindAndValidate<LoginModel>();
@@ -40,12 +46,8 @@
                 if (user == null)
                     return InvalidLogin(model);
 
-                var expiry = model.RememberMe
-                    ? DateTime.Now.AddDays(7)
-                    : (DateTime?) null;
-
                 // TODO: Publish event for CQRS/ES audit logging
-                return this.LoginAndRedirect(new Guid(user.UserId), expiry);
+                return this.SignIn(user);
             };
         }
 
@@ -62,7 +64,8 @@
 
         private dynamic InvalidLogin(LoginModel model)
         {
-            ModelValidationResult = ModelValidationResult.AddError(new[] { "Email", "Password" }, Account.InvalidLogin);
+            this.AddValidationError(new[] { "Email", "Password" }, Account.InvalidLogin);
+
             return View["account/login", model];
         }
     }

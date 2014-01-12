@@ -68,9 +68,10 @@
             if (currentUser == null) 
                 return null;
 
-            var email = ((BenchIdentity)currentUser).Email;
-            User loggedInUser = ReadStore.Users.Get(email).FirstOrDefault();
-            return loggedInUser;
+            //var email = ((TheBenchIdentity)currentUser).Email;
+            //User loggedInUser = ReadStore.Users.Get(email).FirstOrDefault();
+            //return loggedInUser;
+            return null;
         }
 
         /// <summary>
