@@ -1,14 +1,17 @@
-﻿namespace CC.TheBench.Frontend.Web
+﻿using CC.TheBench.Frontend.Web;
+using Microsoft.Owin;
+
+[assembly: OwinStartup(typeof(Startup), "Configuration")]
+
+namespace CC.TheBench.Frontend.Web
 {
-    using System;
-    using Microsoft.Owin;
     using Microsoft.Owin.Extensions;
+    using Microsoft.Owin.FileSystems;
     using Microsoft.Owin.Security.Cookies;
-    using Microsoft.Owin.Security.DataHandler;
+    using Microsoft.Owin.StaticFiles;
     using Nancy;
+    using Nancy.Owin;
     using Owin;
-    using Properties;
-    using Security;
 
     public class Startup
     {
@@ -17,28 +20,57 @@
             // So that squishit works
             //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
 
+            var configuration = new TheBenchSettings();
+
+            ConfigureAuthentication(app, configuration);
+            ConfigureStaticContent(app);
+            ConfigureNancy(app, configuration);           
+        }
+
+        private static void ConfigureAuthentication(IAppBuilder app, TheBenchSettings configuration)
+        {
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = Constants.TheBenchAuthType,
-                CookieHttpOnly = true,
-                CookieName = "thebench.id",
-                CookieSecure = StaticConfiguration.IsRunningDebug ? CookieSecureOption.Never : CookieSecureOption.Always,
-                LoginPath = new PathString("/account/login"),
-                LogoutPath = new PathString("/account/logout"),
-                ExpireTimeSpan = TimeSpan.FromDays(SecuritySettings.Default.AuthenticationCookieExpirationInDays),
-                SlidingExpiration = true,
-                ReturnUrlParameter = "returnUrl"
+                AuthenticationType = configuration.Authentication.AuthenticationType,
+                CookieHttpOnly = configuration.Authentication.CookieHttpOnly,
+                CookieName = configuration.Authentication.CookieName,
+                CookieSecure = configuration.Authentication.CookieSecure,
+                LoginPath = configuration.Authentication.LoginPath,
+                LogoutPath = configuration.Authentication.LogoutPath,
+                ExpireTimeSpan = configuration.Authentication.AuthenticationCookieExpireTimeSpan,
+                SlidingExpiration = configuration.Authentication.EnableSlidingExpiration,
+                ReturnUrlParameter = configuration.Authentication.ReturnUrl
+            });
+        }
+
+        private static void ConfigureStaticContent(IAppBuilder app)
+        {
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = new PathString("/css"),
+                FileSystem = new PhysicalFileSystem("Public/Styles")
             });
 
-            // TODO: When Microsoft.Owin.StaticFiles gets out of pre-release, try that
-            // Also try to pre-bundle resources and eventually embed them since it can serve that too
-            // app.Map("/js", jsApp => jsApp.UseFileServer("/Public/Scripts"));
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = new PathString("/js"),
+                FileSystem = new PhysicalFileSystem("Public/Scripts")
+            });
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = new PathString("/fonts"),
+                FileSystem = new PhysicalFileSystem("Public/Fonts")
+            });
+        }
+
+        private static void ConfigureNancy(IAppBuilder app, TheBenchSettings configuration)
+        {
             // https://github.com/NancyFx/Nancy/wiki/Hosting-nancy-with-owin
-            app.UseNancy();
-
-            // http://katanaproject.codeplex.com/discussions/470920
-            app.UseStageMarker(PipelineStage.MapHandler);
+            app.UseNancy(new NancyOptions
+            {
+                Bootstrapper = new Bootstrapper(configuration),
+            });
         }
     }
 }

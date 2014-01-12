@@ -7,18 +7,18 @@
     using Data;
     using Nancy;
     using Nancy.Bootstrapper;
-    using Nancy.Conventions;
     using Nancy.Cryptography;
     using Nancy.Diagnostics;
     using Nancy.Owin;
     using Nancy.Security;
     using Nancy.TinyIoc;
-    using Properties;
     using Security;
     using Utilities.Extensions.DictionaryExtensions;
 
-    public class Bootstrapper : DefaultNancyBootstrapper
+    internal class Bootstrapper : DefaultNancyBootstrapper
     {
+        private readonly TheBenchSettings _configuration;
+
         protected override CryptographyConfiguration CryptographyConfiguration
         {
             get
@@ -28,17 +28,22 @@
                 // because the algorithm is too slow to do per-request. This means that your salt will be static so 
                 // the passphrase should be long and complex.
                 return new CryptographyConfiguration(
-                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator(SecuritySettings.Default.EncryptionProviderPassphrase,
-                                                                              Encoding.ASCII.GetBytes(SecuritySettings.Default.EncryptionProviderSalt))),
+                    new RijndaelEncryptionProvider(new PassphraseKeyGenerator(_configuration.Encryption.EncryptionProviderPassphrase,
+                                                                              Encoding.ASCII.GetBytes(_configuration.Encryption.EncryptionProviderSalt))),
                     new DefaultHmacProvider(
-                        new PassphraseKeyGenerator(SecuritySettings.Default.HMacProviderPassphrase,
-                                                   Encoding.ASCII.GetBytes(SecuritySettings.Default.HMacProviderSalt))));
+                        new PassphraseKeyGenerator(_configuration.Encryption.HMacProviderPassphrase,
+                                                   Encoding.ASCII.GetBytes(_configuration.Encryption.HMacProviderSalt))));
             }
         }
 
         protected override DiagnosticsConfiguration DiagnosticsConfiguration
         {
-            get { return new DiagnosticsConfiguration { Password = SecuritySettings.Default.DiagnosticsConfigurationPassphrase }; }
+            get { return new DiagnosticsConfiguration { Password = _configuration.DiagnosticsConfigurationPassphrase }; }
+        }
+
+        public Bootstrapper(TheBenchSettings configuration)
+        {
+            _configuration = configuration;
         }
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
@@ -47,9 +52,9 @@
 
             // Password hasher using PBKDF2
             var saltedHash = new SaltedHash(
-                SecuritySettings.Default.SaltLength,
-                SecuritySettings.Default.HashLength,
-                SecuritySettings.Default.NumberOfIterations);
+                _configuration.Encryption.SaltLength,
+                _configuration.Encryption.HashLength,
+                _configuration.Encryption.NumberOfIterations);
 
             container.Register<ISaltedHash, SaltedHash>(saltedHash);
             
@@ -73,15 +78,6 @@
             // Simple.Data is quite aggressive in closing connections and holds no open connections to a data store by default, 
             // so you can keep the Database object returned from the Open*() methods hanging around without worrying.
             container.Register<IReadStoreFactory, ReadStoreFactory>().AsSingleton();
-        }
-
-        protected override void ConfigureConventions(NancyConventions conventions)
-        {
-            base.ConfigureConventions(conventions);
-
-            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/css", @"/Public/Styles"));
-            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/js", @"/Public/Scripts"));
-            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/fonts", @"/Public/Fonts"));
         }
 
         private static Response FlowPrincipal(NancyContext context)
