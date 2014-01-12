@@ -168,6 +168,8 @@
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
     <Compile Include="Data\ReadStoreFactory.cs" />
     <Compile Include="Security\Constants.cs" />
+    <Compile Include="Security\DataProtection.cs" />
+    <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />
     <Compile Include="Security\Extensions\GetPrincipalExtension.cs" />
     <Compile Include="Security\Extensions\IsAuthenticatedExtension.cs" />
     <Compile Include="Security\Extensions\SignOutExtension.cs" />

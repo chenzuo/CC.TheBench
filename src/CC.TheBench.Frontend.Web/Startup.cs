@@ -1,9 +1,13 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
+    using System;
     using Microsoft.Owin;
     using Microsoft.Owin.Extensions;
     using Microsoft.Owin.Security.Cookies;
+    using Microsoft.Owin.Security.DataHandler;
+    using Nancy;
     using Owin;
+    using Properties;
     using Security;
 
     public class Startup
@@ -13,18 +17,17 @@
             // So that squishit works
             //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
 
-            //var ticketDataFormat = new TicketDataFormat(kernel.Get<IDataProtector>());
-
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = Constants.TheBenchAuthType,
                 CookieHttpOnly = true,
                 CookieName = "thebench.id",
+                CookieSecure = StaticConfiguration.IsRunningDebug ? CookieSecureOption.Never : CookieSecureOption.Always,
                 LoginPath = new PathString("/account/login"),
                 LogoutPath = new PathString("/account/logout"),
-                //ExpireTimeSpan = TimeSpan.FromDays(30),
-                //TicketDataFormat = ticketDataFormat,
-                //Provider = new JabbRFormsAuthenticationProvider()
+                ExpireTimeSpan = TimeSpan.FromDays(SecuritySettings.Default.AuthenticationCookieExpirationInDays),
+                SlidingExpiration = true,
+                ReturnUrlParameter = "returnUrl"
             });
 
             // TODO: When Microsoft.Owin.StaticFiles gets out of pre-release, try that

@@ -1,7 +1,9 @@
 ﻿namespace CC.TheBench.Frontend.Web.Security
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Security.Claims;
+    using Extensions;
     using Nancy.Security;
 
     public class TheBenchIdentity : IUserIdentity
@@ -16,7 +18,8 @@
         {
             ClaimsPrincipal = claimsPrincipal;
 
-            UserName = claimsPrincipal.FindFirst(TheBenchClaimTypes.Email).Value;
+            UserName = claimsPrincipal.GetClaimValue(TheBenchClaimTypes.Email);
+            Claims = claimsPrincipal.FindAll(TheBenchClaimTypes.Role).Select(x => x.Value);
         }
     }
 }

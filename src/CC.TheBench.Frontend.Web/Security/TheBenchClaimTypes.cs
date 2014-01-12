@@ -4,5 +4,6 @@
     {
         public const string Identifier = "urn:thebench:id";
         public const string Email = "urn:thebench:email";
+        public const string Role = "urn:thebench:role";
     }
 }

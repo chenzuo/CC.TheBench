@@ -94,5 +94,14 @@ namespace CC.TheBench.Frontend.Web.Properties {
                 return ((int)(this["NumberOfIterations"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int AuthenticationCookieExpirationInDays {
+            get {
+                return ((int)(this["AuthenticationCookieExpirationInDays"]));
+            }
+        }
     }
 }
