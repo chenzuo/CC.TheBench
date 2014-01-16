@@ -7,27 +7,27 @@
     <meta name="description" content="@RenderSection("Title") &raquo; @Text.General.ApplicationName" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/css/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/font-awesome.css")" rel="stylesheet" />
 
     <!--[if IE 7]>
-        <link href="@Url.Content("~/css/font-awesome-ie7.min.css")" rel="stylesheet" />
+        <link href="@Url.Content("~/css/font-awesome-ie7.css")" rel="stylesheet" />
     <![endif]-->
 
     <link href="@Url.Content("~/css/ace-fonts.css")" rel="stylesheet" />
 
-    <link href="@Url.Content("~/css/ace.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/css/ace-rtl.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/ace.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/ace-rtl.css")" rel="stylesheet" />
 
     <!--[if lte IE 8]>
-        <link href="@Url.Content("~/css/ace-ie.min.css")" rel="stylesheet" />
+        <link href="@Url.Content("~/css/ace-ie.css")" rel="stylesheet" />
     <![endif]-->
 
     <link href="@Url.Content("~/css/bench.css")" rel="stylesheet" />
 
     <!--[if lt IE 9]>
         <script src="@Url.Content("~/js/html5shiv.js")"></script>
-        <script src="@Url.Content("~/js/respond.min.js")"></script>
+        <script src="@Url.Content("~/js/respond.js")"></script>
     <![endif]-->
 </head>
 <body class="login-layout">
@@ -48,49 +48,31 @@
 
                         <div class="position-relative">
                             @RenderBody()
-                        </div><!-- /position-relative -->
+                        </div>
                     </div>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+                </div>
+            </div>
         </div>
-    </div><!-- /.main-container -->
+    </div>
 
     <!--[if !IE]> -->
     <script type="text/javascript">
-        window.jQuery || document.write("<script src='@Url.Content("~/js/jquery-2.0.3.min.js")'>" + "<" + "/script>");
+        window.jQuery || document.write("<script src='@Url.Content("~/js/jquery-2.0.3.js")'>" + "<" + "/script>");
     </script>
     <!-- <![endif]-->
 
     <!--[if IE]>
     <script type="text/javascript">
-        window.jQuery || document.write("<script src='@Url.Content("~/js/jquery-1.10.2.min.js")'>" + "<" + "/script>");
+        window.jQuery || document.write("<script src='@Url.Content("~/js/jquery-1.10.2.js")'>" + "<" + "/script>");
     </script>
     <![endif]-->
 
     <script type="text/javascript">
-        if ("ontouchend" in document) document.write("<script src='@Url.Content("~/js/jquery.mobile.custom.min.js")'>" + "<" + "/script>");
+        if ("ontouchend" in document) document.write("<script src='@Url.Content("~/js/jquery.mobile.custom.js")'>" + "<" + "/script>");
     </script>
     
-    <script src="@Url.Content("~/js/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.validate.js")"></script>
 
     @RenderSection("Scripts", false)
 </body>
 </html>
-
-@*<body>
-        <form method="POST">
-            Email <input type="text" name="Email" />
-            <br />
-            Password <input name="Password" type="password" />
-            <br />
-            Remember Me <input name="RememberMe" type="checkbox" value="True" />
-            <br />
-            <input type="submit" value="Login" />
-        </form>
-        @if (Model.Errored)
-        {
-            <div id="errorBox" class="floatingError">Invalid Email or Password</div>
-        }
-    </body>
-    </html>
-*@

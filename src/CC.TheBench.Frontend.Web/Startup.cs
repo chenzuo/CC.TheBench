@@ -73,6 +73,12 @@ namespace CC.TheBench.Frontend.Web
                 RequestPath = new PathString("/fonts"),
                 FileSystem = new PhysicalFileSystem("Public/Fonts")
             });
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = new PathString("/avatars"),
+                FileSystem = new PhysicalFileSystem("Public/Images/Avatars")
+            });
         }
 
         private static void ConfigureNancy(IAppBuilder app, TheBenchSettings configuration)

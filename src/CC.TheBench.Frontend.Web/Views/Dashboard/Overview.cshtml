@@ -1,0 +1,23 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Dashboard.Models.OverviewModel>
+@{
+    Layout = "Layout.cshtml";
+}
+
+@section Title { @Text.Dashboard.Overview }
+
+@section Scripts { }
+
+<div class="page-header">
+    <h1>
+        @Text.Dashboard.Overview
+        <small>
+            <i class="icon-double-angle-right"></i>
+            @Text.Dashboard.OverviewDescription
+        </small>
+    </h1>
+</div>
+
+Welcome to the secure area @Html.RenderContext.Context.CurrentUser.UserName!
+<br />
+<br />
+<a href="@Url.Content("~/account/logout")">Logout</a>

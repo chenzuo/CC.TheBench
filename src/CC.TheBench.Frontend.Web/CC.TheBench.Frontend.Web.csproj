@@ -118,20 +118,22 @@
   <ItemGroup>
     <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.svg" />
     <Content Include="Public\Images\favicon.ico" />
+    <Content Include="Public\Scripts\ace-extra.js" />
     <Content Include="Public\Scripts\html5shiv.js" />
-    <Content Include="Public\Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Public\Scripts\jquery-2.0.3.min.js" />
-    <Content Include="Public\Scripts\jquery.mobile.custom.min.js" />
-    <Content Include="Public\Scripts\jquery.validate.min.js" />
-    <Content Include="Public\Scripts\respond.min.js" />
+    <Content Include="Public\Scripts\jquery-1.10.2.js" />
+    <Content Include="Public\Scripts\jquery-2.0.3.js" />
+    <Content Include="Public\Scripts\jquery.mobile.custom.js" />
+    <Content Include="Public\Scripts\jquery.validate.js" />
+    <Content Include="Public\Scripts\respond.js" />
     <Content Include="Public\Styles\ace-fonts.css" />
-    <Content Include="Public\Styles\ace-ie.min.css" />
-    <Content Include="Public\Styles\ace-rtl.min.css" />
+    <Content Include="Public\Styles\ace-ie.css" />
+    <Content Include="Public\Styles\ace-rtl.css" />
+    <Content Include="Public\Styles\ace-skins.css" />
+    <Content Include="Public\Styles\ace.css" />
     <Content Include="Public\Styles\bench.css" />
-    <Content Include="Public\Styles\ace.min.css" />
-    <Content Include="Public\Styles\bootstrap.min.css" />
-    <Content Include="Public\Styles\font-awesome-ie7.min.css" />
-    <Content Include="Public\Styles\font-awesome.min.css" />
+    <Content Include="Public\Styles\bootstrap.css" />
+    <Content Include="Public\Styles\font-awesome-ie7.css" />
+    <Content Include="Public\Styles\font-awesome.css" />
     <Content Include="packages.config" />
     <Content Include="Views\Invoices\Overview.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -157,6 +159,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Layout.cshtml" />
+    <Content Include="Views\Dashboard\Overview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -179,6 +183,17 @@
     <Compile Include="Data\ReadStoreFactory.cs" />
     <Compile Include="Middleware\RequireHttpsHandler.cs" />
     <Compile Include="Middleware\TaskHelper.cs" />
+    <Compile Include="Modules\Dashboard\OverviewModule.cs" />
+    <Compile Include="Resources\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Template.Designer.cs">
+      <DependentUpon>Template.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="TheBenchSettings.cs" />
     <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />
@@ -245,8 +260,17 @@
     <Compile Include="Validation\ValidationMessageExtension.cs" />
     <Compile Include="Validation\HasErrorExtension.cs" />
     <Compile Include="Views\Account\Models\LoginModel.cs" />
+    <Compile Include="Views\Dashboard\Models\OverviewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Dashboard.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Dashboard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Template.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Account.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Account.Designer.cs</LastGenOutput>
@@ -268,7 +292,9 @@
       <LastGenOutput>Text.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Public\Images\Avatars\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -280,17 +306,17 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54431</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:54431/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="OwinHost">
+          <servers defaultServer="">
             <server name="OwinHost" exePath="{solutiondir}\..\lib\OwinHost.2.1.0-rtw-30112-762-rel\tools\OwinHost.exe" cmdArgs="-u {url}" url="http://localhost:5001/" workingDir="{projectdir}" />
           </servers>
         </WebProjectProperties>
