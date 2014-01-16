@@ -12,6 +12,7 @@ namespace CC.TheBench.Frontend.Web
     using Middleware;
     using Nancy.Owin;
     using Owin;
+    using Security;
 
     public class Startup
     {
@@ -48,7 +49,8 @@ namespace CC.TheBench.Frontend.Web
                 LogoutPath = configuration.Authentication.LogoutPath,
                 ExpireTimeSpan = configuration.Authentication.AuthenticationCookieExpireTimeSpan,
                 SlidingExpiration = configuration.Authentication.EnableSlidingExpiration,
-                ReturnUrlParameter = configuration.Authentication.ReturnUrl
+                ReturnUrlParameter = configuration.Authentication.ReturnUrl,
+                Provider = new TheBenchFormsAuthenticationProvider() // TODO: Inject
             });
         }
 

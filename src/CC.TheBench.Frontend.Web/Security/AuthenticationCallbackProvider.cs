@@ -2,8 +2,10 @@
 {
     using Data;
     using Data.ReadModel;
+    using Extensions;
     using Nancy;
     using Nancy.SimpleAuthentication;
+    using Utilities.Extensions.NancyExtensions;
 
     public class AuthenticationCallbackProvider : IAuthenticationCallbackProvider
     {
@@ -19,10 +21,24 @@
         /// </summary>
         public dynamic Process(NancyModule nancyModule, AuthenticateCallbackData model)
         {
+            Response response;
+
+            if (model.ReturnUrl != null)
+            {
+                response = nancyModule.Response.AsRedirect("~" + model.ReturnUrl);
+            }
+            else
+            {
+                response = nancyModule.AsRedirectQueryStringOrDefault("~/");
+
+                if (nancyModule.IsAuthenticated())
+                {
+                    response = nancyModule.AsRedirectQueryStringOrDefault("~/account/identity");
+                }
+            }
+
             // Get the currently logged in user
             var loggedInUser = GetLoggedInUser(nancyModule);
-
-            // TODO: Look at https://github.com/JabbR/JabbR/blob/cea55e08d9507b3570d4c1f0b2af6db2a9e44aaa/JabbR/Nancy/JabbRAuthenticationCallbackProvider.cs to get the returnurl stuff
 
             if (model.Exception == null)
             {
@@ -43,7 +59,7 @@
 
             // If a user was logged in, he got here from the linking page
             // If the user isn't logged in, he got here from the login page
-            return nancyModule.Response.AsRedirect(loggedInUser != null ? "~/account/#identityProviders" : "~/account/login");
+            return response;
         }
 
         public dynamic OnRedirectToAuthenticationProviderError(NancyModule nancyModule, string errorMessage)
@@ -64,7 +80,7 @@
         /// </summary>
         private User GetLoggedInUser(INancyModule nancyModule)
         {
-            var currentUser = nancyModule.Context.CurrentUser;
+            var currentUser = nancyModule.GetPrincipal();
             if (currentUser == null) 
                 return null;
 
@@ -89,7 +105,7 @@
                 // If a user is already logged in, then we know they could only have gotten here via the account page,
                 // so we will redirect them there
                 //nancyModule.AddAlertMessage("success", string.Format("Successfully linked {0} account.", providerName));
-                return nancyModule.Response.AsRedirect("~/account/identityProviders");
+                return nancyModule.Response.AsRedirect("~/account/identity");
             }
 
             // User is unknown, nobody is logged in, send to register/link page
@@ -120,7 +136,7 @@
 
             // We are logged in, and are trying to link ourselves to something that has already been linked, just redirect
             // TODO: Perhaps we should update the returned data at this time
-            return nancyModule.Response.AsRedirect("~/account/identityProviders");
+            return nancyModule.Response.AsRedirect("~/account/identity");
         }
 
         //private void LinkIdentity(UserInformation userInfo, string providerName, ChatUser user)

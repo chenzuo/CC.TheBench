@@ -5,7 +5,7 @@
 
     public static class GetPrincipalExtension
     {
-        public static ClaimsPrincipal GetPrincipal(this NancyModule module)
+        public static ClaimsPrincipal GetPrincipal(this INancyModule module)
         {
             var userIdentity = module.Context.CurrentUser as TheBenchIdentity;
 

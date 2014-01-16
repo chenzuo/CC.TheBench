@@ -7,7 +7,7 @@
 
     public static class IsAuthenticatedExtension
     {
-        public static bool IsAuthenticated(this NancyModule module)
+        public static bool IsAuthenticated(this INancyModule module)
         {
             return module.GetPrincipal().IsAuthenticated();
         }
