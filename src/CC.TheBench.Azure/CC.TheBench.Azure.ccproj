@@ -12,6 +12,7 @@
     <AssemblyName>CC.TheBench.Azure</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>CC.TheBench.Azure</Name>
+    <UseWebProjectPorts>False</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,24 @@
     <ServiceDefinition Include="ServiceDefinition.csdef" />
     <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CC.TheBench.Frontend.Web\CC.TheBench.Frontend.Web.csproj">
+      <Name>CC.TheBench.Frontend.Web</Name>
+      <Project>{b5874799-093a-4a0d-a00e-e15eb9dce7c8}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>CC.TheBench.Frontend.Web</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CC.TheBench.Frontend.WebContent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CC.TheBench.Frontend.WebContent\diagnostics.wadcfg">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
