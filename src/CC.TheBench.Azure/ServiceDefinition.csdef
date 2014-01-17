@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- http://msdn.microsoft.com/en-us/library/windowsazure/gg557553.aspx -->
 <ServiceDefinition name="CC.TheBench.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-10.2.2">
-  <WebRole name="CC.TheBench.Frontend.Web" vmsize="Small">
+  <WebRole name="CC.TheBench.Frontend.Web" vmsize="ExtraSmall">
     <Sites>
-      <Site name="Web">
+      <Site name="TheBench">
         <Bindings>
-          <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="Public" endpointName="PublicSite" />
         </Bindings>
       </Site>
     </Sites>
     <Endpoints>
-      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="PublicSite" protocol="http" port="80" />
     </Endpoints>
-    <Imports>
+    <!--<Imports>
       <Import moduleName="Diagnostics" />
-    </Imports>
+    </Imports>-->
   </WebRole>
 </ServiceDefinition>
