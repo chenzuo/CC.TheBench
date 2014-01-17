@@ -4,7 +4,7 @@
 
     public static class AsRedirectQueryStringOrDefaultExtension
     {
-        public static Response AsRedirectQueryStringOrDefault(this NancyModule module, string defaultUrl)
+        public static Response AsRedirectQueryStringOrDefault(this INancyModule module, string defaultUrl)
         {
             string returnUrl = module.Request.Query.returnUrl;
 

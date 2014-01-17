@@ -29,6 +29,7 @@
             }
             else
             {
+                // TODO: Need to test if / is the good path, maybe to the login page?
                 response = nancyModule.AsRedirectQueryStringOrDefault("~/");
 
                 if (nancyModule.IsAuthenticated())
@@ -36,9 +37,6 @@
                     response = nancyModule.AsRedirectQueryStringOrDefault("~/account/identity");
                 }
             }
-
-            // Get the currently logged in user
-            var loggedInUser = GetLoggedInUser(nancyModule);
 
             if (model.Exception == null)
             {
@@ -50,8 +48,8 @@
 
                 // Deal with an unknown/already known social identity
                 return userIdentity == null 
-                    ? HandleUnknownIdentity(loggedInUser, nancyModule) 
-                    : HandleKnownIdentity(loggedInUser, userIdentity, nancyModule);
+                    ? HandleUnknownIdentity(nancyModule) 
+                    : HandleKnownIdentity(userIdentity, nancyModule);
             }
 
             // An error occured, we didn't get permission, etc...
@@ -84,18 +82,19 @@
             if (currentUser == null) 
                 return null;
 
-            //var email = ((TheBenchUser)currentUser).Email;
-            //User loggedInUser = ReadStore.Users.Get(email).FirstOrDefault();
-            //return loggedInUser;
-            return null;
+            User loggedInUser = ReadStore.Users.Get(currentUser.Email).FirstOrDefault();
+            return loggedInUser;
         }
 
         /// <summary>
         /// Deal with an unknown social identity
         /// </summary>
-        private dynamic HandleUnknownIdentity(User loggedInUser, INancyModule nancyModule)
+        private dynamic HandleUnknownIdentity(INancyModule nancyModule)
         {
-            // User with that identity doesn't exist, check if a user is logged in
+            // Get the currently logged in user
+            var loggedInUser = GetLoggedInUser(nancyModule);
+
+            // If we come in with an unknown identity, but are logged in, it means we want to link it
             if (loggedInUser != null)
             {
                 // Link to the logged in user
@@ -116,13 +115,20 @@
         /// <summary>
         /// Deal with an already known social identity
         /// </summary>
-        private dynamic HandleKnownIdentity(User loggedInUser, UserIdentity userIdentity, INancyModule nancyModule)
+        private dynamic HandleKnownIdentity(UserIdentity userIdentity, INancyModule nancyModule)
         {
+            // Get the currently logged in user
+            var loggedInUser = GetLoggedInUser(nancyModule);
+
             // If we aren't logged in, log ourselves in
             if (loggedInUser == null)
             {
-                // TODO: Implement
-                //return nancyModule.CompleteLogin(_authenticationTokenService, user);
+                // TODO: Fix returns
+                User user = ReadStore.Users.FindAllById(userIdentity.UserId).FirstOrDefault();
+                if (user == null)
+                    return null;
+
+                nancyModule.SignIn(user);
                 return null;
             }
 

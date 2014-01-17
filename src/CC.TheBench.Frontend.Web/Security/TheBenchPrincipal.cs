@@ -10,6 +10,11 @@
             get { return this.GetClaimValue(TheBenchClaimTypes.Name); }
         }
 
+        public string Email
+        {
+            get { return this.GetClaimValue(TheBenchClaimTypes.Email); }
+        }
+
         public TheBenchPrincipal(ClaimsPrincipal principal)
         {
             AddIdentities(principal.Identities);

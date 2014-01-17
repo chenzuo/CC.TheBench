@@ -11,7 +11,7 @@
 
     public static class SignInExtension
     {
-        public static Response SignIn(this NancyModule module, IEnumerable<Claim> claims)
+        public static Response SignIn(this INancyModule module, IEnumerable<Claim> claims)
         {
             var env = module.Context.Items.Get<IDictionary<string, object>>(NancyOwinHost.RequestEnvironmentKey);
             var owinContext = new OwinContext(env);
@@ -22,7 +22,7 @@
             return module.AsRedirectQueryStringOrDefault("~/");
         }
 
-        public static Response SignIn(this NancyModule module, User user)
+        public static Response SignIn(this INancyModule module, User user)
         {
             var claims = new List<Claim>
             {
