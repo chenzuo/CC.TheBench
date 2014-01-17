@@ -89,7 +89,7 @@
 
             var principal = env.Get<IPrincipal>("server.User") as ClaimsPrincipal;
             if (principal != null)
-                context.CurrentUser = new TheBenchIdentity(principal);
+                context.CurrentUser = new TheBenchUser(new TheBenchPrincipal(principal));
 
             return null;
         }

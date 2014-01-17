@@ -1,4 +1,5 @@
 ﻿@using CC.TheBench.Frontend.Web.Security
+@using CC.TheBench.Frontend.Web.Security.Extensions
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,11 +259,11 @@
 *@
                     <li class="light-blue">
                         <a data-toggle="dropdown" class="dropdown-toggle">
-                            @* TODO: Use username for alt and Welcome / Get Avatar from CurrentUser *@
-                            <img class="nav-user-photo" src="@Url.Content("~/avatars/avatar2.png")" alt="@(((ITheBenchIdentity)Html.RenderContext.Context.CurrentUser).Name)" />
+                            @* TODO: Get Avatar from Principal *@
+                            <img class="nav-user-photo" src="@Url.Content("~/avatars/avatar2.png")" alt="@Html.GetPrincipal().Name" />
                             <span class="user-info">
                                 <small>Welcome,</small>
-                                @(((ITheBenchIdentity)Html.RenderContext.Context.CurrentUser).Name)
+                                @Html.GetPrincipal().Name
                             </span>
 
                             <i class="icon-caret-down"></i>

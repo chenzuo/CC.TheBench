@@ -195,6 +195,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Security\TheBenchFormsAuthenticationProvider.cs" />
+    <Compile Include="Security\TheBenchPrincipal.cs" />
     <Compile Include="TheBenchSettings.cs" />
     <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />
@@ -255,7 +256,7 @@
     </Compile>
     <Compile Include="Security\AuthenticationCallbackProvider.cs" />
     <Compile Include="Security\SaltedHash.cs" />
-    <Compile Include="Security\TheBenchIdentity.cs" />
+    <Compile Include="Security\TheBenchUser.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validation\GetFirstInvalidFieldExtension.cs" />
     <Compile Include="Validation\ValidationMessageExtension.cs" />
