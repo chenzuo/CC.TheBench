@@ -2,8 +2,8 @@
 <ServiceConfiguration serviceName="CC.TheBench.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
   <Role name="CC.TheBench.Frontend.Web">
     <Instances count="1" />
-    <ConfigurationSettings>
+    <!--<ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-    </ConfigurationSettings>
+    </ConfigurationSettings>-->
   </Role>
 </ServiceConfiguration>

@@ -32,6 +32,16 @@
         <script src="@Url.Content("~/js/html5shiv.js")"></script>
         <script src="@Url.Content("~/js/respond.js")"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+        // Fix for Facebook adding #_=_ weirdness, http://stackoverflow.com/a/18305085/4329
+        if (window.location.hash == '#_=_') {
+            debugger;
+            history.replaceState
+                ? history.replaceState(null, null, window.location.href.split('#')[0])
+                : window.location.hash = '';
+        }
+    </script>
 </head>
 <body class="navbar-fixed">
     <div class="navbar navbar-default navbar-fixed-top" id="navbar">

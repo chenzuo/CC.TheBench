@@ -72,6 +72,9 @@
             if (currentUser == null) 
                 return null;
 
+            if (string.IsNullOrWhiteSpace(currentUser.Email))
+                return null;
+
             User loggedInUser = ReadStore.Users.Get(currentUser.Email).FirstOrDefault();
             return loggedInUser;
         }
@@ -113,7 +116,7 @@
             // If we aren't logged in, log ourselves in
             if (loggedInUser == null)
             {
-                User user = ReadStore.Users.FindAllById(userIdentity.UserId).FirstOrDefault();
+                User user = ReadStore.Users.FindAllByUserId(userIdentity.UserId).FirstOrDefault();
                 if (user == null)
                 {
                     // Something went wrong
@@ -125,7 +128,7 @@
                 
                 return string.IsNullOrWhiteSpace(returnUrl) 
                     ? nancyModule.AsRedirectQueryStringOrDefault("~/dashboard") 
-                    : nancyModule.Response.AsRedirect("~" + returnUrl);
+                    : nancyModule.Response.AsRedirect(returnUrl);
             }
 
             // If we are logged in, we are trying to link ourselves, check if we are allowed
