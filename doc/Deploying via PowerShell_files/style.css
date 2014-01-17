@@ -1,0 +1,149 @@
+/*  
+Theme Name: Clean-n-Clear
+Theme URI: 
+Sponsor: Angross.com
+Version: 1.0
+Author: Mohd Sakib
+Author URI: 
+*/
+
+/**************** Body *********************/
+*{margin:0;padding:0;}
+body{background: #fff;color:#333;font:12px "Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;}
+#wrapper{background:#FFFFFF;margin:0 auto; width:900px;}
+
+/************Header**********/
+#header{ background:url(images/headerbg.gif) repeat-x;}
+#header div#hleft{background:url(images/headerbgleft.gif) no-repeat left; height:106px;}
+#header div#hright{background:url(images/headerbgright.gif) no-repeat right; height:106px;}
+#header {margin:0 0 20px 0;padding:0; width:900px; height:106px;}
+#blogdes{ padding:24px 10px 0 30px; width:500px; float:left;}
+#header h1 a {font-family:Verdana,Tahoma,Arial,sans-serif; font-size:25px; font-weight:normal; color:#000333;}
+#header h2 {font-size:18px; color:#2583ad; font-weight:normal; font-family:Verdana,Tahoma,Arial,sans-serif;}
+h2 a:link,h2 a:visited{ font-size:22px; color: #2655b6; text-decoration:none; font-weight: lighter;}
+h2 a:hover{color: #000000;}
+h4.orangeh4{ font-size:13px; font-weight:bold; color:#e35914; padding:0; margin:0;}
+
+
+
+#slider{
+float:right;
+padding:20px 30px 0 0;
+width:300px;
+text-align:right;
+}
+#slider a img{
+border:none;
+}
+#slider #subcontent2 a, #slider #subcontent3 a{ border:none; background:none; display:inline;}
+
+
+/**************** Entry *********************/
+#maincontainer{display:table-cell; width:900px; padding:0; margin:0; background:url(images/containerbg.gif) repeat-y; float:left;}
+#maincontainer2{display:table-cell; width:900px;padding:0; margin:0; background:url(images/containertop.gif) no-repeat top;float:left;}
+#maincontainer3{display:table-cell; width:900px;padding:0; margin:0; background:url(images/containerbottom.gif) no-repeat bottom;float:left;}
+.postbg{margin:10px 0 0 0;}
+small{color:#999999; }
+.entry{ float:left;margin-bottom:10px;width:549px;}
+.entry h2{}
+.entry p{padding:0 0 10px 0;}
+.post{padding:10px 15px 15px 15px;text-align:justify; margin-bottom:10px; font-size:13px; }
+.entry ul { margin-left: 0px; padding: 0 0 0 30px;  padding-left: 10px;  } 
+ .entry ul li { margin: 7px 0 8px 10px; list-style:circle;}
+.entry ol { padding: 5px; margin: 0; }
+.post ol{ padding:0 0 0 30px;}
+.postinfo{width:520px; background: url(images/postinfo.gif) repeat-y; margin:10px 0; }
+.postinfo2{width:520px; background: url(images/postinfotop.gif) no-repeat top; }
+.postinfo3{width:500px; padding:4px 10px; background: url(images/postinfobottom.gif) no-repeat bottom; }
+
+/**************** Links *********************/
+a:link, a:visited{color: #2655b6;text-decoration:none;}
+a:hover{color:#000000;text-decoration:underline;}
+
+/**************** Navigation *********************/
+#navigation{height:37px; border:1px solid #999999; border-top:none; margin:0 0 5px  0;}
+#navigation .inner{ background:#464646; height:36px; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff; float:left;}
+#menu{background-color:#464646;padding:9px 0 11px 20px; float:left; width:620px; }
+#menu li{display:inline;list-style:none; font-weight:normal;}
+.page_item a:link, .page_item a:visited{color: #FFFFFF; padding:10px 20px 10px 28px; font-size:11px; font-family:tahoma, arial; background:url(images/line.gif) left center no-repeat;}
+.page_item a:hover {  text-decoration:none;}
+.current_page_item a:link, .current_page_item a:visited{ padding:10px 20px 10px 28px; color:#fff;text-decoration:none; font-size:11px; font-family:tahoma, arial;}
+.current_page_item a:hover { text-decoration:none;}
+.home a, .home a:visited{background:none; color: #FFFFFF; padding:10px 20px 10px 15px; font-size:11px; font-family:tahoma, arial;}
+/***********Ads top***********/
+#adstop { padding:2px; margin: 0 0 5px 0;}
+
+/**************** Sidebars *********************/
+#right{width:350px; float:right;}
+#sidebarcontainer{padding:0 8px 0 0;}
+#aboutblogger{ width:336px; height:130px; float:right;  padding:15px 10px 8px 4px;}
+#about1{background:url(images/aboutbg.gif) repeat-y;}
+#about2{background:url(images/abouttop.gif) no-repeat top;}
+#about3 {background:url(images/aboutbottom.gif) no-repeat bottom; }
+#about4{ height:110px; background:url(images/abouticon.gif) no-repeat right center; padding:8px 90px 10px 10px; }
+#about4 p{line-height:13px; font-size:12px; color:#555; padding:5px 0 0 0;}
+
+
+#topsidebar{display:table-cell; width:335px; float:right; padding:19px 0 0 0; margin:0 ; background:url(images/navigation.gif)  top no-repeat #e4f2fd;}
+#topsidebar2{display:table-cell; width:335px;  padding:0; margin:0; background:url(images/navigationbottom.gif) bottom no-repeat; float:right;}
+#sidebar1{ width:160px; float:left; border-right:1px solid #CCCCCC; padding-right:10px; }
+#sidebar1 h2{font-weight:normal;}
+#sidebar1 ul{list-style-type:none; padding:0 0 8px 0;}
+#sidebar1 ul li{list-style-type:none;margin-left:10px;margin-top:10px;}
+#sidebar1 ul li ul{font-style:normal;list-style-type:none;margin-top:10px;padding:0 0 0 5px;}
+#sidebar1 ul li ul li{border:0;border-bottom:1px solid #ccc;display:block;margin:0 0px 5px;padding:0 0 5px 10px; background:url(images/arrowquote.gif) left no-repeat top;}
+#sidebar1 p{padding:0 5px; }
+
+#sidebar2{ width:160px; float:left; padding:0 3px 0 0;}
+#sidebar2 h2{font-weight:normal;}
+#sidebar2 ul{list-style-type:none;  padding:0 0 8px 0;}
+#sidebar2 ul li{list-style-type:none;margin-left:10px;margin-top:10px;}
+#sidebar2 ul li ul{font-style:normal;list-style-type:none;margin-top:10px;padding:0 0 0 5px;}
+#sidebar2 ul li ul li{border:0;border-bottom:1px solid #ccc;display:block;margin:0 0px 5px;background:url(images/arrowquote.gif) left no-repeat top; padding:0 0 5px 13px;}
+#sidebar2 p{padding:0 5px;}
+#sidebar1 ul li ul li a, #sidebar2 ul li ul li a{ color:#005394;}
+/**************** Search *********************/
+#topbarsearch{ float:right; background:#464646; width:256px;}
+#topsearch{ float:right; width:215px; padding:10px 8px 0 0; background:#464646;}
+#topsearch input#ls{ font-size:11px; width:134px; height:13px; font-style:italic; color:#999999; font-family:verdana;}
+#searchsubmit{display:inline; float:right;}
+#ls{display:inline; float:left;}
+
+/**************** Comments *********************/
+#comments {font-weight:lighter; padding-top:10px; margin-top:10px;}
+.commentlist{  list-style:none;}
+.entry  ol li{ padding: 0 0 20px 0 ;}
+#author, #email, #url {color:#666;width:40%;border:1px solid #e4f2fd;margin-bottom:0.6em;background:#fcfcfc;margin-top:1px;padding:3px;}
+#commentform{padding: 0 0 0 30px;}
+#submit{font:bold 1em Tahoma;margin-bottom:15px;margin-top:5px;padding:2px;}
+#respond{padding-top:20px;padding-bottom:10px; font-weight:lighter;}
+#comment{width:70%;border:1px solid #e4f2fd;}
+.balloontop{background: #e4f2fd;width:489px; }
+
+.balloonbottom{  background:url(images/commtop.gif) center top no-repeat; }
+.balloonbottom2{background:url(images/commbottom.gif) center bottom no-repeat; padding:33px 15px 5px 15px;}
+
+/**************** Footer *********************/
+#footer{ float:left; width:860px; text-align: right;color:#ffffff; background-color:#333333;padding:20px; margin:14px 0 0 ; font-size:11px}
+#footer a:link, #footer a:visited{color:#CCCCCC;}
+
+/**************** Misc *********************/
+acronym, abbr, span.caps { cursor: help; }
+acronym, abbr { border-bottom: 1px dashed #999; }
+blockquote { margin: 15px 30px 0 10px; padding-left: 20px; border-left: 5px solid #ffe1b8; }
+blockquote cite { margin: 5px 0 0; display: block; }
+.center { text-align: center; }
+hr { display: none; }
+a img { border: none; }
+.alignright{float:right; padding:5px;  font-size:14px; font-weight:bold; text-decoration:underline;}
+.alignleft{float:left; padding:5px 5px 5px 20px; font-size:14px; text-decoration:underline; font-weight:bold;}
+img.centered{display:block;margin-left:auto;margin-right:auto;}
+img.alignright{display:inline;margin:0 0 2px 7px;padding:4px;}
+img.alignleft{display:inline;margin:0 7px 2px 0;padding:4px;}
+pre {border: solid 1px #9a9a9a;color: blue;margin: 10px;padding:10px;background: #f3f2ed}
+code {font-size:1.0em;color: #000}
+#tag_cloud{padding:5px;}
+#topcontentmediumbanner{width:468px; line-height:1px;/* <-- IE6 fix */ margin:4px auto 0 auto;}
+#singleadsbig{}
+#topads15{margin:auto; width:728px; line-height:1px;}
+p.update{ padding:5px; background:#fffaf6; border:1px solid #ff915b; margin:10px 0 0 0;}
