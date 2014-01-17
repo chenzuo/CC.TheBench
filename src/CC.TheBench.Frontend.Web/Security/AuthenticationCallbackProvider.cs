@@ -9,11 +9,18 @@
 
     public class AuthenticationCallbackProvider : IAuthenticationCallbackProvider
     {
-        private dynamic ReadStore { get; set; }
+        private readonly IReadStoreFactory _readStoreFactory;
+
+        private dynamic _readStore;
+
+        private dynamic ReadStore
+        {
+            get { return _readStore ?? (_readStore = _readStoreFactory.ReadStore()); }
+        }
 
         public AuthenticationCallbackProvider(IReadStoreFactory readStoreFactory)
         {
-            ReadStore = readStoreFactory.ReadStore();
+            _readStoreFactory = readStoreFactory;
         }
 
         /// <summary>
