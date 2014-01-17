@@ -14,6 +14,8 @@
         
         <!-- Download NuGet.exe if it does not already exist -->
         <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+		
+		<PackageSources>"https://www.myget.org/f/aspnetwebstacknightlyrelease/;https://www.nuget.org/api/v2/"</PackageSources>
     </PropertyGroup>
     
     <ItemGroup Condition=" '$(PackageSources)' == '' ">
