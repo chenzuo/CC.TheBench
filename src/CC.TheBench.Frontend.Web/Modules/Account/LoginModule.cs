@@ -21,7 +21,7 @@
             Get["/"] = x =>
             {
                 if (IsAuthenticated)
-                    return this.AsRedirectQueryStringOrDefault("~/");
+                    return this.AsRedirectQueryStringOrDefault("~/dashboard");
 
                 this.CreateNewCsrfToken();
 
@@ -32,7 +32,7 @@
             Post["/"] = x =>
             {
                 if (IsAuthenticated)
-                    return this.AsRedirectQueryStringOrDefault("~/");
+                    return this.AsRedirectQueryStringOrDefault("~/dashboard");
 
                 this.ValidateCsrfToken();
 

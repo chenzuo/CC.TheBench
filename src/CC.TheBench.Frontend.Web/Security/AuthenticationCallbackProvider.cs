@@ -21,23 +21,6 @@
         /// </summary>
         public dynamic Process(NancyModule nancyModule, AuthenticateCallbackData model)
         {
-            Response response;
-
-            if (model.ReturnUrl != null)
-            {
-                response = nancyModule.Response.AsRedirect("~" + model.ReturnUrl);
-            }
-            else
-            {
-                // TODO: Need to test if / is the good path, maybe to the login page?
-                response = nancyModule.AsRedirectQueryStringOrDefault("~/");
-
-                if (nancyModule.IsAuthenticated())
-                {
-                    response = nancyModule.AsRedirectQueryStringOrDefault("~/account/identity");
-                }
-            }
-
             if (model.Exception == null)
             {
                 var userInfo = model.AuthenticatedClient.UserInformation;
@@ -48,8 +31,8 @@
 
                 // Deal with an unknown/already known social identity
                 return userIdentity == null 
-                    ? HandleUnknownIdentity(nancyModule) 
-                    : HandleKnownIdentity(userIdentity, nancyModule);
+                    ? HandleUnknownIdentity(nancyModule)
+                    : HandleKnownIdentity(userIdentity, nancyModule, model.ReturnUrl);
             }
 
             // An error occured, we didn't get permission, etc...
@@ -57,7 +40,7 @@
 
             // If a user was logged in, he got here from the linking page
             // If the user isn't logged in, he got here from the login page
-            return response;
+            return nancyModule.Response.AsRedirect(nancyModule.IsAuthenticated() ? "~/account/identity" : "~/account/login");
         }
 
         public dynamic OnRedirectToAuthenticationProviderError(NancyModule nancyModule, string errorMessage)
@@ -115,7 +98,7 @@
         /// <summary>
         /// Deal with an already known social identity
         /// </summary>
-        private dynamic HandleKnownIdentity(UserIdentity userIdentity, INancyModule nancyModule)
+        private dynamic HandleKnownIdentity(UserIdentity userIdentity, INancyModule nancyModule, string returnUrl)
         {
             // Get the currently logged in user
             var loggedInUser = GetLoggedInUser(nancyModule);
@@ -123,13 +106,19 @@
             // If we aren't logged in, log ourselves in
             if (loggedInUser == null)
             {
-                // TODO: Fix returns
                 User user = ReadStore.Users.FindAllById(userIdentity.UserId).FirstOrDefault();
                 if (user == null)
-                    return null;
+                {
+                    // Something went wrong
+                    //nancyModule.AddAlertMessage();
+                    return nancyModule.AsRedirectQueryStringOrDefault("~/dashboard");
+                }
 
                 nancyModule.SignIn(user);
-                return null;
+                
+                return string.IsNullOrWhiteSpace(returnUrl) 
+                    ? nancyModule.AsRedirectQueryStringOrDefault("~/dashboard") 
+                    : nancyModule.Response.AsRedirect("~" + returnUrl);
             }
 
             // If we are logged in, we are trying to link ourselves, check if we are allowed

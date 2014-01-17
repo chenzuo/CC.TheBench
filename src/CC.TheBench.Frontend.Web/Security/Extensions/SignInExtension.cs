@@ -19,7 +19,7 @@
             var identity = new ClaimsIdentity(claims, Constants.TheBenchAuthType);
             owinContext.Authentication.SignIn(identity);
 
-            return module.AsRedirectQueryStringOrDefault("~/");
+            return module.AsRedirectQueryStringOrDefault("~/dashboard");
         }
 
         public static Response SignIn(this INancyModule module, User user)
