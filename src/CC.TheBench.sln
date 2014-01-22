@@ -5,10 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC.TheBench.Frontend.Web", "CC.TheBench.Frontend.Web\CC.TheBench.Frontend.Web.csproj", "{B5874799-093A-4A0D-A00E-E15EB9DCE7C8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4A3266D0-96A3-4349-BB67-558AA059795E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{4A3266D0-96A3-4349-BB67-558AA059795E}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
+		nuget.config = nuget.config
+		packages.config = packages.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6CC6311D-8A5C-458C-8AEA-6533E7E0B6A6}"
@@ -24,6 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC.TheBench.Frontend.Migrat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{E57C2565-EB30-47D0-BFC9-3538F2FD7F7F}"
 	ProjectSection(SolutionItems) = preProject
+		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
 		..\VERSION.txt = ..\VERSION.txt
 	EndProjectSection
