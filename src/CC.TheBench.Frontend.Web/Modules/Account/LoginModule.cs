@@ -18,6 +18,7 @@
             : base(readStoreFactory, "/account/login")
         {
             _saltedHash = saltedHash;
+
             Get["/"] = x =>
             {
                 if (IsAuthenticated)

@@ -14,7 +14,7 @@
             if (validationResult.IsValid)
                 return defaultField;
 
-            var memberNames = validationResult.Errors.SelectMany(x => x.MemberNames).ToList();
+            var memberNames = validationResult.Errors.Values.SelectMany(x => x.SelectMany(y => y.MemberNames)).ToList();
 
             foreach (var fieldToCheck in fieldsOrder)
             {

@@ -1,4 +1,5 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CC.TheBench.Frontend.Web.Views.Account.Models.LoginModel>
+@using System.Linq
 @using CC.TheBench.Frontend.Web.Validation
 @{
     Layout = "Account/Layout.cshtml";
@@ -52,9 +53,9 @@
             </h4>
         
             <div id="errors" class="alert alert-danger" @(Html.RenderContext.Context.ModelValidationResult.IsValid ? "style='display: none;'" : string.Empty)>
-                @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors)
+                @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors.Values.SelectMany(x => x))
                 {
-                    <p>@e.GetMessage(string.Empty)</p>
+                    <p>@e.ErrorMessage</p>
                 }
             </div>
             

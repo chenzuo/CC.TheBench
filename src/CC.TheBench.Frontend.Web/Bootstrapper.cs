@@ -82,8 +82,7 @@
 
         private static Response FlowPrincipal(NancyContext context)
         {
-            // TODO: Replace with context.GetOwinEnvironment() when v0.22 is released
-            var env = context.Items.Get<IDictionary<string, object>>(NancyOwinHost.RequestEnvironmentKey);
+            var env = context.GetOwinEnvironment();
             if (env == null) 
                 return null;
 

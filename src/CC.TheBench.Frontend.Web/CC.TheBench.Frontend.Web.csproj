@@ -72,21 +72,25 @@
     <Reference Include="MySql.Data">
       <HintPath>..\..\lib\MySql.Data.6.8.3\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\..\lib\Nancy.0.21.1\lib\net40\Nancy.dll</HintPath>
+    <Reference Include="Nancy, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nancy.0.22.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Owin">
-      <HintPath>..\..\lib\Nancy.Owin.0.21.1\lib\net40\Nancy.Owin.dll</HintPath>
+    <Reference Include="Nancy.Owin, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nancy.Owin.0.22.0\lib\net40\Nancy.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.SimpleAuthentication, Version=0.3.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Nancy.SimpleAuthentication.0.3.12\lib\net40\Nancy.SimpleAuthentication.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Validation.FluentValidation">
-      <HintPath>..\..\lib\Nancy.Validation.FluentValidation.0.21.1\lib\net40\Nancy.Validation.FluentValidation.dll</HintPath>
+    <Reference Include="Nancy.Validation.FluentValidation, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nancy.Validation.FluentValidation.0.22.0\lib\net40\Nancy.Validation.FluentValidation.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.ViewEngines.Razor">
-      <HintPath>..\..\lib\Nancy.Viewengines.Razor.0.21.1\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+    <Reference Include="Nancy.ViewEngines.Razor, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nancy.Viewengines.Razor.0.22.0\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\..\lib\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -335,6 +339,10 @@ xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.21.1\lib\Net40\
 if $(ConfigurationName) == Debug (
 xcopy /s /y /R "$(SolutionDir).nuget\..\..\lib\Nancy.Viewengines.Razor.0.21.1\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
 xcopy /s /y /R "$(SolutionDir).nuget\..\..\lib\Nancy.Viewengines.Razor.0.21.1\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
+)
+if $(ConfigurationName) == Debug (
+xcopy /s /y /R "$(SolutionDir)..\lib\Nancy.Viewengines.Razor.0.22.0\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
+xcopy /s /y /R "$(SolutionDir)..\lib\Nancy.Viewengines.Razor.0.22.0\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

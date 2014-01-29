@@ -6,14 +6,13 @@
     using Microsoft.Owin;
     using Nancy;
     using Nancy.Owin;
-    using Utilities.Extensions.DictionaryExtensions;
     using Utilities.Extensions.NancyExtensions;
 
     public static class SignInExtension
     {
         public static Response SignIn(this INancyModule module, IEnumerable<Claim> claims)
         {
-            var env = module.Context.Items.Get<IDictionary<string, object>>(NancyOwinHost.RequestEnvironmentKey);
+            var env = module.Context.GetOwinEnvironment();
             var owinContext = new OwinContext(env);
 
             var identity = new ClaimsIdentity(claims, Constants.TheBenchAuthType);

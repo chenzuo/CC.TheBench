@@ -13,7 +13,7 @@
             if (validationResult.IsValid)
                 return false;
 
-            var memberNames = validationResult.Errors.SelectMany(x => x.MemberNames);
+            var memberNames = validationResult.Errors.Values.SelectMany(x => x.SelectMany(y => y.MemberNames));
 
             return memberNames.Contains(memberName, StringComparer.InvariantCultureIgnoreCase);
         }
