@@ -52,12 +52,7 @@
                 @Text.Account.EnterYourInformation
             </h4>
         
-            <div id="errors" class="alert alert-danger" @(Html.RenderContext.Context.ModelValidationResult.IsValid ? "style='display: none;'" : string.Empty)>
-                @foreach (var e in Html.RenderContext.Context.ModelValidationResult.Errors.Values.SelectMany(x => x))
-                {
-                    <p>@e.ErrorMessage</p>
-                }
-            </div>
+            @Html.ValidationSummary()
             
             <div class="space-6"></div>
         

@@ -266,6 +266,7 @@
     <Compile Include="Validation\GetFirstInvalidFieldExtension.cs" />
     <Compile Include="Validation\ValidationMessageExtension.cs" />
     <Compile Include="Validation\HasErrorExtension.cs" />
+    <Compile Include="Validation\ValidationSummaryExtension.cs" />
     <Compile Include="Views\Account\Models\LoginModel.cs" />
     <Compile Include="Views\Dashboard\Models\OverviewModel.cs" />
   </ItemGroup>
