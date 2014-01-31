@@ -9,7 +9,8 @@
         {
             const string errorDialog = @"<div id=""errors"" class=""alert alert-danger""{0}>{1}</div>";
 
-            var isValid = html.RenderContext.Context.ModelValidationResult.IsValid;
+            var validationResult = html.RenderContext.Context.ModelValidationResult;
+            var isValid = validationResult.IsValid;
 
             var errorDialogVisible = isValid
                 ? "style=\"display: none;\""
@@ -17,7 +18,7 @@
 
             var errors = isValid
                 ? string.Empty
-                : string.Concat(html.RenderContext.Context.ModelValidationResult.Errors.Values.SelectMany(x => x.Select(y => string.Concat("<p>", y.ErrorMessage, "</p>"))));
+                : string.Concat(validationResult.ErrorMessages().Select(x => string.Concat("<p>", x, "</p>")));
 
             return new NonEncodedHtmlString(string.Format(errorDialog, errorDialogVisible, errors));
         } 

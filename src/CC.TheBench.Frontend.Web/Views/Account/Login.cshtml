@@ -10,7 +10,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#@Html.RenderContext.Context.GetFirstInvalidField("email", new[] {"email", "password"})').focus();
+            $('#@Html.FirstInvalidProperty("email", new[] {"email", "password"})').focus();
 
             $('#login-form').validate({
                 errorClass: 'has-error',
@@ -61,14 +61,14 @@
 
                 <fieldset>
                     <label class="block clearfix">
-                        <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Email") ? "has-error" : string.Empty)">
+                        <span class="block input-icon input-icon-right @Html.ValidationStyle("email", "has-error")">
                             <input type="text" class="form-control" id="email" name="email" placeholder="@Text.Account.Email" value="@Model.Email" required />
                             <i class="icon-user"></i>
                         </span>
                     </label>
 
                     <label class="block clearfix">
-                        <span class="block input-icon input-icon-right @(Html.RenderContext.Context.HasError("Password") ? "has-error" : string.Empty)">
+                        <span class="block input-icon input-icon-right @Html.ValidationStyle("password", "has-error")">
                             <input type="password" class="form-control" id="password" name="password" placeholder="@Text.Account.Password" required />
                             <i class="icon-lock"></i>
                         </span>

@@ -211,7 +211,7 @@
     <Compile Include="Security\TheBenchClaimTypes.cs" />
     <Compile Include="Utilities\Extensions\ByteExtensions\ToHexExtension.cs" />
     <Compile Include="Utilities\Extensions\DictionaryExtensions\GetExtension.cs" />
-    <Compile Include="Utilities\Extensions\NancyExtensions\AddValidationErrorExtension.cs" />
+    <Compile Include="Validation\AddValidationErrorExtension.cs" />
     <Compile Include="Utilities\Extensions\NancyExtensions\AsRedirectQueryStringOrDefaultExtension.cs" />
     <Compile Include="Utilities\Extensions\StringExtensions\ToByteArrayExtension.cs" />
     <Compile Include="Modules\Account\LogoutModule.cs" />
@@ -263,9 +263,11 @@
     <Compile Include="Security\SaltedHash.cs" />
     <Compile Include="Security\TheBenchUser.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Validation\GetFirstInvalidFieldExtension.cs" />
+    <Compile Include="Validation\ErrorPropertiesExtension.cs" />
+    <Compile Include="Validation\ErrorMessagesExtension.cs" />
+    <Compile Include="Validation\FirstInvalidPropertyExtension.cs" />
     <Compile Include="Validation\ValidationMessageExtension.cs" />
-    <Compile Include="Validation\HasErrorExtension.cs" />
+    <Compile Include="Validation\ValidationStyleExtension.cs" />
     <Compile Include="Validation\ValidationSummaryExtension.cs" />
     <Compile Include="Views\Account\Models\LoginModel.cs" />
     <Compile Include="Views\Dashboard\Models\OverviewModel.cs" />

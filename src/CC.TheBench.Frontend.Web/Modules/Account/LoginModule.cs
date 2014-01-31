@@ -8,6 +8,7 @@
     using Security;
     using Security.Extensions;
     using Utilities.Extensions.NancyExtensions;
+    using Validation;
     using Views.Account.Models;
 
     public class LoginModule : BaseModule
