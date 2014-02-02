@@ -19,10 +19,10 @@
                 var providerName = model.AuthenticatedClient.ProviderName;
 
                 // See if we already know about this provider/id
-                UserIdentity userIdentity = ReadStore.UserIdentities.FindAllByProviderAndId(providerName, userInfo.Id).FirstOrDefault();
+                UserIdentity userIdentity = null;// ReadStore.UserIdentities.FindAllByProviderAndId(providerName, userInfo.Id).FirstOrDefault();
 
                 // Deal with an unknown/already known social identity
-                return userIdentity == null 
+                return userIdentity == null
                     ? HandleUnknownIdentity(nancyModule)
                     : HandleKnownIdentity(userIdentity, nancyModule, model.ReturnUrl);
             }
@@ -54,13 +54,13 @@
         private User GetLoggedInUser(INancyModule nancyModule)
         {
             var currentUser = nancyModule.GetPrincipal();
-            if (currentUser == null) 
+            if (currentUser == null)
                 return null;
 
             if (string.IsNullOrWhiteSpace(currentUser.Email))
                 return null;
 
-            User loggedInUser = ReadStore.Users.Get(currentUser.Email).FirstOrDefault();
+            User loggedInUser = null;//ReadStore.Users.Get(currentUser.Email).FirstOrDefault();
             return loggedInUser;
         }
 
@@ -101,7 +101,7 @@
             // If we aren't logged in, log ourselves in
             if (loggedInUser == null)
             {
-                User user = ReadStore.Users.FindAllByUserId(userIdentity.UserId).FirstOrDefault();
+                User user = null;//ReadStore.Users.FindAllByUserId(userIdentity.UserId).FirstOrDefault();
                 if (user == null)
                 {
                     // Something went wrong
@@ -110,19 +110,19 @@
                 }
 
                 nancyModule.SignIn(user);
-                
-                return string.IsNullOrWhiteSpace(returnUrl) 
-                    ? nancyModule.AsRedirectQueryStringOrDefault("~/dashboard") 
+
+                return string.IsNullOrWhiteSpace(returnUrl)
+                    ? nancyModule.AsRedirectQueryStringOrDefault("~/dashboard")
                     : nancyModule.Response.AsRedirect(returnUrl);
             }
 
             // If we are logged in, we are trying to link ourselves, check if we are allowed
-            if (loggedInUser.UserId != userIdentity.UserId)
-            {
-                // You can't link an account that's already attached to another user
-                // TODO: Implement
-                //nancyModule.AddAlertMessage("error", string.Format("This {0} account has already been linked to another user.", providerName));
-            }
+            //if (loggedInUser.UserId != userIdentity.UserId)
+            //{
+            //    // You can't link an account that's already attached to another user
+            //    // TODO: Implement
+            //    //nancyModule.AddAlertMessage("error", string.Format("This {0} account has already been linked to another user.", providerName));
+            //}
 
             // We are logged in, and are trying to link ourselves to something that has already been linked, just redirect
             // TODO: Perhaps we should update the returned data at this time

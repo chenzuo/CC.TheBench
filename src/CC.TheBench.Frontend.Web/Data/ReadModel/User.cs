@@ -1,10 +1,17 @@
 ﻿namespace CC.TheBench.Frontend.Web.Data.ReadModel
 {
-    public class User
+    using WindowsAzure.Table.Attributes;
+
+    public sealed class User : UserIdentity
     {
-        public string UserId { get; set; }
-        
+        public User()
+        {
+            IdentityProvider = IdentityType.Manual.ToString();
+        }
+
+        [PartitionKey]
         public string Email { get; set; }
+     
         public string HashAndSalt { get; set; }
 
         public string DisplayName { get; set; }

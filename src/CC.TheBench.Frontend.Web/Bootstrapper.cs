@@ -4,7 +4,11 @@
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Text;
+    using WindowsAzure.Table;
     using Data;
+    using Data.ReadModel;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Table;
     using Nancy;
     using Nancy.Bootstrapper;
     using Nancy.Cryptography;
@@ -71,6 +75,13 @@
             pipelines.BeforeRequest.AddItemToStartOfPipeline(FlowPrincipal);
         }
 
+        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+        {
+            base.ConfigureApplicationContainer(container);
+
+            container.Register(CloudStorageAccount.Parse(_configuration.Storage.AzureConnectionString));
+        }
+
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
         {
             base.ConfigureRequestContainer(container, context);
@@ -78,6 +89,9 @@
             // Simple.Data is quite aggressive in closing connections and holds no open connections to a data store by default, 
             // so you can keep the Database object returned from the Open*() methods hanging around without worrying.
             //container.Register<IReadStoreFactory, ReadStoreFactory>().AsSingleton();
+
+            var tableClient = container.Resolve<CloudStorageAccount>().CreateCloudTableClient();
+            container.Register<ITableSet<User>, TableSet<User>>(new TableSet<User>(tableClient));
         }
 
         private static Response FlowPrincipal(NancyContext context)

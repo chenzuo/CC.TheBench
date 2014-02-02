@@ -1,20 +1,31 @@
 ﻿namespace CC.TheBench.Frontend.Web.Data.ReadModel
 {
-    using Microsoft.WindowsAzure.Storage.Table;
+    using System;
+    using WindowsAzure.Table.Attributes;
 
     public class UserIdentity
     {
-        public string UserId { get; set; }
+        [RowKey]
+        public string IdentityProvider { get; protected set; }
 
-        public string Provider { get; set; }
-        public string Id { get; set; }
+        public DateTime Created { get; set; }
 
-        public string Email { get; set; }
-        public string Locale { get; set; }
-        public string Name { get; set; }
-        public string Picture { get; set; }
-        public string Username { get; set; }
+        public DateTime Modified { get; set; }
     }
+
+    //public class UserIdentity
+    //{
+    //    public string UserId { get; set; }
+
+    //    public string Provider { get; set; }
+    //    public string Id { get; set; }
+
+    //    public string Email { get; set; }
+    //    public string Locale { get; set; }
+    //    public string Name { get; set; }
+    //    public string Picture { get; set; }
+    //    public string Username { get; set; }
+    //}
 
     //public class UserIdentity : TableEntity
     //{

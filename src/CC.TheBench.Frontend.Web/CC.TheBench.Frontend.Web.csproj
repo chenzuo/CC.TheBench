@@ -120,6 +120,7 @@
       <HintPath>..\..\lib\SimpleAuthentication.Core.0.3.12\lib\net40\SimpleAuthentication.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Services.Client" />
@@ -131,6 +132,10 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsAzure.StorageExtensions, Version=0.7.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\WindowsAzure.StorageExtensions.0.7.7\lib\net40\WindowsAzure.StorageExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Public\Fonts\FontAwesome\fontawesome-webfont.svg" />
@@ -195,6 +200,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Data\ReadModel\IdentityType.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
     <Compile Include="Middleware\RequireHttpsHandler.cs" />
     <Compile Include="Middleware\TaskHelper.cs" />
@@ -325,17 +331,17 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54431</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5001/</IISUrl>
+          <IISUrl>http://localhost:54431/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="OwinHost">
+          <servers defaultServer="">
             <server name="OwinHost" exePath="{solutiondir}\..\lib\OwinHost.2.1.0\tools\OwinHost.exe" cmdArgs="-u {url}" url="http://localhost:5001/" workingDir="{projectdir}" />
           </servers>
         </WebProjectProperties>

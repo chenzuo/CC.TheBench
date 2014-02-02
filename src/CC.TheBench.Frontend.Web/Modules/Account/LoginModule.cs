@@ -1,5 +1,7 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
+    using System.Linq;
+    using WindowsAzure.Table;
     using Data;
     using Data.ReadModel;
     using Nancy.ModelBinding;
@@ -14,11 +16,13 @@
     public class LoginModule : BaseModule
     {
         private readonly ISaltedHash _saltedHash;
+        private readonly ITableSet<User> _users;
 
-        public LoginModule(ISaltedHash saltedHash)
+        public LoginModule(ISaltedHash saltedHash, ITableSet<User> users)
             : base("/account/login")
         {
             _saltedHash = saltedHash;
+            _users = users;
 
             Get["/"] = x =>
             {
@@ -53,7 +57,7 @@
 
         private User VerifyUser(LoginModel model)
         {
-            User user = ReadStore.Users.Get(model.Email);
+            var user = _users.FirstOrDefault(x => x.Email == model.Email);
             if (user == null)
                 return null;
 

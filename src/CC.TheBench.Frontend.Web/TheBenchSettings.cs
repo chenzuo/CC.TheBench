@@ -1,6 +1,7 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
     using System;
+    using System.Configuration;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
     using Nancy;
@@ -9,19 +10,22 @@
 
     internal class TheBenchSettings
     {
+        public Authentication Authentication { get; private set; }
+
+        public Encryption Encryption { get; private set; }
+
+        public General General { get; private set; }
+
+        public Storage Storage { get; private set; }
+
         public TheBenchSettings()
         {
             var securitySettings = SecuritySettings.Default;
             Authentication = new Authentication(securitySettings);
             Encryption = new Encryption(securitySettings);
             General = new General(securitySettings);
+            Storage = new Storage();
         }
-
-        public Authentication Authentication { get; private set; }
-
-        public Encryption Encryption { get; private set; }
-
-        public General General { get; private set; }
     }
 
     internal class General
@@ -148,4 +152,13 @@
             get { return _securitySettings.NumberOfIterations; }
         }
     }
+
+    internal class Storage
+    {
+        public string AzureConnectionString
+        {
+            get { return ConfigurationManager.ConnectionStrings["TheBenchTableStorage"].ConnectionString; }
+        }
+    }
+
 }

@@ -25,7 +25,7 @@
         {
             var claims = new List<Claim>
             {
-                new Claim(TheBenchClaimTypes.Identifier, user.UserId),
+                new Claim(TheBenchClaimTypes.Identifier, user.Email), // TODO: Double check
                 new Claim(TheBenchClaimTypes.Email, user.Email),
                 new Claim(TheBenchClaimTypes.Name, user.DisplayName)
             };
