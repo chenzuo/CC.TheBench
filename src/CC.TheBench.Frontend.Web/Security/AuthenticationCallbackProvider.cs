@@ -1,6 +1,5 @@
 ﻿namespace CC.TheBench.Frontend.Web.Security
 {
-    using Data;
     using Data.ReadModel;
     using Extensions;
     using Nancy;
@@ -9,20 +8,6 @@
 
     public class AuthenticationCallbackProvider : IAuthenticationCallbackProvider
     {
-        private readonly IReadStoreFactory _readStoreFactory;
-
-        private dynamic _readStore;
-
-        private dynamic ReadStore
-        {
-            get { return _readStore ?? (_readStore = _readStoreFactory.ReadStore()); }
-        }
-
-        public AuthenticationCallbackProvider(IReadStoreFactory readStoreFactory)
-        {
-            _readStoreFactory = readStoreFactory;
-        }
-
         /// <summary>
         /// Called when we receive a callback from a social provider
         /// </summary>

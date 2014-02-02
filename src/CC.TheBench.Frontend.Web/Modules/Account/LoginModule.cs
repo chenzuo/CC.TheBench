@@ -15,8 +15,8 @@
     {
         private readonly ISaltedHash _saltedHash;
 
-        public LoginModule(IReadStoreFactory readStoreFactory, ISaltedHash saltedHash)
-            : base(readStoreFactory, "/account/login")
+        public LoginModule(ISaltedHash saltedHash)
+            : base("/account/login")
         {
             _saltedHash = saltedHash;
 

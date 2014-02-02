@@ -1,12 +1,11 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Dashboard
 {
-    using Data;
     using Views.Dashboard.Models;
 
     public class OverviewModule : SecureNancyModule
     {
-        public OverviewModule(IReadStoreFactory readStoreFactory)
-            : base(readStoreFactory, "/dashboard")
+        public OverviewModule()
+            : base("/dashboard")
         {
             Get["/"] = x =>
             {
