@@ -88,7 +88,7 @@
 
             // Need a new CloudTableClient per request, it's not thread safe
             var tableClient = container.Resolve<CloudStorageAccount>().CreateCloudTableClient();
-            //container.Register<ITableSet<User>, TableSet<User>>(new TableSet<User>(tableClient));
+
             container.Register<ITableSet<User>>((c,p) => new TableSet<User>(tableClient));
         }
 

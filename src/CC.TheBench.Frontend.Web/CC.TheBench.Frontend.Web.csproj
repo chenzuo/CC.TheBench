@@ -200,6 +200,8 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Data\CloudEntity.cs" />
+    <Compile Include="Data\CloudTable.cs" />
     <Compile Include="Data\ReadModel\IdentityType.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
     <Compile Include="Middleware\RequireHttpsHandler.cs" />
