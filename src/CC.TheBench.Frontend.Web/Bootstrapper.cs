@@ -4,8 +4,10 @@
     using System.Security.Principal;
     using System.Text;
     using WindowsAzure.Table;
+    using Data;
     using Data.ReadModel;
     using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.RetryPolicies;
     using Nancy;
     using Nancy.Bootstrapper;
     using Nancy.Cryptography;
@@ -88,8 +90,9 @@
 
             // Need a new CloudTableClient per request, it's not thread safe
             var tableClient = container.Resolve<CloudStorageAccount>().CreateCloudTableClient();
+            tableClient.RetryPolicy = new NoRetry();
 
-            container.Register<ITableSet<User>>((c,p) => new TableSet<User>(tableClient));
+            container.Register<ITableStorageProvider>((c,p) => new TableStorageProvider(tableClient));
         }
 
         private static Response FlowPrincipal(NancyContext context)

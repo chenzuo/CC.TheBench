@@ -1,7 +1,5 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
-    using System.Linq;
-    using WindowsAzure.Table;
     using Data;
     using Data.ReadModel;
     using Nancy.ModelBinding;
@@ -16,9 +14,9 @@
     public class LoginModule : BaseModule
     {
         private readonly ISaltedHash _saltedHash;
-        private readonly ITableSet<User> _users;
+        private readonly CloudTable<User> _users;
 
-        public LoginModule(ISaltedHash saltedHash, ITableSet<User> users)
+        public LoginModule(ISaltedHash saltedHash, CloudTable<User> users)
             : base("/account/login")
         {
             _saltedHash = saltedHash;
@@ -57,12 +55,13 @@
 
         private User VerifyUser(LoginModel model)
         {
-            var user = _users.FirstOrDefault(x => x.Email == model.Email);
+            // TODO: Lets abstract this away later so we dont need to think about partitionkey and rowkey here
+            var user = _users.Get(model.Email, IdentityType.Manual.ToString());
             if (user == null)
                 return null;
 
-            return _saltedHash.VerifyHashString(model.Password, user.HashAndSalt) 
-                ? user 
+            return _saltedHash.VerifyHashString(model.Password, user.Value.HashAndSalt) 
+                ? user.Value 
                 : null;
         }
 

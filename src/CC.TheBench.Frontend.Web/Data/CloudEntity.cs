@@ -15,7 +15,7 @@
         public string PartitionKey { get; set; }
 
         /// <summary>Flag indicating last update. Populated by the Table Storage.</summary>
-        public DateTime Timestamp { get; set; }
+        public DateTimeOffset Timestamp { get; set; }
 
         /// <summary>ETag. Indicates changes. Populated by the Table Storage.</summary>
         public string ETag { get; set; }

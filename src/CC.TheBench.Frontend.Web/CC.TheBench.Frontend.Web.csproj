@@ -124,6 +124,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\lib\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -201,9 +202,15 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Data\CloudEntity.cs" />
+    <Compile Include="Data\CloudFormatter.cs" />
     <Compile Include="Data\CloudTable.cs" />
+    <Compile Include="Data\FatEntity.cs" />
+    <Compile Include="Data\IDataSerializer.cs" />
+    <Compile Include="Data\IIntermediateDataSerializer.cs" />
+    <Compile Include="Data\ITableStorageProvider.cs" />
     <Compile Include="Data\ReadModel\IdentityType.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
+    <Compile Include="Data\TableStorageProvider.cs" />
     <Compile Include="Middleware\RequireHttpsHandler.cs" />
     <Compile Include="Middleware\TaskHelper.cs" />
     <Compile Include="Modules\Dashboard\OverviewModule.cs" />
