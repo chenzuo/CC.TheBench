@@ -4,6 +4,7 @@
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Text;
+    using Data.ReadModel;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.RetryPolicies;
     using Nancy;
@@ -14,6 +15,7 @@
     using Nancy.Security;
     using Nancy.TinyIoc;
     using Security;
+    using Storage.Model;
     using Storage.Provider;
     using Utilities.Extensions.DictionaryExtensions;
 
@@ -71,6 +73,25 @@
 
             // Wire up flowing of OWIN user to a Nancy one
             pipelines.BeforeRequest.AddItemToStartOfPipeline(FlowPrincipal);
+
+            // TODO: Remove dummy data
+            //var user = new CloudEntity<User>
+            //{
+            //    PartitionKey = "david@cumps.be",
+            //    RowKey = "Manual",
+            //    Value = new User
+            //    {
+            //        Email = "david@cumps.be",
+            //        DisplayName = "David Cumps",
+            //        HashAndSalt = saltedHash.GetHashAndSaltString("admin")
+            //    }
+            //};
+
+            //var tableClient = container.Resolve<CloudStorageAccount>().CreateCloudTableClient();
+            //tableClient.RetryPolicy = new NoRetry();
+            //var t = new TableStorageProvider(tableClient);
+            //t.CreateTable("User");
+            //t.Insert("User", user);
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)

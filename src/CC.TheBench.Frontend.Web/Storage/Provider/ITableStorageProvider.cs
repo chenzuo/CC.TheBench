@@ -64,6 +64,14 @@
         /// </remarks>
         IEnumerable<CloudEntity<T>> Get<T>(string tableName, string partitionKey, string startRowKey, string endRowKey);
 
+        /// <summary>Inserts a new entity into the table storage.</summary>
+        /// <remarks>
+        /// <para>If the table does not exist then it should be created.</para>
+        /// <warning>Idempotence is not enforced.</warning>
+        /// </remarks>
+        ///<exception cref="InvalidOperationException"> if an already existing entity has been encountered.</exception>
+        void Insert<T>(string tableName, CloudEntity<T> entity);
+
         /// <summary>Inserts a collection of new entities into the table storage.</summary>
         /// <remarks>
         /// <para>The call is expected to fail on the first encountered already-existing

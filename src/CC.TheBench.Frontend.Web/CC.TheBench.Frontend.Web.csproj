@@ -202,6 +202,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Storage\Model\CloudEntity.cs" />
+    <Compile Include="Storage\Provider\Tables.cs" />
     <Compile Include="Storage\Provider\Delete.cs" />
     <Compile Include="Storage\Provider\Get.cs" />
     <Compile Include="Storage\Provider\Upsert.cs" />
@@ -231,6 +232,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Security\TheBenchPrincipal.cs" />
+    <Compile Include="Storage\Utilities\TransientTableErrorBackOff.cs" />
     <Compile Include="Storage\Utilities\SlowInstantiation.cs" />
     <Compile Include="TheBenchSettings.cs" />
     <Compile Include="Security\Constants.cs" />
