@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.WindowsAzure.Storage.RetryPolicies;
 
     internal static class Retry
@@ -33,43 +32,43 @@
             }
         }
 
-        public static void Do(this IRetryPolicy firstPolicy, IRetryPolicy secondPolicy, CancellationToken cancellationToken, Action action)
-        {
-            var first = firstPolicy;
-            var second = secondPolicy;
-            var retryCount = 0;
+        //public static void Do(this IRetryPolicy firstPolicy, IRetryPolicy secondPolicy, CancellationToken cancellationToken, Action action)
+        //{
+        //    var first = firstPolicy;
+        //    var second = secondPolicy;
+        //    var retryCount = 0;
 
-            while (true)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                try
-                {
-                    action();
-                    return;
-                }
-                catch (Exception exception)
-                {
-                    TimeSpan delay;
-                    if (first.ShouldRetry(retryCount, 0, exception, out delay, null))
-                    {
-                        retryCount++;
-                        if (delay > TimeSpan.Zero)
-                        {
-                            Thread.Sleep(delay);
-                        }
+        //    while (true)
+        //    {
+        //        cancellationToken.ThrowIfCancellationRequested();
+        //        try
+        //        {
+        //            action();
+        //            return;
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            TimeSpan delay;
+        //            if (first.ShouldRetry(retryCount, 0, exception, out delay, null))
+        //            {
+        //                retryCount++;
+        //                if (delay > TimeSpan.Zero)
+        //                {
+        //                    Thread.Sleep(delay);
+        //                }
 
-                        continue;
-                    }
+        //                continue;
+        //            }
 
-                    if (!second.ShouldRetry(retryCount, 0, exception, out delay, null)) 
-                        throw;
+        //            if (!second.ShouldRetry(retryCount, 0, exception, out delay, null)) 
+        //                throw;
 
-                    retryCount++;
-                    if (delay > TimeSpan.Zero)
-                        Thread.Sleep(delay);
-                }
-            }
-        }
+        //            retryCount++;
+        //            if (delay > TimeSpan.Zero)
+        //                Thread.Sleep(delay);
+        //        }
+        //    }
+        //}
 
         //public static T Get<T>(this IRetryPolicy retryPolicy, CancellationToken cancellationToken, Func<T> action)
         //{

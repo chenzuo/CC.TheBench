@@ -4,15 +4,16 @@
     using System.IO;
     using System.Net;
     using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Queue.Protocol;
     using Microsoft.WindowsAzure.Storage.RetryPolicies;
-    using Microsoft.WindowsAzure.Storage.Shared.Protocol;
-    using Microsoft.WindowsAzure.Storage.Table.Protocol;
 
     internal partial class RetryPolicies
     {
-        /// <summary>Similar to <see cref="TransientServerErrorBackOff"/>, yet
-        /// the Table Storage comes with its own set or exceptions/.</summary>
+        /// <summary>
+        /// Retry policy to temporarily back off in case of transient Azure server
+        /// errors, system overload or in case the denial of service detection system
+        /// thinks we're a too heavy user. Blocks the thread while backing off to
+        /// prevent further requests for a while (per thread).
+        /// </summary>
         public IRetryPolicy TransientTableErrorBackOff()
         {
             return new TransientTableErrorBackOffRetry();
@@ -25,9 +26,7 @@
                 return new TransientTableErrorBackOffRetry();
             }
 
-            public bool ShouldRetry(int currentRetryCount, int statusCode, Exception lastException,
-                out TimeSpan retryInterval,
-                OperationContext operationContext)
+            public bool ShouldRetry(int currentRetryCount, int statusCode, Exception lastException, out TimeSpan retryInterval, OperationContext operationContext)
             {
                 if (currentRetryCount >= 30 || !TransientTableErrorExceptionFilter(lastException))
                 {
@@ -46,15 +45,11 @@
         static bool TransientTableErrorExceptionFilter(Exception exception)
         {
             if (exception is AggregateException)
-            {
                 exception = exception.GetBaseException();
-            }
 
             var storageException = exception as StorageException;
             if (storageException != null && storageException.InnerException != null)
-            {
                 return TransientTableErrorExceptionFilter(storageException.InnerException);
-            }
 
             //var dataServiceRequestException = exception as DataServiceRequestException;
             //if (dataServiceRequestException != null)

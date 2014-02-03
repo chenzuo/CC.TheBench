@@ -43,9 +43,7 @@
         private static bool SlowInstantiationExceptionFilter(Exception exception)
         {
             if (exception is AggregateException)
-            {
                 exception = exception.GetBaseException();
-            }
 
             // Blob Storage or Queue Storage exceptions
             // Table Storage may throw exception of type 'StorageClientException'
