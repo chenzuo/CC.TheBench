@@ -1,14 +1,11 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
-    using System.Collections.Generic;
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Text;
     using WindowsAzure.Table;
-    using Data;
     using Data.ReadModel;
     using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Table;
     using Nancy;
     using Nancy.Bootstrapper;
     using Nancy.Cryptography;
@@ -79,6 +76,9 @@
         {
             base.ConfigureApplicationContainer(container);
 
+            // CloudStorageAccount is safe to keep around for the entire application
+            // TODO: http://stackoverflow.com/questions/10813816/how-expensive-is-creation-of-cloudstorageaccount-or-cloudblobclient-instances-fr#10814400
+            //       http://msdn.microsoft.com/en-us/library/microsoft.windowsazure.serviceruntime.roleenvironment.changing.aspx
             container.Register(CloudStorageAccount.Parse(_configuration.Storage.AzureConnectionString));
         }
 
@@ -86,12 +86,10 @@
         {
             base.ConfigureRequestContainer(container, context);
 
-            // Simple.Data is quite aggressive in closing connections and holds no open connections to a data store by default, 
-            // so you can keep the Database object returned from the Open*() methods hanging around without worrying.
-            //container.Register<IReadStoreFactory, ReadStoreFactory>().AsSingleton();
-
+            // Need a new CloudTableClient per request, it's not thread safe
             var tableClient = container.Resolve<CloudStorageAccount>().CreateCloudTableClient();
-            container.Register<ITableSet<User>, TableSet<User>>(new TableSet<User>(tableClient));
+            //container.Register<ITableSet<User>, TableSet<User>>(new TableSet<User>(tableClient));
+            container.Register<ITableSet<User>>((c,p) => new TableSet<User>(tableClient));
         }
 
         private static Response FlowPrincipal(NancyContext context)
