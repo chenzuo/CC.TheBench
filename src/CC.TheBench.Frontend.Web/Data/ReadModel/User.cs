@@ -1,19 +1,17 @@
 ﻿namespace CC.TheBench.Frontend.Web.Data.ReadModel
 {
-    using WindowsAzure.Table.Attributes;
+    using System.Runtime.Serialization;
 
-    public sealed class User : UserIdentity
+    [DataContract]
+    public sealed class User
     {
-        public User()
-        {
-            IdentityProvider = IdentityType.Manual.ToString();
-        }
-
-        [PartitionKey]
+        [DataMember]
         public string Email { get; set; }
-     
+
+        [DataMember]
         public string HashAndSalt { get; set; }
 
+        [DataMember]
         public string DisplayName { get; set; }
     }
 }

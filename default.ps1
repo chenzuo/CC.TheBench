@@ -55,14 +55,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration(""$configuration"")]" | out-file "$src\CommonAssemblyInfo.cs" -encoding "ASCII"
 }
 
-task PreviewMigrateDatabase -depends Compile {
-    exec { & "$lib\FluentMigrator.Tools.1.1.2.1\tools\AnyCPU\40\Migrate.exe" -p --db=MySql -a $migrationsout\$migrations.dll --configPath=$src\$frontend\Web.config -c="Simple.Data.Properties.Settings.DefaultConnectionString" }
-}
-
-task MigrateDatabase -depends Compile {
-    exec { & "$lib\FluentMigrator.Tools.1.1.2.1\tools\AnyCPU\40\Migrate.exe" --db=MySql -a $migrationsout\$migrations.dll --configPath=$src\$frontend\Web.config -c="Simple.Data.Properties.Settings.DefaultConnectionString" }
-}
-
 task ServeSite -depends Clean  {
     msbuild /t:rebuild /v:q /nologo /p:OutDir=$frontendout /p:Configuration=$configuration /p:UseWPP_CopyWebApplication=True /p:PipelineDependsOnBuild=False /p:TrackFileAccess=false "$frontendwebui"
 

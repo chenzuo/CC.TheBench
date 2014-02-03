@@ -24,9 +24,7 @@
         {
             // 'false' == do not inherit the attribute
             if (GetAttributes<DataContractAttribute>(type, false).Length > 0)
-            {
                 return new DataContractSerializer(type);
-            }
 
             return new NetDataContractSerializer();
         }
@@ -41,9 +39,7 @@
 
             using (var compressed = Compress(destination, true))
             using (var writer = XmlDictionaryWriter.CreateBinaryWriter(compressed, null, null, false))
-            {
                 serializer.WriteObject(writer, instance);
-            }
         }
 
         /// <summary>Deserializes the object from specified source stream.</summary>
@@ -56,9 +52,7 @@
 
             using (var decompressed = Decompress(source, true))
             using (var reader = XmlDictionaryReader.CreateBinaryReader(decompressed, XmlDictionaryReaderQuotas.Max))
-            {
                 return serializer.ReadObject(reader);
-            }
         }
 
         /// <remarks></remarks>
@@ -66,9 +60,7 @@
         {
             using (var decompressed = Decompress(source, true))
             using (var reader = XmlDictionaryReader.CreateBinaryReader(decompressed, XmlDictionaryReaderQuotas.Max))
-            {
                 return XElement.Load(reader);
-            }
         }
 
         /// <remarks></remarks>
@@ -106,6 +98,7 @@
                     .GetCustomAttributes(typeof(T), inherit)
                     .Select(a => (T)a).ToArray();
             }
+
             return new T[0];
         }
     }

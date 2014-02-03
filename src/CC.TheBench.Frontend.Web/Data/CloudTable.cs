@@ -1,29 +1,88 @@
 ﻿namespace CC.TheBench.Frontend.Web.Data
 {
-    using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
 
     public class CloudTable<T>
     {
-        readonly ITableStorageProvider _provider;
-        readonly string _tableName;
+        private readonly ITableStorageProvider _provider;
+        private readonly string _tableName;
+
+        public string Name
+        {
+            get { return _tableName; }
+        }
 
         public CloudTable(ITableStorageProvider provider)
         {
-            var tableName = typeof(T).Name;
-            // validating against the Windows Azure rule for table names.
-            if (!Regex.Match(tableName, "^[A-Za-z][A-Za-z0-9]{2,62}").Success)
-                throw new ArgumentException("Table name is incorrect", "tableName");
-
             _provider = provider;
-            _tableName = tableName;
+            _tableName = typeof(T).Name;
         }
 
         public CloudEntity<T> Get(string partitionName, string rowKey)
         {
             var entity = _provider.Get<T>(_tableName, partitionName, new[] { rowKey }).FirstOrDefault();
-            return entity; //null != entity ? new Maybe<CloudEntity<T>>(entity) : Maybe<CloudEntity<T>>.Empty;
+            return entity;
+        }
+
+        public IEnumerable<CloudEntity<T>> Get()
+        {
+            return _provider.Get<T>(_tableName);
+        }
+
+        public IEnumerable<CloudEntity<T>> Get(string partitionKey)
+        {
+            return _provider.Get<T>(_tableName, partitionKey);
+        }
+
+        public IEnumerable<CloudEntity<T>> Get(string partitionKey, IEnumerable<string> rowKeys)
+        {
+            return _provider.Get<T>(_tableName, partitionKey, rowKeys);
+        }
+
+        public IEnumerable<CloudEntity<T>> Get(string partitionKey, string startRowKey, string endRowKey)
+        {
+            return _provider.Get<T>(_tableName, partitionKey, startRowKey, endRowKey);
+        }
+
+        public void Insert(IEnumerable<CloudEntity<T>> entities)
+        {
+            _provider.Insert(_tableName, entities);
+        }
+
+        public void Insert(CloudEntity<T> entity)
+        {
+            _provider.Insert(_tableName, new[] { entity });
+        }
+
+        public void Update(IEnumerable<CloudEntity<T>> entities)
+        {
+            _provider.Update(_tableName, entities, false);
+        }
+
+        public void Update(CloudEntity<T> entity)
+        {
+            _provider.Update(_tableName, new[] { entity }, false);
+        }
+
+        public void Upsert(IEnumerable<CloudEntity<T>> entities)
+        {
+            _provider.Upsert(_tableName, entities);
+        }
+
+        public void Upsert(CloudEntity<T> entity)
+        {
+            _provider.Upsert(_tableName, new[] { entity });
+        }
+
+        public void Delete(string partitionKey, IEnumerable<string> rowKeys)
+        {
+            _provider.Delete<T>(_tableName, partitionKey, rowKeys);
+        }
+
+        public void Delete(string partitionKey, string rowKey)
+        {
+            _provider.Delete<T>(_tableName, partitionKey, new[] { rowKey });
         }
     }
 }

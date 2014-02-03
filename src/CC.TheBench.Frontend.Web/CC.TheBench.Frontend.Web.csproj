@@ -210,6 +210,8 @@
     <Compile Include="Data\ITableStorageProvider.cs" />
     <Compile Include="Data\ReadModel\IdentityType.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
+    <Compile Include="Data\Retry.cs" />
+    <Compile Include="Data\RetryPolicies.cs" />
     <Compile Include="Data\TableStorageProvider.cs" />
     <Compile Include="Middleware\RequireHttpsHandler.cs" />
     <Compile Include="Middleware\TaskHelper.cs" />

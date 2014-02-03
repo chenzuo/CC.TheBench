@@ -1,5 +1,6 @@
 ﻿namespace CC.TheBench.Frontend.Web
 {
+    using System.Net;
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Text;
@@ -78,10 +79,16 @@
         {
             base.ConfigureApplicationContainer(container);
 
-            // CloudStorageAccount is safe to keep around for the entire application
             // TODO: http://stackoverflow.com/questions/10813816/how-expensive-is-creation-of-cloudstorageaccount-or-cloudblobclient-instances-fr#10814400
             //       http://msdn.microsoft.com/en-us/library/microsoft.windowsazure.serviceruntime.roleenvironment.changing.aspx
-            container.Register(CloudStorageAccount.Parse(_configuration.Storage.AzureConnectionString));
+
+            // CloudStorageAccount is safe to keep around for the entire application
+            // Turn off Nagle: http://blogs.msdn.com/b/windowsazurestorage/archive/2010/06/25/nagle-s-algorithm-is-not-friendly-towards-small-requests.aspx
+            var cloudStorageAccount = CloudStorageAccount.Parse(_configuration.Storage.AzureConnectionString);
+            var tableServicePoint = ServicePointManager.FindServicePoint(cloudStorageAccount.TableEndpoint);
+            tableServicePoint.UseNagleAlgorithm = false;
+
+            container.Register(cloudStorageAccount);
         }
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)

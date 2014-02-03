@@ -1,16 +1,8 @@
 ﻿namespace CC.TheBench.Frontend.Web.Data.ReadModel
 {
-    using System;
-    using WindowsAzure.Table.Attributes;
-
     public class UserIdentity
     {
-        [RowKey]
         public string IdentityProvider { get; protected set; }
-
-        public DateTime Created { get; set; }
-
-        public DateTime Modified { get; set; }
     }
 
     //public class UserIdentity
