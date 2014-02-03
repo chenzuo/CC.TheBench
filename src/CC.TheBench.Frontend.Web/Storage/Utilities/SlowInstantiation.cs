@@ -1,17 +1,13 @@
-﻿namespace CC.TheBench.Frontend.Web.Data
+﻿namespace CC.TheBench.Frontend.Web.Storage.Utilities
 {
     using System;
-    using System.Linq;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Queue.Protocol;
     using Microsoft.WindowsAzure.Storage.RetryPolicies;
     using Microsoft.WindowsAzure.Storage.Shared.Protocol;
     using Microsoft.WindowsAzure.Storage.Table.Protocol;
 
-    /// <summary>
-    /// Azure retry policies for corner-situation and server errors.
-    /// </summary>
-    internal class RetryPolicies
+    internal partial class RetryPolicies
     {
         /// <summary>
         /// Very patient retry policy to deal with container, queue or table instantiation
@@ -42,17 +38,6 @@
 
                 return true;
             }
-        }
-
-        private static bool IsErrorStringMatch(StorageException exception, params string[] errorStrings)
-        {
-            return exception != null && exception.RequestInformation.ExtendedErrorInformation != null
-                   && errorStrings.Contains(exception.RequestInformation.ExtendedErrorInformation.ErrorCode);
-        }
-
-        private static bool IsErrorStringMatch(string exceptionErrorString, params string[] errorStrings)
-        {
-            return errorStrings.Contains(exceptionErrorString);
         }
 
         private static bool SlowInstantiationExceptionFilter(Exception exception)

@@ -1,12 +1,12 @@
 ﻿namespace CC.TheBench.Frontend.Web.Modules.Account
 {
-    using Data;
     using Data.ReadModel;
     using Nancy.ModelBinding;
     using Nancy.Security;
     using Resources;
     using Security;
     using Security.Extensions;
+    using Storage;
     using Utilities.Extensions.NancyExtensions;
     using Validation;
     using Views.Account.Models;
@@ -56,7 +56,7 @@
         private User VerifyUser(LoginModel model)
         {
             // TODO: Lets abstract this away later so we dont need to think about partitionkey and rowkey here
-            var user = _users.Get(model.Email, IdentityType.Manual.ToString());
+            var user = _users.Get(model.Email, "Manual");
             if (user == null)
                 return null;
 

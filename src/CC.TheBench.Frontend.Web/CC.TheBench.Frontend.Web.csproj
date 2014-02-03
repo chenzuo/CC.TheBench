@@ -201,18 +201,22 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Data\CloudEntity.cs" />
-    <Compile Include="Data\CloudFormatter.cs" />
-    <Compile Include="Data\CloudTable.cs" />
-    <Compile Include="Data\FatEntity.cs" />
-    <Compile Include="Data\IDataSerializer.cs" />
-    <Compile Include="Data\IIntermediateDataSerializer.cs" />
-    <Compile Include="Data\ITableStorageProvider.cs" />
-    <Compile Include="Data\ReadModel\IdentityType.cs" />
+    <Compile Include="Storage\Model\CloudEntity.cs" />
+    <Compile Include="Storage\Provider\Delete.cs" />
+    <Compile Include="Storage\Provider\Get.cs" />
+    <Compile Include="Storage\Provider\Upsert.cs" />
+    <Compile Include="Storage\Provider\Update.cs" />
+    <Compile Include="Storage\Provider\Insert.cs" />
+    <Compile Include="Storage\Serialization\CloudFormatter.cs" />
+    <Compile Include="Storage\CloudTable.cs" />
+    <Compile Include="Storage\Serialization\FatEntity.cs" />
+    <Compile Include="Storage\Serialization\IDataSerializer.cs" />
+    <Compile Include="Storage\Serialization\IIntermediateDataSerializer.cs" />
+    <Compile Include="Storage\Provider\ITableStorageProvider.cs" />
     <Compile Include="Data\ReadModel\UserIdentity.cs" />
-    <Compile Include="Data\Retry.cs" />
-    <Compile Include="Data\RetryPolicies.cs" />
-    <Compile Include="Data\TableStorageProvider.cs" />
+    <Compile Include="Storage\Utilities\Retry.cs" />
+    <Compile Include="Storage\Utilities\RetryPolicies.cs" />
+    <Compile Include="Storage\Provider\TableStorageProvider.cs" />
     <Compile Include="Middleware\RequireHttpsHandler.cs" />
     <Compile Include="Middleware\TaskHelper.cs" />
     <Compile Include="Modules\Dashboard\OverviewModule.cs" />
@@ -227,6 +231,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Security\TheBenchPrincipal.cs" />
+    <Compile Include="Storage\Utilities\SlowInstantiation.cs" />
     <Compile Include="TheBenchSettings.cs" />
     <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />

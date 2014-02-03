@@ -1,4 +1,4 @@
-﻿namespace CC.TheBench.Frontend.Web.Data
+﻿namespace CC.TheBench.Frontend.Web.Storage.Serialization
 {
     using System.IO;
     using System.Xml.Linq;

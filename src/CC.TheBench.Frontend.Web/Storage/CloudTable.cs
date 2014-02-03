@@ -1,7 +1,9 @@
-﻿namespace CC.TheBench.Frontend.Web.Data
+﻿namespace CC.TheBench.Frontend.Web.Storage
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Model;
+    using Provider;
 
     public class CloudTable<T>
     {

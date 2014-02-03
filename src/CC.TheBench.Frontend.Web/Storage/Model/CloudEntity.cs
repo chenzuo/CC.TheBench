@@ -1,6 +1,7 @@
-﻿namespace CC.TheBench.Frontend.Web.Data
+﻿namespace CC.TheBench.Frontend.Web.Storage.Model
 {
     using System;
+    using Provider;
 
     /// <summary>Entity to be stored by the <see cref="ITableStorageProvider"/>.</summary>
     /// <typeparam name="T">Type of the value carried by the entity.</typeparam>

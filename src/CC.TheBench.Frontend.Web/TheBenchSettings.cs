@@ -10,29 +10,29 @@
 
     internal class TheBenchSettings
     {
-        public Authentication Authentication { get; private set; }
+        public AuthenticationConfiguration Authentication { get; private set; }
 
-        public Encryption Encryption { get; private set; }
+        public EncryptionConfiguration Encryption { get; private set; }
 
-        public General General { get; private set; }
+        public GeneralConfiguration General { get; private set; }
 
-        public Storage Storage { get; private set; }
+        public StorageConfiguration Storage { get; private set; }
 
         public TheBenchSettings()
         {
             var securitySettings = SecuritySettings.Default;
-            Authentication = new Authentication(securitySettings);
-            Encryption = new Encryption(securitySettings);
-            General = new General(securitySettings);
-            Storage = new Storage();
+            Authentication = new AuthenticationConfiguration(securitySettings);
+            Encryption = new EncryptionConfiguration(securitySettings);
+            General = new GeneralConfiguration(securitySettings);
+            Storage = new StorageConfiguration();
         }
     }
 
-    internal class General
+    internal class GeneralConfiguration
     {
         private readonly SecuritySettings _securitySettings;
 
-        public General(SecuritySettings securitySettings)
+        public GeneralConfiguration(SecuritySettings securitySettings)
         {
             _securitySettings = securitySettings;
         }
@@ -48,11 +48,11 @@
         }
     }
 
-    internal class Authentication
+    internal class AuthenticationConfiguration
     {
         private readonly SecuritySettings _securitySettings;
 
-        public Authentication(SecuritySettings securitySettings)
+        public AuthenticationConfiguration(SecuritySettings securitySettings)
         {
             _securitySettings = securitySettings;
         }
@@ -108,11 +108,11 @@
         }
     }
 
-    internal class Encryption
+    internal class EncryptionConfiguration
     {
         private readonly SecuritySettings _securitySettings;
 
-        public Encryption(SecuritySettings securitySettings)
+        public EncryptionConfiguration(SecuritySettings securitySettings)
         {
             _securitySettings = securitySettings;
         }
@@ -153,7 +153,7 @@
         }
     }
 
-    internal class Storage
+    internal class StorageConfiguration
     {
         public string AzureConnectionString
         {

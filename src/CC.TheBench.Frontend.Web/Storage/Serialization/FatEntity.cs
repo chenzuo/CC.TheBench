@@ -1,10 +1,11 @@
-﻿namespace CC.TheBench.Frontend.Web.Data
+﻿namespace CC.TheBench.Frontend.Web.Storage.Serialization
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using Microsoft.WindowsAzure.Storage.Table;
+    using Model;
 
     /// <summary>This entity is basically a workaround the 64KB limitation
     /// for entity properties. 15 properties represents a total storage

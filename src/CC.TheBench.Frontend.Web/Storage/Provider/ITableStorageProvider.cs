@@ -1,7 +1,8 @@
-﻿namespace CC.TheBench.Frontend.Web.Data
+﻿namespace CC.TheBench.Frontend.Web.Storage.Provider
 {
     using System;
     using System.Collections.Generic;
+    using Model;
 
     /// <summary>Abstraction for the Table Storage.</summary>
     /// <remarks>This provider represents a logical abstraction of the Table Storage,
