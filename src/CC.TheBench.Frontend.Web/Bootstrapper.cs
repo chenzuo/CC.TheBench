@@ -4,7 +4,6 @@
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Text;
-    using Data.ReadModel;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.RetryPolicies;
     using Nancy;
@@ -15,7 +14,6 @@
     using Nancy.Security;
     using Nancy.TinyIoc;
     using Security;
-    using Storage.Model;
     using Storage.Provider;
     using Utilities.Extensions.DictionaryExtensions;
 

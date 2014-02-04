@@ -40,6 +40,36 @@
             return AzureClient.GetTableReference(tableName);
         }
 
+        /// <summary>
+        /// Performs lazy splitting of the provided collection into collections of <paramref name="sliceLength"/>
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="sliceLength">Maximum length of the slice.</param>
+        /// <returns>lazy enumerator of the collection of arrays</returns>
+        public static IEnumerable<TItem[]> Slice<TItem>(IEnumerable<TItem> source, int sliceLength)
+        {
+            if (source == null) 
+                throw new ArgumentNullException("source");
+
+            if (sliceLength <= 0)
+                throw new ArgumentOutOfRangeException("sliceLength", "value must be greater than 0");
+
+            var list = new List<TItem>(sliceLength);
+            foreach (var item in source)
+            {
+                list.Add(item);
+                if (sliceLength != list.Count) 
+                    continue;
+
+                yield return list.ToArray();
+                list.Clear();
+            }
+
+            if (list.Count > 0)
+                yield return list.ToArray();
+        }
+
         /// <summary>Slice entities according the payload limitation of
         /// the transaction group, plus the maximal number of entities to
         /// be embedded into a single transaction.</summary>
