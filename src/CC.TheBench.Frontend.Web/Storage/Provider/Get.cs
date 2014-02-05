@@ -3,8 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Threading;
     using Microsoft.WindowsAzure.Storage.Table;
     using Model;
+    using Serialization;
+    using Utilities;
 
     public partial class TableStorageProvider
     {
@@ -94,25 +97,51 @@
         private IEnumerable<CloudEntity<T>> GetInternal<T>(string tableName, string filter)
         {
             // CloudTable.ExecuteQuery handles continuation token internally
+            // CloudTable.ExecuteQuerySegmented does not
             // http://stackoverflow.com/questions/16017001/does-azure-tablequery-handle-continuation-tokens-internally
+            // We are using ExecuteQuerySegmented however since we want to start yielding results asap
 
-            //var query = new TableQuery<T>();
-            //var query = new TableQuery<T>().Where(filter);
-            // table.ExecuteQuery(rangeQuery)
-            /* var table = _tableStorage.GetTableReference(tableName);
-             var retrieveOperation = TableOperation.Retrieve<T>(partitionKey, rowKeys.ElementAt(0));
-             var retrievedResult = table.Execute(retrieveOperation);
+            var table = _tableStorage.GetTableReference(tableName);
+            var query = string.IsNullOrWhiteSpace(filter) ? new TableQuery<FatEntity>() : new TableQuery<FatEntity>().Where(filter);
 
-             var result = new List<CloudEntity<T>>(1);
-             if (retrievedResult.Result != null)
-                 result.Add(new CloudEntity<T>
-                 {
-                     Value = retrievedResult.Result as T
-                 });
+            TableContinuationToken continuationToken = null;         
 
-             return result;*/
+            do
+            {
+                TableQuerySegment<FatEntity> querySegment = null;
+                FatEntity[] fatEntities = null;
 
-            throw new NotImplementedException();
+                var token = continuationToken;
+                Retry.Do(_policies.TransientTableErrorBackOff(), CancellationToken.None, () =>
+                {
+                    // TODO: Catch
+                    //try
+                    //{
+                    querySegment = table.ExecuteQuerySegmented(query, token);
+                    fatEntities = querySegment.Results.ToArray();
+                    //}
+                    //catch (DataServiceQueryException ex)
+                    //{
+                    //    // if the table does not exist, there is nothing to return
+                    //    var errorCode = RetryPolicies.GetErrorCode(ex);
+                    //    if (TableErrorCodeStrings.TableNotFound == errorCode
+                    //        || StorageErrorCodeStrings.ResourceNotFound == errorCode)
+                    //    {
+                    //        fatEntities = new FatEntity[0];
+                    //        return;
+                    //    }
+
+                    //    throw;
+                    //}
+                });
+
+                foreach (var fatEntity in fatEntities)
+                    yield return FatEntity.Convert<T>(fatEntity, _serializer);
+
+                if (querySegment != null && querySegment.ContinuationToken != null)
+                    continuationToken = querySegment.ContinuationToken;
+
+            } while (continuationToken != null);
         }
     }
 }

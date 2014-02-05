@@ -18,8 +18,8 @@
         /// <summary>Flag indicating last update. Populated by the Table Storage.</summary>
         public DateTimeOffset Timestamp { get; set; }
 
-        /// <summary>ETag. Indicates changes. Populated by the Table Storage.</summary>
-        public string ETag { get; set; }
+        ///// <summary>ETag. Indicates changes. Populated by the Table Storage.</summary>
+        //public string ETag { get; set; }
 
         /// <summary>Value carried by the entity.</summary>
         public T Value { get; set; }

@@ -152,7 +152,7 @@
         }
 
         /// <summary>Converts a <c>FatEntity</c> toward a <c>CloudEntity</c>.</summary>
-        public static CloudEntity<T> Convert<T>(FatEntity fatEntity, IDataSerializer serializer, string etag)
+        public static CloudEntity<T> Convert<T>(FatEntity fatEntity, IDataSerializer serializer)
         {
             using (var stream = new MemoryStream(fatEntity.GetData()) { Position = 0 })
             {
@@ -163,7 +163,7 @@
                     PartitionKey = fatEntity.PartitionKey,
                     RowKey = fatEntity.RowKey,
                     Timestamp = fatEntity.Timestamp,
-                    ETag = etag,
+                    //ETag = etag,
                     Value = val
                 };
             }
