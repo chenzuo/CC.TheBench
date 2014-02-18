@@ -23,14 +23,9 @@
                 return false;
 
             var theBenchIdentity = claimsPrincipal.Identities
-                                                  .FirstOrDefault(x => x.AuthenticationType == Constants.TheBenchAuthType);
+                                                  .FirstOrDefault(x => x.AuthenticationType == TheBenchConstants.TheBenchAuthType);
 
-            if (theBenchIdentity == null)
-                return false;
-
-            var idClaim = theBenchIdentity.FindFirst(TheBenchClaimTypes.Identifier);
-
-            return idClaim != null;
+            return theBenchIdentity != null && theBenchIdentity.IsAuthenticated;
         }
     }
 }

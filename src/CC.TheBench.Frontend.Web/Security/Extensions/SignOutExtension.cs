@@ -10,8 +10,8 @@
         {
             var env = module.Context.GetOwinEnvironment();
             var owinContext = new OwinContext(env);
-
-            owinContext.Authentication.SignOut(Constants.TheBenchAuthType);
+            
+            owinContext.Authentication.SignOut(TheBenchConstants.TheBenchAuthType);
         }
     }
 }

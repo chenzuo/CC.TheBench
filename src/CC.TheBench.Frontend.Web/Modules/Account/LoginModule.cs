@@ -49,7 +49,7 @@
                     return InvalidLogin(model);
 
                 // TODO: Publish event for CQRS/ES audit logging
-                return this.SignIn(user);
+                return this.SignIn(user, model.RememberMe);
             };
         }
 

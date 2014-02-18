@@ -110,8 +110,8 @@
             {
                 TableQuerySegment<FatEntity> querySegment = null;
                 FatEntity[] fatEntities = null;
-
                 var token = continuationToken;
+
                 Retry.Do(_policies.TransientTableErrorBackOff(), CancellationToken.None, () =>
                 {
                     // TODO: Catch

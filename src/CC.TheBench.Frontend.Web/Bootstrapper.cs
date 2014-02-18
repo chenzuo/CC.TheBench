@@ -4,6 +4,7 @@
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Text;
+    using Configuration;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.RetryPolicies;
     using Nancy;

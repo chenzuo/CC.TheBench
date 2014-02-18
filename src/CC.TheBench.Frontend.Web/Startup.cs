@@ -5,6 +5,7 @@ using Microsoft.Owin;
 
 namespace CC.TheBench.Frontend.Web
 {
+    using Configuration;
     using Microsoft.Owin.Extensions;
     using Microsoft.Owin.FileSystems;
     using Microsoft.Owin.Security.Cookies;
@@ -44,11 +45,11 @@ namespace CC.TheBench.Frontend.Web
                 CookieHttpOnly = configuration.Authentication.CookieHttpOnly,
                 CookieName = configuration.Authentication.CookieName,
                 CookieSecure = configuration.Authentication.CookieSecure,
+                ExpireTimeSpan = configuration.Authentication.AuthenticationCookieExpireTimeSpan,
                 LoginPath = configuration.Authentication.LoginPath,
                 LogoutPath = configuration.Authentication.LogoutPath,
-                ExpireTimeSpan = configuration.Authentication.AuthenticationCookieExpireTimeSpan,
-                SlidingExpiration = configuration.Authentication.EnableSlidingExpiration,
-                ReturnUrlParameter = configuration.Authentication.ReturnUrl
+                ReturnUrlParameter = configuration.Authentication.ReturnUrl,
+                SlidingExpiration = configuration.Authentication.EnableSlidingExpiration
             });
         }
 

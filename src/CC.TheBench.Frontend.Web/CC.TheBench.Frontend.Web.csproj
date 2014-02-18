@@ -201,6 +201,11 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Configuration\AuthenticationConfiguration.cs" />
+    <Compile Include="Configuration\EncryptionConfiguration.cs" />
+    <Compile Include="Configuration\GeneralConfiguration.cs" />
+    <Compile Include="Configuration\StorageConfiguration.cs" />
+    <Compile Include="Properties\SecuritySettings.cs" />
     <Compile Include="Storage\Model\CloudEntity.cs" />
     <Compile Include="Storage\Provider\Tables.cs" />
     <Compile Include="Storage\Provider\Delete.cs" />
@@ -234,7 +239,7 @@
     <Compile Include="Security\TheBenchPrincipal.cs" />
     <Compile Include="Storage\Utilities\TransientTableErrorBackOff.cs" />
     <Compile Include="Storage\Utilities\SlowInstantiation.cs" />
-    <Compile Include="TheBenchSettings.cs" />
+    <Compile Include="Configuration\TheBenchSettings.cs" />
     <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />
     <Compile Include="Security\Extensions\GetPrincipalExtension.cs" />

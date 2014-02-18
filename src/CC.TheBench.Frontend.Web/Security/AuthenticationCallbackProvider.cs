@@ -54,7 +54,7 @@
         private User GetLoggedInUser(INancyModule nancyModule)
         {
             var currentUser = nancyModule.GetPrincipal();
-            if (currentUser == null)
+            if (!currentUser.IsAuthenticated())
                 return null;
 
             if (string.IsNullOrWhiteSpace(currentUser.Email))

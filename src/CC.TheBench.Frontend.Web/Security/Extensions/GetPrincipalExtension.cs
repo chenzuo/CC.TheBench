@@ -10,7 +10,7 @@
             var userIdentity = htmlHelper.CurrentUser as TheBenchUser;
 
             return userIdentity == null
-                ? null
+                ? TheBenchConstants.AnonymousPrincipal
                 : userIdentity.Principal;
         }
 
@@ -18,8 +18,8 @@
         {
             var userIdentity = module.Context.CurrentUser as TheBenchUser;
 
-            return userIdentity == null 
-                ? null 
+            return userIdentity == null
+                ? TheBenchConstants.AnonymousPrincipal 
                 : userIdentity.Principal;
         }
     }
