@@ -240,7 +240,7 @@
     <Compile Include="Storage\Utilities\TransientTableErrorBackOff.cs" />
     <Compile Include="Storage\Utilities\SlowInstantiation.cs" />
     <Compile Include="Configuration\TheBenchSettings.cs" />
-    <Compile Include="Security\Constants.cs" />
+    <Compile Include="Security\TheBenchConstants.cs" />
     <Compile Include="Security\Extensions\GetClaimValueExtension.cs" />
     <Compile Include="Security\Extensions\GetPrincipalExtension.cs" />
     <Compile Include="Security\Extensions\IsAuthenticatedExtension.cs" />
